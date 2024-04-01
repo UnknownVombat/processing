@@ -49,11 +49,10 @@ export async function logoutUser() {
     }
 }
 
-export async function switchActive(active) {
+export async function switchActive(active, key) {
     const url = base_url + '/users/switch_active'
     const status = {true: 'active', false: 'paused'}
     console.log(status[active])
-    const key = authStorage((state) => state.key)
     const data = {'status': status[active]}
     const headers = {
         'accept': 'application/json',

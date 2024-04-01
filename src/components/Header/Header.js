@@ -8,9 +8,11 @@ import start from '../../icons/play-regular-24.png'
 import stop from '../../icons/pause-regular-24.png'
 import {logoutUser, switchActive} from "../../Requests";
 import {NavLink} from "react-router-dom";
+import {authStorage} from "../../storages/AuthStorage";
 
 
 const Header = () => {
+    const key = authStorage((state) => state.key)
     function changeUserActive() {
         document.getElementById('user_block').classList.toggle('active')
         document.getElementById('user_hidden_block').classList.toggle('active')
@@ -23,9 +25,9 @@ const Header = () => {
 
     async function handleToggle(){
         setActive(!isActive);
-        const result = await switchActive(!isActive)
+        const result = await switchActive(!isActive, key)
         console.log(result)
-    };
+    }
     return (
         <header>
             <div className={'block'}>
