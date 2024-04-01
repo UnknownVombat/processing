@@ -1,0 +1,10 @@
+* {
+  color: #01050d;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.App {
+  display: flex;
+  flex-direction: row;
+}

@@ -1,0 +1,35 @@
+.support_icons {
+    display: block;
+    margin: 100% auto;
+    text-align: center;
+}
+
+.inline_block {
+    border-radius: 26px;
+    background-color: #d8e8cd;
+    /*margin: 10px;*/
+    /*padding: 5px 5px 8px 5px;*/
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    padding: 2px 10px 0 10px;
+    cursor: pointer;
+}
+
+.inline_block:hover {
+    background-color: #3c6930;
+}
+
+.image_div {
+    margin-top: 3px;
+    margin-bottom: 2px;
+}
+
+.text_div {
+    margin-top: 1px;
+    margin-left: 5px;
+}
+
+.text_div a {
+    text-decoration: none;
+}

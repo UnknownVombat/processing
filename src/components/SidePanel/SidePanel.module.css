@@ -1,0 +1,14 @@
+.side_panel {
+    padding: 10px 5px;
+    /*margin: 5px;*/
+    background: #d8e8cd;
+    width: auto;
+    max-width: 15%;
+    /*position: fixed;*/
+    left: 0;
+    bottom: 0;
+    top: 0;
+    /*border-radius: 10px;*/
+    font-size: 1.5rem;
+    height: 100vh;
+}

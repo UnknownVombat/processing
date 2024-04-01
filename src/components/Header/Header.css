@@ -1,0 +1,153 @@
+header {
+    display: flex;
+    flex-direction: row;
+    height: 70px;
+}
+
+.block {
+    right: 0;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    width: auto;
+    background-color: white;
+    position: fixed;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
+.little_icons {
+    background: #d8e8cd;
+    margin: 2px;
+    height: 30px;
+    width: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.little_icons:hover {
+    background-color: #3c6930;
+}
+
+.little_icons.active {
+    background-color: #3c6930;
+}
+
+.little_icons img {
+    margin: 3px;
+}
+
+.user_block_big {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+}
+
+.user_block {
+    display: flex;
+    flex-direction: row;
+    background: #d8e8cd;
+    height: 30px;
+    width: 165px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 3px 3px 7px;
+}
+
+.user_block:hover {
+    background-color: #3c6930;
+}
+
+.user_block img {
+    padding-left: 5px;
+    padding-right: 2px;
+}
+
+.user_block p {
+    font-size: 1rem;
+    height: auto;
+    width: auto;
+    padding: 4px 0 0;
+    margin: 0;
+}
+
+.user_hidden_block {
+    width: 165px;
+    margin: 3px;
+    height: 60px;
+    top: -10px;
+    transition: 0.2s ease;
+    background: #d8e8cd;
+    flex-direction: column;
+    text-align: center;
+    position: relative;
+    border-radius: 0 0 10px 10px;
+    cursor: pointer;
+    display: none;
+}
+
+.user_block_little {
+    cursor: pointer;
+    padding-top: 3px;
+    padding-bottom: 5px;
+}
+
+.user_block_little:hover {
+    background-color: #3c6930;
+}
+
+.user_hidden_block.active {
+    /*top: -10px;*/
+    display: initial;
+}
+
+.user_block.active {
+    border-radius: 10px 10px 0 0;
+    background-color: #3c6930;
+}
+
+.little_icons_block {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+}
+
+.is_paused {
+    width: auto;
+    display: none;
+    height: 30px;
+    background-color: #fafaf2;
+    border: #d8e8cd 1px solid ;
+    border-radius: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin: 2px 2px 7px;
+    cursor: pointer;
+}
+
+.is_paused p {
+    font-size: 1rem;
+    height: auto;
+    width: auto;
+    padding: 4px 5px 0 0;
+    margin: 0;
+}
+
+.is_paused img {
+    margin: 2px;
+    color: #8ad814;
+}
+
+.is_paused.active {
+    display: flex;
+    flex-direction: row;
+}
+
+.is_paused.active img {
+    color: #fd6870;
+}
+
+.is_paused:hover {
+    background-color: #edede3;
+}
