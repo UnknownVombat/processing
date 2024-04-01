@@ -12,7 +12,7 @@ export async function loginUser(login, password, ip, city) {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Credentials': '*'}
     try {
-        const response = await fetch(url, {method: 'POST', body: JSON.stringify(data), headers: headers, credentials: "include"})
+        const response = await fetch(url, {method: 'POST', body: JSON.stringify(data), headers: headers})
         console.log(response)
         if (!response.ok){
             return false
@@ -27,8 +27,16 @@ export async function loginUser(login, password, ip, city) {
 
 export async function logoutUser() {
     const url = base_url + '/users/logout'
+    const key = authStorage((state) => state.key)
+    const headers = {
+        'accept': 'application/json',
+        'accept-encoding': 'gzip,deflate,br',
+        'content-type': 'application/json;charset=utf-8',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': '*',
+        'Authorization': key}
     try {
-        const response = await fetch(url, {method: 'GET', credentials: "include"})
+        const response = await fetch(url, {method: 'GET', headers: headers})
         console.log(response)
         if (!response.ok){
             return false
@@ -45,15 +53,17 @@ export async function switchActive(active) {
     const url = base_url + '/users/switch_active'
     const status = {true: 'active', false: 'paused'}
     console.log(status[active])
+    const key = authStorage((state) => state.key)
     const data = {'status': status[active]}
     const headers = {
         'accept': 'application/json',
         'accept-encoding': 'gzip,deflate,br',
         'content-type': 'application/json;charset=utf-8',
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Credentials': '*'}
+        'Access-Control-Allow-Credentials': '*',
+        'Authorization': key}
     try {
-        const response = await fetch(url, {method: 'POST', body: JSON.stringify(data), headers: headers, credentials: "include"})
+        const response = await fetch(url, {method: 'POST', body: JSON.stringify(data), headers: headers})
         console.log(response)
         if (!response.ok){
             return false
