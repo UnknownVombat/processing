@@ -1,5 +1,3 @@
-import {authStorage} from "./storages/AuthStorage";
-
 const base_url = 'http://127.0.0.1:8000'
 
 export async function loginUser(login, password, ip, city) {
@@ -25,9 +23,8 @@ export async function loginUser(login, password, ip, city) {
     }
 }
 
-export async function logoutUser() {
+export async function logoutUser(key) {
     const url = base_url + '/users/logout'
-    const key = authStorage((state) => state.key)
     const headers = {
         'accept': 'application/json',
         'accept-encoding': 'gzip,deflate,br',

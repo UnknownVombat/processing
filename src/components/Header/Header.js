@@ -13,6 +13,11 @@ import {authStorage} from "../../storages/AuthStorage";
 
 const Header = () => {
     const key = authStorage((state) => state.key)
+    const resetKey = authStorage((state) => state.resetKey)
+    function logoutF(){
+        resetKey('')
+        logoutUser(key)
+    }
     function changeUserActive() {
         document.getElementById('user_block').classList.toggle('active')
         document.getElementById('user_hidden_block').classList.toggle('active')
@@ -51,7 +56,7 @@ const Header = () => {
                     </div>
                     <div className={'user_hidden_block'} id='user_hidden_block'>
                         <div className={'user_block_little'}>Настройки</div>
-                        <NavLink to='/auth'><div className={'user_block_little'} onClick={logoutUser}>Выйти</div></NavLink>
+                        <NavLink to='/auth'><div className={'user_block_little'} onClick={logoutF}>Выйти</div></NavLink>
                     </div>
                 </div>
             </div>
