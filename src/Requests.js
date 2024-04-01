@@ -76,9 +76,8 @@ export async function switchActive(active) {
     }
 }
 
-export async function checkAuth() {
+export async function checkAuth(key) {
     const url = base_url + '/users/check_auth'
-    const key = authStorage((state) => state.key)
     const headers = {
         'accept': 'application/json',
         'accept-encoding': 'gzip,deflate,br',
