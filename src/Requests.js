@@ -1,3 +1,5 @@
+import {authStorage} from "./storages/AuthStorage";
+
 const base_url = 'http://127.0.0.1:8000'
 
 export async function loginUser(login, password, ip, city) {
@@ -16,7 +18,7 @@ export async function loginUser(login, password, ip, city) {
             return false
         }
         const result = await response.json()
-        return result['success'] === true;
+        return {'result': result['success'], 'token': result['access_token']}
     } catch (error) {
         console.error('Ошибка авторизации: ', error)
         return false
@@ -66,14 +68,16 @@ export async function switchActive(active) {
 
 export async function checkAuth() {
     const url = base_url + '/users/check_auth'
+    const key = authStorage((state) => state.key)
     const headers = {
         'accept': 'application/json',
         'accept-encoding': 'gzip,deflate,br',
         'content-type': 'application/json;charset=utf-8',
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Credentials': '*'}
+        'Access-Control-Allow-Credentials': '*',
+        'Authorization': key}
     try {
-        const response = await fetch(url, {method: 'GET', headers: headers, credentials: "include"})
+        const response = await fetch(url, {method: 'GET', headers: headers})
         console.log(response)
         if (!response.ok){
             return false

@@ -1,8 +1,10 @@
 import React from 'react';
 import styles from './Auth.module.css'
 import {loginUser} from "../../Requests";
+import {authStorage} from "../../storages/AuthStorage";
 
 const Auth = () => {
+    const resetKey = authStorage((state) => state.resetKey)
     function getIP() {
         let result = fetch('https://api.ipify.org?format=json')
             .then(res => res.json())
@@ -20,9 +22,10 @@ const Auth = () => {
         const ip = await getIP()
         const city = await getCity(ip)
         const result = await loginUser(login, password, ip, city)
-        if (result){
-            // window.location.href = '/'
-            console.log('Запрос прошел')
+        if (result['result']){
+            resetKey(result['access_key'])
+            window.location.href = '/'
+            // console.log('Запрос прошел')
         } else {
             alert('Ошибка авторизации!')
         }
