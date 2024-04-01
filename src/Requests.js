@@ -94,3 +94,25 @@ export async function checkAuth(key) {
         return false
     }
 }
+
+export async function getWorkers(key) {
+    const url = base_url + '/users/get'
+    const headers = {
+        'accept': 'application/json',
+        'accept-encoding': 'gzip,deflate,br',
+        'content-type': 'application/json;charset=utf-8',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': '*',
+        'Authorization': key}
+    try {
+        const response = await fetch(url, {method: 'GET', headers: headers})
+        console.log(response)
+        if (!response.ok){
+            return false
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Ошибка авторизации: ', error)
+        return false
+    }
+}

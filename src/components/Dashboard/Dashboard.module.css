@@ -1,5 +1,90 @@
 .dashboard {
     width: 100%;
     right: 0;
+    height: auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.user_dashboard {
+    width: 50%;
+    right: 0;
     height: 100vh;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.all_dashboard h2 {
+    padding-left: 15px;
+    margin-bottom: 0;
+}
+
+.user_row {
+    flex-direction: column;
+    width: auto;
+    height: auto;
+    margin: 10px;
+    font-size: 1.3rem;
+}
+
+.users_row {
+    flex-direction: column;
+    width: auto;
+    height: auto;
+    margin: 5px;
+}
+
+.big_p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.user_row p {
+    margin-bottom: 0;
+}
+
+.submit {
+    width: 120px;
+    height: 30px;
+    font-size: 1rem;
+    background-color: #d8e8cd;
+    border-radius: 10px;
+    border: #3c6930 2px solid;
+    cursor: pointer;
+}
+
+.submit:hover {
+    background-color: #3c6930;
+}
+
+.withdraw {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-right: 10px;
+    width: 100%;
+    height: auto;
+    font-size: 1.3rem;
+}
+
+.withdraw input {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    height: 1.3rem;
+    border-radius: 10px;
+    border: #3c6930 2px solid;
+    padding-left: 5px;
+    width: 200px;
+}
+
+.little_p {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.your_data {
+    padding-left: 15px;
+    width: 100vw;
 }
