@@ -23,7 +23,7 @@ const Auth = () => {
         const city = await getCity(ip)
         const result = await loginUser(login, password, ip, city)
         if (result['result']){
-            resetKey(result['access_key'])
+            resetKey(result['token'])
             window.location.href = '/'
             // console.log('Запрос прошел')
         } else {
