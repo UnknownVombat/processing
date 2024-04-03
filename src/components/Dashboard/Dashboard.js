@@ -4,6 +4,7 @@ import {checkAuth, getWorkers} from "../../Requests";
 import {authStorage} from "../../storages/AuthStorage";
 import {dataStorage} from "../../storages/DataStorage";
 import UserRow from "./UserRow/UserRow";
+import SessionRow from "./SessionRow/SessionRow";
 
 const Dashboard = () => {
     const key = authStorage((state) => state.key)
@@ -65,8 +66,8 @@ const Dashboard = () => {
                             </div>
                         </div>
                         <div className={styles.user_dashboard}>
-                            <p className={styles.big_p}>Данные о сессиях:</p>
-
+                            <p className={styles.session_p}>Данные о сессиях:</p>
+                            {sessions.map((element) => {return SessionRow(element['WorkersSessions'], key)})}
                         </div>
                     </div>
                 </div>

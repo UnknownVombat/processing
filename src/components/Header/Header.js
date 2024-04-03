@@ -16,7 +16,7 @@ const Header = () => {
     const key = authStorage((state) => state.key)
     const resetKey = authStorage((state) => state.resetKey)
     const user = dataStorage((state) => state.user)
-    // const resetUser = dataStorage((state) => state.resetStatus)
+    const resetUser = dataStorage((state) => state.resetStatus)
     // if (user instanceof Array) {
     //     for (const row in user) {
     //         if (row['is_admin'] === true){
@@ -43,6 +43,7 @@ const Header = () => {
         setActive(!isActive);
         const result = await switchActive(!isActive, key)
         console.log(result)
+        resetUser(user['name'], user['balance'], !isActive)
         // eslint-disable-next-line no-restricted-globals
         location.reload()
     }
@@ -64,7 +65,7 @@ const Header = () => {
                 <div className={'user_block_big'}>
                     <div className={'user_block'} id='user_block' onClick={changeUserActive}>
                         <img src={user_img} alt='Us'/>
-                        <p>OFFICE_USER1</p>
+                        <p>{user['name']}</p>
                         <img src={arrow} alt='Ar'/>
                     </div>
                     <div className={'user_hidden_block'} id='user_hidden_block'>

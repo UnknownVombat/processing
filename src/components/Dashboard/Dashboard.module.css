@@ -10,9 +10,13 @@
 .user_dashboard {
     width: 50%;
     right: 0;
-    height: 100vh;
+    height: auto;
+    max-height: 70vh;
     flex-direction: column;
     margin-left: 10px;
+    margin-right: 10px;
+    border: #3c6930 2px solid;
+    border-radius: 20px;
 }
 
 .all_dashboard h2 {
@@ -87,4 +91,11 @@
 .your_data {
     padding-left: 15px;
     width: 100vw;
+}
+
+.session_p {
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
 }
