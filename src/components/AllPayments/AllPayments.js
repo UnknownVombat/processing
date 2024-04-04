@@ -1,16 +1,16 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {authStorage} from "../../storages/AuthStorage";
 import {applicationStorage} from "../../storages/ApplicationStorage";
-import {checkAuth, getActiveApplications, getAllMethods} from "../../Requests";
-import './Payments.css'
-import PaymentRow from "./PaymentRow/PaymentRow";
+import {checkAuth, getAllMethods, getAllApplications} from "../../Requests";
+import './AllPayments.css'
+import AllPaymentRow from "./AllPaymentRow/AllPaymentRow";
 
-const Payments = () => {
+const AllPayments = () => {
     const key = authStorage((state) => state.key)
     let applications = applicationStorage((state) => state.applications)
     const resetApplications = applicationStorage((state) => state.resetApplications)
     const [authented, setAuth] = useState(true)
-    const [connected, setConnected] = useState(false)
+    const [connected, setConnected] = useState(true)
     let methodDict = {}
     const socket = useRef()
     function connect() {
@@ -42,7 +42,7 @@ const Payments = () => {
         for (var method of methods['result']) {
             methodsDict[method['PaymentMethods']['id']] = method['PaymentMethods']['name']
         }
-        const apps = await getActiveApplications(key)
+        const apps = await getAllApplications(key)
         // console.log(apps)
         const new_apps = apps.map((app) => {
             let data = {}
@@ -68,10 +68,10 @@ const Payments = () => {
     })
 
     function clickButton(el_id){
-        if (el_id === 'active') {
+        if (el_id === 'all') {
             window.location.reload()
         } else {
-            window.location.href = '/history'
+            window.location.href = '/payments'
         }
     }
     // }
@@ -80,8 +80,8 @@ const Payments = () => {
             <div className='payments_apps_container'>
                 <h2>Выплаты</h2>
                 <div className='payments_buttons_container'>
-                    <button id='active' className='payments_submit clicked' onClick={() => clickButton('active')}>Активные</button>
-                    <button id='all' className='payments_submit' onClick={() => clickButton('all')}>Все</button>
+                    <button id='active' className='payments_submit' onClick={() => clickButton('active')}>Активные</button>
+                    <button id='all' className='payments_submit clicked' onClick={() => clickButton('all')}>Все</button>
                 </div>
                 <table>
 
@@ -97,11 +97,10 @@ const Payments = () => {
                             <th>ФИО</th>
                             <th>Статус</th>
                             <th>Время создания</th>
-                            <th>Действия</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {applications.map((element) => {return PaymentRow(element)})}
+                        {applications.map((element) => {return AllPaymentRow(element)})}
                         </tbody>
                     </table>
                 </div>
@@ -113,4 +112,4 @@ const Payments = () => {
 
 };
 
-export default Payments;
+export default AllPayments;

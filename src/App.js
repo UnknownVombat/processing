@@ -5,6 +5,7 @@ import Layout from "./components/Layout/Layout";
 import Auth from "./components/Auth/Auth";
 import Settings from "./components/Settings/Settings";
 import Payments from "./components/Payments/Payments";
+import AllPayments from "./components/AllPayments/AllPayments";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
                 <Route path='/' element={<Dashboard/>}/>
                 <Route path='/payments' element={<Payments />} />
                 <Route path='/settings' element={<Settings />} />
+                <Route path='/history' element={<AllPayments />} />
             </Route>
             <Route index path='/auth' element={<Auth />} />
         </Routes>

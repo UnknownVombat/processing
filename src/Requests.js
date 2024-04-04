@@ -254,3 +254,49 @@ export async function addBot(bot_token, bot_name, key) {
         return false
     }
 }
+
+export async function getActiveApplications(key) {
+    const url = base_url + '/applications/get'
+    const headers = {
+        'accept': 'application/json',
+        'accept-encoding': 'gzip,deflate,br',
+        'content-type': 'application/json;charset=utf-8',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': '*',
+        'Authorization': key}
+    try {
+        const response = await fetch(url, {method: 'GET', headers: headers})
+        console.log(response)
+        if (!response.ok){
+            return false
+        }
+        const result = await response.json();
+        return result['result']
+    } catch (error) {
+        console.error('Ошибка авторизации: ', error)
+        return false
+    }
+}
+
+export async function getAllApplications(key) {
+    const url = base_url + '/applications/get/success'
+    const headers = {
+        'accept': 'application/json',
+        'accept-encoding': 'gzip,deflate,br',
+        'content-type': 'application/json;charset=utf-8',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': '*',
+        'Authorization': key}
+    try {
+        const response = await fetch(url, {method: 'GET', headers: headers})
+        console.log(response)
+        if (!response.ok){
+            return false
+        }
+        const result = await response.json();
+        return result['result']
+    } catch (error) {
+        console.error('Ошибка авторизации: ', error)
+        return false
+    }
+}
