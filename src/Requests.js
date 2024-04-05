@@ -485,3 +485,25 @@ export async function createKeys(name, key) {
         return false
     }
 }
+
+export async function getWithdraws(key) {
+    const url = base_url + '/withdraws/get'
+    const headers = {
+        'accept': 'application/json',
+        'accept-encoding': 'gzip,deflate,br',
+        'content-type': 'application/json;charset=utf-8',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': '*',
+        'Authorization': key}
+    try {
+        const response = await fetch(url, {method: 'GET', headers: headers})
+        if (!response.ok){
+            return false
+        }
+        const result = await response.json()
+        return result['result']
+    } catch (error) {
+        console.error('Ошибка авторизации: ', error)
+        return false
+    }
+}
