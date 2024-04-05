@@ -24,6 +24,11 @@
     margin-bottom: 0;
 }
 
+.user_dashboard h2 {
+    padding-left: 15px;
+    margin-bottom: 0;
+}
+
 .user_row {
     flex-direction: column;
     width: auto;

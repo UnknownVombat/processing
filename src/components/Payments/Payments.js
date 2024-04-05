@@ -9,6 +9,7 @@ const Payments = () => {
     const key = authStorage((state) => state.key)
     let applications = applicationStorage((state) => state.applications)
     const resetApplications = applicationStorage((state) => state.resetApplications)
+    const lastApp = applicationStorage((state) => state.lastApp)
     const [authented, setAuth] = useState(true)
     const [connected, setConnected] = useState(false)
     let methodDict = {}
@@ -62,7 +63,7 @@ const Payments = () => {
 
     useEffect(() => {
 
-    }, [applications]);
+    }, [applications, lastApp]);
     window.addEventListener('load', () => {
         onLoadPage()
     })
@@ -83,9 +84,6 @@ const Payments = () => {
                     <button id='active' className='payments_submit clicked' onClick={() => clickButton('active')}>Активные</button>
                     <button id='all' className='payments_submit' onClick={() => clickButton('all')}>Все</button>
                 </div>
-                <table>
-
-                </table>
                 <div className='payments_table_container'>
                     <table>
                         <thead>
@@ -101,7 +99,7 @@ const Payments = () => {
                         </tr>
                         </thead>
                         <tbody>
-                        {applications.map((element) => {return PaymentRow(element)})}
+                        {applications.map((element) => {return PaymentRow(element, key)})}
                         </tbody>
                     </table>
                 </div>

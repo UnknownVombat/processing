@@ -300,3 +300,116 @@ export async function getAllApplications(key) {
         return false
     }
 }
+
+export async function updateStatus(status, foreign_id, key) {
+    const url = base_url + '/applications/update'
+    const data = {'foreign_id': foreign_id, 'status': status}
+    const headers = {
+        'accept': 'application/json',
+        'accept-encoding': 'gzip,deflate,br',
+        'content-type': 'application/json;charset=utf-8',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': '*',
+        'Authorization': key}
+    try {
+        const response = await fetch(url, {method: 'PATCH', body: JSON.stringify(data), headers: headers})
+        if (!response.ok){
+            return false
+        }
+        const result = await response.json()
+        return result['access'] === true;
+    } catch (error) {
+        console.error('Ошибка авторизации: ', error)
+        return false
+    }
+}
+
+export async function sendWithdraw(amount, key){
+    const url = base_url + '/withdraws/new'
+    const data = {'amount': amount}
+    const headers = {
+        'accept': 'application/json',
+        'accept-encoding': 'gzip,deflate,br',
+        'content-type': 'application/json;charset=utf-8',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': '*',
+        'Authorization': key}
+    try {
+        const response = await fetch(url, {method: 'POST', body: JSON.stringify(data), headers: headers})
+        if (!response.ok){
+            return false
+        }
+        const result = await response.json()
+        return result['access'] === true;
+    } catch (error) {
+        console.error('Ошибка авторизации: ', error)
+        return false
+    }
+}
+
+export async function loginAdmin(login, password, ip, city) {
+    const url = base_url + '/admin/login'
+    const data = {'login': login, 'password': password, 'ip': ip, 'city': city}
+    const headers = {
+        'accept': 'application/json',
+        'accept-encoding': 'gzip,deflate,br',
+        'content-type': 'application/json;charset=utf-8',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': '*'}
+    try {
+        const response = await fetch(url, {method: 'POST', body: JSON.stringify(data), headers: headers})
+        console.log(response)
+        if (!response.ok){
+            return false
+        }
+        const result = await response.json()
+        return {'result': result['success'], 'token': result['admin_token']}
+    } catch (error) {
+        console.error('Ошибка авторизации: ', error)
+        return false
+    }
+}
+
+export async function checkAdminAuth(key){
+    const url = base_url + '/admin/check_auth'
+    const headers = {
+        'accept': 'application/json',
+        'accept-encoding': 'gzip,deflate,br',
+        'content-type': 'application/json;charset=utf-8',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': '*',
+        'Authorization': key}
+    try {
+        const response = await fetch(url, {method: 'GET', headers: headers})
+        if (!response.ok){
+            return false
+        }
+        const result = await response.json()
+        return result['access'] === true;
+    } catch (error) {
+        console.error('Ошибка авторизации: ', error)
+        return false
+    }
+}
+
+export async function getTeams(key) {
+    const url = base_url + '/teams/get'
+    const headers = {
+        'accept': 'application/json',
+        'accept-encoding': 'gzip,deflate,br',
+        'content-type': 'application/json;charset=utf-8',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': '*',
+        'Authorization': key}
+    try {
+        const response = await fetch(url, {method: 'GET', headers: headers})
+        if (!response.ok){
+            return false
+        }
+        const result = await response.json()
+        return result['result']
+    } catch (error) {
+        console.error('Ошибка авторизации: ', error)
+        return false
+    }
+}

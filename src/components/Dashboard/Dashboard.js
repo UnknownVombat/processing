@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styles from './Dashboard.module.css'
-import {checkAuth, getWorkers} from "../../Requests";
+import {checkAuth, getWorkers, sendWithdraw} from "../../Requests";
 import {authStorage} from "../../storages/AuthStorage";
 import {dataStorage} from "../../storages/DataStorage";
 import UserRow from "./UserRow/UserRow";
@@ -28,6 +28,11 @@ const Dashboard = () => {
     const user = dataStorage((state) => state.user)
     const users = dataStorage((state) => state.users)
     const sessions = dataStorage((state) => state.sessions)
+    async function withdraw() {
+        const amount = document.getElementById('amount').value
+        const result = await sendWithdraw(amount, key)
+        return result
+    }
     if (authented === true){
         if (status === 'user'){
             return (
@@ -39,8 +44,8 @@ const Dashboard = () => {
                         <p>Статус: {user['status']}</p>
                         <div className={styles.withdraw}>
                             <label>Вывести баланс</label>
-                            <input type='text' placeholder='Сумма вывода'/>
-                            <button className={styles.submit} onClick={() => console.log('Вывод')}>Вывести</button>
+                            <input id='amount' type='number' placeholder='Сумма вывода'/>
+                            <button className={styles.submit} onClick={withdraw}>Вывести</button>
                         </div>
                     </div>
                 </div>
