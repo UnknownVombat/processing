@@ -25,6 +25,8 @@ const AdminUsers = () => {
         const team_name = document.getElementById('team_name').value
         const admin_contact = document.getElementById('admin_contact').value
         registerTeam(team_name, admin_contact, key)
+        alert('Успешно!')
+        window.location.reload()
     }
 
     async function addUser() {
@@ -33,7 +35,10 @@ const AdminUsers = () => {
         const is_admin = document.getElementById('is_admin').value
         const team_id = document.getElementById('team_id').value
         const password = document.getElementById('password').value
+        console.log(is_admin)
         registerWorker(user_name, login, password, team_id, is_admin, key)
+        alert('Успешно!')
+        window.location.reload()
     }
     async function createKey() {
         const source_name = document.getElementById('source_name').value
@@ -90,9 +95,9 @@ const AdminUsers = () => {
                             <div className={styles.column_div}>
                                 <label>Пользователь админ?</label>
                                 <div className={styles.row_div}>
-                                    <input type='radio' name='admin' value='admin_true' id='is_admin'/>
+                                    <input type='radio' name='admin' value='true' id='is_admin'/>
                                     <label htmlFor='admin_true'>Да</label>
-                                    <input type='radio' name='admin' value='admin_false' id='is_admin'/>
+                                    <input type='radio' name='admin' value='false' id='is_admin'/>
                                     <label htmlFor='admin_false'>Нет</label>
                                 </div>
                                 <label>Введите айди команды</label>
