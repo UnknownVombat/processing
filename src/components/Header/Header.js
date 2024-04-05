@@ -69,7 +69,7 @@ const Header = () => {
                         <img src={arrow} alt='Ar'/>
                     </div>
                     <div className={'user_hidden_block'} id='user_hidden_block'>
-                        <div className={'user_block_little'}>Настройки</div>
+                        <NavLink to='/settings'><div className={'user_block_little'}>Настройки</div></NavLink>
                         <NavLink to='/auth'><div className={'user_block_little'} onClick={logoutF}>Выйти</div></NavLink>
                     </div>
                 </div>

@@ -7,9 +7,9 @@ import PaymentRow from "./PaymentRow/PaymentRow";
 
 const Payments = () => {
     const key = authStorage((state) => state.key)
-    let applications = applicationStorage((state) => state.applications)
+    const applications = applicationStorage((state) => state.applications)
     const resetApplications = applicationStorage((state) => state.resetApplications)
-    const lastApp = applicationStorage((state) => state.lastApp)
+    // const lastApp = applicationStorage((state) => state.lastApp)
     const [authented, setAuth] = useState(true)
     const [connected, setConnected] = useState(false)
     let methodDict = {}
@@ -44,7 +44,6 @@ const Payments = () => {
             methodsDict[method['PaymentMethods']['id']] = method['PaymentMethods']['name']
         }
         const apps = await getActiveApplications(key)
-        // console.log(apps)
         const new_apps = apps.map((app) => {
             let data = {}
             data[app['PayApplications']['foreign_id']] = [app['PayApplications']['amount'], app['PayApplications']['requisite'],
@@ -63,7 +62,7 @@ const Payments = () => {
 
     useEffect(() => {
 
-    }, [applications, lastApp]);
+    }, [applications]);
     window.addEventListener('load', () => {
         onLoadPage()
     })
@@ -77,34 +76,39 @@ const Payments = () => {
     }
     // }
     if (authented === true) {
-        return (
-            <div className='payments_apps_container'>
-                <h2>Выплаты</h2>
-                <div className='payments_buttons_container'>
-                    <button id='active' className='payments_submit clicked' onClick={() => clickButton('active')}>Активные</button>
-                    <button id='all' className='payments_submit' onClick={() => clickButton('all')}>Все</button>
+        try {
+            return (
+                <div className='payments_apps_container'>
+                    <h2>Выплаты</h2>
+                    <div className='payments_buttons_container'>
+                        <button id='active' className='payments_submit clicked' onClick={() => clickButton('active')}>Активные</button>
+                        <button id='all' className='payments_submit' onClick={() => clickButton('all')}>Все</button>
+                    </div>
+                    <div className='payments_table_container'>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Айди заявки</th>
+                                <th>Сумма</th>
+                                <th>Реквизиты</th>
+                                <th>Метод</th>
+                                <th>ФИО</th>
+                                <th>Статус</th>
+                                <th>Время создания</th>
+                                <th>Действия</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {applications.map((element) => {return PaymentRow(element, key)})}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div className='payments_table_container'>
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Айди заявки</th>
-                            <th>Сумма</th>
-                            <th>Реквизиты</th>
-                            <th>Метод</th>
-                            <th>ФИО</th>
-                            <th>Статус</th>
-                            <th>Время создания</th>
-                            <th>Действия</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {applications.map((element) => {return PaymentRow(element, key)})}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        );
+            );
+        } catch (e) {
+            alert(e)
+            // window.location.href = '/payments'
+        }
     } else {
         window.location.href = '/auth'
     }

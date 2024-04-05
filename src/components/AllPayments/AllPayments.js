@@ -71,6 +71,7 @@ const AllPayments = () => {
         if (el_id === 'all') {
             window.location.reload()
         } else {
+            resetApplications([])
             window.location.href = '/payments'
         }
     }

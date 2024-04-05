@@ -413,3 +413,75 @@ export async function getTeams(key) {
         return false
     }
 }
+
+export async function registerTeam(name, admin_contact, key) {
+    const url = base_url + '/admin/register_team'
+    const data = {'name': name, 'admin_contact': admin_contact}
+    const headers = {
+        'accept': 'application/json',
+        'accept-encoding': 'gzip,deflate,br',
+        'content-type': 'application/json;charset=utf-8',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': '*',
+        'Authorization': key}
+    try {
+        const response = await fetch(url, {method: 'POST', body: JSON.stringify(data), headers: headers})
+        console.log(response)
+        if (!response.ok){
+            return false
+        }
+        const result = await response.json()
+        return result['access']
+    } catch (error) {
+        console.error('Ошибка авторизации: ', error)
+        return false
+    }
+}
+
+export async function registerWorker(name, login, password, team_id, is_admin, key) {
+    const url = base_url + '/admin/register_worker'
+    const data = {'name': name, 'login': login, 'password': password, 'team_id': team_id, 'is_admin': is_admin}
+    const headers = {
+        'accept': 'application/json',
+        'accept-encoding': 'gzip,deflate,br',
+        'content-type': 'application/json;charset=utf-8',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': '*',
+        'Authorization': key}
+    try {
+        const response = await fetch(url, {method: 'POST', body: JSON.stringify(data), headers: headers})
+        console.log(response)
+        if (!response.ok){
+            return false
+        }
+        const result = await response.json()
+        return result['access']
+    } catch (error) {
+        console.error('Ошибка авторизации: ', error)
+        return false
+    }
+}
+
+export async function createKeys(name, key) {
+    const url = base_url + '/admin/create_keys'
+    const data = {'name': name}
+    const headers = {
+        'accept': 'application/json',
+        'accept-encoding': 'gzip,deflate,br',
+        'content-type': 'application/json;charset=utf-8',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': '*',
+        'Authorization': key}
+    try {
+        const response = await fetch(url, {method: 'POST', body: JSON.stringify(data), headers: headers})
+        console.log(response)
+        if (!response.ok){
+            return false
+        }
+        const result = await response.json()
+        return result['result']
+    } catch (error) {
+        console.error('Ошибка авторизации: ', error)
+        return false
+    }
+}

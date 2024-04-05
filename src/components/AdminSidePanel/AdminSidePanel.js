@@ -24,7 +24,7 @@ const AdminSidePanel = () => {
                 </div></NavLink>
             </div>
             <div className={styles.main_icons}>
-                <NavLink to='/'><div className={styles.inline_block}>
+                <NavLink to='/admin/withdraws'><div className={styles.inline_block}>
                     <div className={styles.image_div}><img src={withdraws} alt='Dash'/></div>
                     <div className={styles.text_div}>Выводы</div>
                 </div></NavLink>

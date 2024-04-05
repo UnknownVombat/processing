@@ -8,6 +8,8 @@ export const dataStorage = create(persist(
         sessions: [],
         methods: [],
         otherMethods: [],
+        keys: '',
+        resetKeys: (new_keys) => set(() => ({keys: new_keys})),
         resetUsers: (new_users) => set(() => ({users: new_users})),
         resetMethods: (new_methods) => set(() => ({methods: new_methods})),
         resetOtherMethods: (new_methods) => set(() => ({otherMethods: new_methods})),

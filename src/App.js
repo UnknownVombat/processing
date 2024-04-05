@@ -9,6 +9,7 @@ import AllPayments from "./components/AllPayments/AllPayments";
 import AdminLayout from "./components/AdminLayout/AdminLayout";
 import AdminUsers from "./components/AdminUsers/AdminUsers";
 import AdminAuth from "./components/AdminAuth/AdminAuth";
+import AdminWithdraws from "./components/AdminWithdraws/AdminWithdraws";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             </Route>
             <Route path='/admin' element={<AdminLayout />}>
                 <Route path='/admin' element={<AdminUsers />}/>
+                <Route path='/admin/withdraws' element={<AdminWithdraws />}/>
             </Route>
             <Route index path='/auth' element={<Auth />} />
             <Route path='/admin/auth' element={<AdminAuth />} />
