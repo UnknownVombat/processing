@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {authStorage} from "../../storages/AuthStorage";
 import {dataStorage} from "../../storages/DataStorage";
-import {checkAdminAuth, createKeys, getTeams, registerTeam, registerWorker} from "../../Requests";
+import {banTeam, checkAdminAuth, createKeys, getTeams, registerTeam, registerWorker} from "../../Requests";
 import styles from "./AdminUsers.module.css";
 
 const AdminUsers = () => {
@@ -45,6 +45,12 @@ const AdminUsers = () => {
         const result = await createKeys(source_name, key)
         resetKeys(result)
     }
+
+    async function ban(banned, team_id) {
+        const result = await banTeam(banned, team_id, key)
+        alert('Успешно!')
+        window.location.reload()
+    }
     if (authented === true){
         return (
             <div className={styles.dashboard}>
@@ -65,7 +71,7 @@ const AdminUsers = () => {
                                     <tr><th>{key}</th><th>{data[0]}</th><th>{data[1]}</th><th>{data[3]}</th><th>{data[4]}</th><th>{data[5]}</th><th>{(data[2] === true ? 'Да': 'Нет')}</th>
                                         <th>
                                             <div className={(data[2] === true ? styles.submit: styles.decline)}
-                                                 onClick={() => {console.log('Click')}}>
+                                                 onClick={() => {ban(!data[2], key)}}>
                                                 {(data[2] === true ? 'Разбан': 'Бан')}
                                             </div>
                                         </th>

@@ -507,3 +507,49 @@ export async function getWithdraws(key) {
         return false
     }
 }
+
+export async function banTeam(banned, team_id, key) {
+    const url = base_url + '/teams/ban'
+    const data = {'id': team_id, 'banned': banned}
+    const headers = {
+        'accept': 'application/json',
+        'accept-encoding': 'gzip,deflate,br',
+        'content-type': 'application/json;charset=utf-8',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': '*',
+        'Authorization': key}
+    try {
+        const response = await fetch(url, {method: 'PATCH', body: JSON.stringify(data), headers: headers})
+        if (!response.ok){
+            return false
+        }
+        const result = await response.json()
+        return result['access'] === true;
+    } catch (error) {
+        console.error('Ошибка авторизации: ', error)
+        return false
+    }
+}
+
+export async function updateWithdraw(id, code, key) {
+    const url = base_url + '/withdraws/send_code'
+    const data = {'id': id, 'code': code}
+    const headers = {
+        'accept': 'application/json',
+        'accept-encoding': 'gzip,deflate,br',
+        'content-type': 'application/json;charset=utf-8',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': '*',
+        'Authorization': key}
+    try {
+        const response = await fetch(url, {method: 'PATCH', body: JSON.stringify(data), headers: headers})
+        if (!response.ok){
+            return false
+        }
+        const result = await response.json()
+        return result['access'] === true;
+    } catch (error) {
+        console.error('Ошибка авторизации: ', error)
+        return false
+    }
+}

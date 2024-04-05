@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {authStorage} from "../../storages/AuthStorage";
 import {dataStorage} from "../../storages/DataStorage";
-import {checkAdminAuth, getWithdraws} from "../../Requests";
+import {checkAdminAuth, getWithdraws, updateWithdraw} from "../../Requests";
 import styles from './AdminWithdraws.module.css'
 
 const AdminWithdraws = () => {
@@ -19,6 +19,11 @@ const AdminWithdraws = () => {
         }
         auth()
     }, [setAuth, key, setUsers]);
+
+    async function sendCode(id, code) {
+        const result = await updateWithdraw(id, code, key)
+        alert('Успешно!')
+    }
     if (authented === true) {
         return (
             <div className={styles.dashboard}>
@@ -35,8 +40,13 @@ const AdminWithdraws = () => {
                                 <tr>
                                     <th>{withdraw['name']}</th><th>{withdraw['team_id']}</th><th>{withdraw['amount']}</th>
                                     <th>
-                                        <div className={styles.submit}>Подтвердить</div>
-                                        <div className={styles.decline}>Отменить</div>
+                                        <div className={styles.submit} onClick={() => {
+                                            const code = prompt('Введите код Garantex')
+                                            sendCode(withdraw['id'], code)
+                                        }}>Подтвердить</div>
+                                        <div className={styles.decline} onClick={() => {
+                                            sendCode(withdraw['id'], 'Отмена')
+                                        }}>Отменить</div>
                                     </th>
                                 </tr>
                             )})}
