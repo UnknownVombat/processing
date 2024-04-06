@@ -6,7 +6,7 @@ import user_img from '../../icons/bxs-user.svg'
 import arrow from '../../icons/bx-chevron-down.svg'
 import start from '../../icons/play-regular-24.png'
 import stop from '../../icons/pause-regular-24.png'
-import {logoutUser, switchActive} from "../../Requests";
+import {getBot, logoutUser, switchActive} from "../../Requests";
 import {NavLink} from "react-router-dom";
 import {authStorage} from "../../storages/AuthStorage";
 import {dataStorage} from "../../storages/DataStorage";
@@ -17,14 +17,7 @@ const Header = () => {
     const resetKey = authStorage((state) => state.resetKey)
     const user = dataStorage((state) => state.user)
     const resetUser = dataStorage((state) => state.resetStatus)
-    // if (user instanceof Array) {
-    //     for (const row in user) {
-    //         if (row['is_admin'] === true){
-    //             resetUser({'name': row['name'], 'balance': row['balance']}, row['status'])
-    //             break
-    //         }
-    //     }
-    // }
+    let bot = ''
     function logoutF(){
         resetKey('')
         logoutUser(key)
@@ -47,6 +40,12 @@ const Header = () => {
         // eslint-disable-next-line no-restricted-globals
         location.reload()
     }
+
+    async function onLoadPage() {
+        bot = await getBot(key)
+    }
+
+    onLoadPage()
     return (
         <header>
             <div className={'block'}>
@@ -59,7 +58,7 @@ const Header = () => {
                         <img src={wrench} alt='Wr'/>
                     </div>
                     <div className={'little_icons'}>
-                        <a href='https://www.youtube.com/' target="_blank" rel="noreferrer"><img src={bell} alt='Bl'/></a>
+                        <a href={'https://t.me/' + bot} target="_blank" rel="noreferrer"><img src={bell} alt='Bl'/></a>
                     </div>
                 </div>
                 <div className={'user_block_big'}>

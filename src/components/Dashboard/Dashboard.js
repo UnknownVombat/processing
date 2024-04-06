@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styles from './Dashboard.module.css'
-import {checkAuth, getWorkers, sendWithdraw} from "../../Requests";
+import {checkAuth, getCode, getWorkers, sendWithdraw} from "../../Requests";
 import {authStorage} from "../../storages/AuthStorage";
 import {dataStorage} from "../../storages/DataStorage";
 import UserRow from "./UserRow/UserRow";
@@ -13,10 +13,12 @@ const Dashboard = () => {
     const setSessions = dataStorage((state) => state.resetSessions)
     const [authented, setAuth] = useState(true)
     const [status, setStatus] = useState('user')
+    let code = ''
     useEffect(() => {
         async function auth() {
             let result = await checkAuth(key)
             let data = await getWorkers(key)
+            code = await getCode(key)
             setAuth(result)
             setUsers(data['users'])
             setSessions(data['sessions'])
@@ -31,6 +33,11 @@ const Dashboard = () => {
     async function withdraw() {
         const amount = document.getElementById('amount').value
         const result = await sendWithdraw(amount, key)
+        if (result === true) {
+            alert('Успешно!')
+        } else {
+            alert('Не хватает средств!')
+        }
         return result
     }
     if (authented === true){
@@ -47,6 +54,7 @@ const Dashboard = () => {
                             <input id='amount' type='number' placeholder='Сумма вывода'/>
                             <button className={styles.submit} onClick={withdraw}>Вывести</button>
                         </div>
+                        <p>Код гарантекс для последней заявки на вывод: {code}</p>
                     </div>
                 </div>
             );
@@ -66,8 +74,9 @@ const Dashboard = () => {
                                 <div className={styles.withdraw}>
                                     <label>Вывести баланс</label>
                                     <input type='text' placeholder='Сумма вывода'/>
-                                    <button className={styles.submit} onClick={() => console.log('Вывод')}>Вывести</button>
+                                    <button className={styles.submit} onClick={withdraw}>Вывести</button>
                                 </div>
+                                <p>Код гарантекс для последней заявки на вывод: {code}</p>
                             </div>
                         </div>
                         <div className={styles.user_dashboard}>

@@ -10,6 +10,7 @@ import AdminLayout from "./components/AdminLayout/AdminLayout";
 import AdminUsers from "./components/AdminUsers/AdminUsers";
 import AdminAuth from "./components/AdminAuth/AdminAuth";
 import AdminWithdraws from "./components/AdminWithdraws/AdminWithdraws";
+import AdminAllPayments from "./components/AdminAllPayments/AdminAllPayments";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path='/admin' element={<AdminLayout />}>
                 <Route path='/admin' element={<AdminUsers />}/>
                 <Route path='/admin/withdraws' element={<AdminWithdraws />}/>
+                <Route path='/admin/all_payments' element={<AdminAllPayments />} />
             </Route>
             <Route index path='/auth' element={<Auth />} />
             <Route path='/admin/auth' element={<AdminAuth />} />

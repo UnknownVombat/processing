@@ -41,7 +41,8 @@ const Settings = () => {
     async function addNewBot(){
         const bot_token = document.getElementById('bot_token').value
         const bot_name = document.getElementById('bot_name').value
-        addBot(bot_token, bot_name, key)
+        const tg_id = document.getElementById('tg_id').value
+        addBot(bot_token, bot_name, tg_id, key)
     }
     if (authented === true){
         if (status === 'user') {
@@ -52,6 +53,8 @@ const Settings = () => {
                     <input type='text' placeholder='Токен бота' id='bot_token'/>
                     <label>Введите имя бота</label>
                     <input type='text' placeholder='Имя бота' id='bot_name'/>
+                    <label>Введите ваш телеграм ID</label>
+                    <input type='text' placeholder='Телеграм ID' id='tg_id'/>
                     <button className={styles.submit} onClick={addNewBot}>Добавить бота</button>
                 </div>
             )
@@ -64,6 +67,8 @@ const Settings = () => {
                         <input type='text' placeholder='Токен бота' id='bot_token'/>
                         <label>Введите имя бота</label>
                         <input type='text' placeholder='Имя бота' id='bot_name'/>
+                        <label>Введите ваш телеграм ID</label>
+                        <input type='text' placeholder='Телеграм ID' id='tg_id'/>
                         <button className={styles.submit} onClick={addNewBot}>Добавить бота</button>
                     </div>
                     <div className={styles.settings_div}>

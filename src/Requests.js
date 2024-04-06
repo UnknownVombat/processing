@@ -232,9 +232,9 @@ export async function addNewMethod(method_id, key) {
     }
 }
 
-export async function addBot(bot_token, bot_name, key) {
+export async function addBot(bot_token, bot_name, tg_id, key) {
     const url = base_url + '/users/bot'
-    const data = {'bot_token': bot_token, 'bot_name': bot_name}
+    const data = {'bot_token': bot_token, 'bot_name': bot_name, 'tg_id': tg_id}
     const headers = {
         'accept': 'application/json',
         'accept-encoding': 'gzip,deflate,br',
@@ -280,6 +280,29 @@ export async function getActiveApplications(key) {
 
 export async function getAllApplications(key) {
     const url = base_url + '/applications/get/success'
+    const headers = {
+        'accept': 'application/json',
+        'accept-encoding': 'gzip,deflate,br',
+        'content-type': 'application/json;charset=utf-8',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': '*',
+        'Authorization': key}
+    try {
+        const response = await fetch(url, {method: 'GET', headers: headers})
+        console.log(response)
+        if (!response.ok){
+            return false
+        }
+        const result = await response.json();
+        return result['result']
+    } catch (error) {
+        console.error('Ошибка авторизации: ', error)
+        return false
+    }
+}
+
+export async function getAdminAllApplications(key) {
+    const url = base_url + '/applications/all'
     const headers = {
         'accept': 'application/json',
         'accept-encoding': 'gzip,deflate,br',
@@ -548,6 +571,52 @@ export async function updateWithdraw(id, code, key) {
         }
         const result = await response.json()
         return result['access'] === true;
+    } catch (error) {
+        console.error('Ошибка авторизации: ', error)
+        return false
+    }
+}
+
+export async function getCode(key) {
+    const url = base_url + '/withdraws/code'
+    const headers = {
+        'accept': 'application/json',
+        'accept-encoding': 'gzip,deflate,br',
+        'content-type': 'application/json;charset=utf-8',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': '*',
+        'Authorization': key}
+    try {
+        const response = await fetch(url, {method: 'GET', headers: headers})
+        console.log(response)
+        if (!response.ok){
+            return false
+        }
+        const result = await response.json();
+        return result['result']
+    } catch (error) {
+        console.error('Ошибка авторизации: ', error)
+        return false
+    }
+}
+
+export async function getBot(key) {
+    const url = base_url + '/users/bot'
+    const headers = {
+        'accept': 'application/json',
+        'accept-encoding': 'gzip,deflate,br',
+        'content-type': 'application/json;charset=utf-8',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': '*',
+        'Authorization': key}
+    try {
+        const response = await fetch(url, {method: 'GET', headers: headers})
+        console.log(response)
+        if (!response.ok){
+            return false
+        }
+        const result = await response.json();
+        return result['result']
     } catch (error) {
         console.error('Ошибка авторизации: ', error)
         return false

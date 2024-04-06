@@ -18,7 +18,7 @@ const AdminSidePanel = () => {
         <div className={styles.side_panel}>
             <PanelHeader />
             <div className={styles.main_icons}>
-                <NavLink to='/admin/users'><div className={styles.inline_block}>
+                <NavLink to='/admin'><div className={styles.inline_block}>
                     <div className={styles.image_div}><img src={users} alt='Dash'/></div>
                     <div className={styles.text_div}>Команды</div>
                 </div></NavLink>
@@ -30,13 +30,13 @@ const AdminSidePanel = () => {
                 </div></NavLink>
             </div>
             <div className={styles.main_icons}>
-                <NavLink to='/'><div className={styles.inline_block}>
+                <NavLink to='/admin/all_payments'><div className={styles.inline_block}>
                     <div className={styles.image_div}><img src={deals} alt='Dash'/></div>
                     <div className={styles.text_div}>Все сделки</div>
                 </div></NavLink>
             </div>
             <div className={styles.main_icons}>
-                <NavLink to='/auth'><div className={styles.inline_block} onClick={logoutF}>
+                <NavLink to='/admin/auth'><div className={styles.inline_block} onClick={logoutF}>
                     <div className={styles.image_div}><img src={logout} alt='Login'/></div>
                     <div className={styles.text_div}>Выход</div>
                 </div></NavLink>

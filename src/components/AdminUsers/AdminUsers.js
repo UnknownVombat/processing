@@ -14,9 +14,12 @@ const AdminUsers = () => {
         async function auth() {
             let result = await checkAdminAuth(key)
             let data = await getTeams(key)
-            console.log(data)
+            if (data.length > 0) {
+                setUsers(data)
+            } else {
+                setUsers([])
+            }
             setAuth(result)
-            setUsers(data)
         }
         auth()
     }, [setAuth, key, setUsers, keys]);
@@ -47,10 +50,26 @@ const AdminUsers = () => {
     }
 
     async function ban(banned, team_id) {
-        const result = await banTeam(banned, team_id, key)
+        await banTeam(banned, team_id, key)
         alert('Успешно!')
         window.location.reload()
     }
+
+    async function onLoadPage() {
+        let result = await checkAdminAuth(key)
+        let data = await getTeams(key)
+        if (data.length > 0) {
+            setUsers(data)
+        } else {
+            setUsers([])
+        }
+        setAuth(result)
+
+    }
+
+    window.addEventListener('load', () => {
+        onLoadPage()
+    })
     if (authented === true){
         return (
             <div className={styles.dashboard}>

@@ -13,17 +13,35 @@ const AdminWithdraws = () => {
         async function auth() {
             let result = await checkAdminAuth(key)
             let data = await getWithdraws(key)
-            console.log(data)
+            if (data.length > 0) {
+                setUsers(data)
+            } else {
+                setUsers([])
+            }
             setAuth(result)
-            setUsers(data)
         }
         auth()
     }, [setAuth, key, setUsers]);
 
     async function sendCode(id, code) {
-        const result = await updateWithdraw(id, code, key)
+        await updateWithdraw(id, code, key)
         alert('Успешно!')
     }
+
+    async function onLoadPage() {
+        let result = await checkAdminAuth(key)
+        let data = await getWithdraws(key)
+        if (data.length > 0) {
+            setUsers(data)
+        } else {
+            setUsers([])
+        }
+        setAuth(result)
+    }
+
+    window.addEventListener('load', () => {
+        onLoadPage()
+    })
     if (authented === true) {
         return (
             <div className={styles.dashboard}>

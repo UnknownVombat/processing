@@ -1,11 +1,10 @@
 import React from 'react';
-import styles from './PaymentRow.module.css'
 
 const AllPaymentRow = (element) => {
     const key = Object.keys(element)
-    const style = {true: styles.row_true, false: null}
+    // const style = {true: styles.row_true, false: null}
     return (
-        <tr className={style[element[key][5]]}>
+        <tr>
             <th>{key}</th>
             <th>{element[key][0]}</th>
             <th>{element[key][1]}</th>
@@ -13,6 +12,7 @@ const AllPaymentRow = (element) => {
             <th>{element[key][3]}</th>
             <th>{element[key][4]}</th>
             <th>{element[key][6]}</th>
+            <th>{element[key][7]}</th>
         </tr>
     );
 };
