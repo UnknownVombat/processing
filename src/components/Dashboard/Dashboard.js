@@ -13,12 +13,13 @@ const Dashboard = () => {
     const setSessions = dataStorage((state) => state.resetSessions)
     const [authented, setAuth] = useState(true)
     const [status, setStatus] = useState('user')
-    let code = ''
+    const [code, setCode] = useState('')
     useEffect(() => {
         async function auth() {
             let result = await checkAuth(key)
             let data = await getWorkers(key)
-            code = await getCode(key)
+            const codeRes = await getCode(key)
+            setCode(codeRes)
             setAuth(result)
             setUsers(data['users'])
             setSessions(data['sessions'])
