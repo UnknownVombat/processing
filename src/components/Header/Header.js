@@ -43,7 +43,6 @@ const Header = () => {
 
     async function onLoadPage() {
         const result = await getBot(key)
-        alert(result)
         setBot(result)
     }
 
