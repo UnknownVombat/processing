@@ -1,4 +1,4 @@
-const base_url = 'http://127.0.0.1:8000'
+const base_url = 'https://proc.sunrise-dev.online'
 
 export async function loginUser(login, password, ip, city) {
     const url = base_url + '/users/login'
