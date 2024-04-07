@@ -33,6 +33,7 @@ const Settings = () => {
     function contains(arr, elem) {
         return arr.find((i) => i === elem);
     }
+    // eslint-disable-next-line array-callback-return
     let notHaveMethods = otherMethods.map((element) => {
         if (!contains(haveMethods, element['PaymentMethods']['id'])) {
             return element
@@ -74,6 +75,7 @@ const Settings = () => {
                     <div className={styles.settings_div}>
                         <h2>Реквизиты</h2>
                         {methods.map((element) => {return MethodRow(element, key)})}
+                        {/* eslint-disable-next-line array-callback-return */}
                         {notHaveMethods.map((element) => {
                             if (typeof element === 'object'){
                                 return AddMethodRow(element, key)
