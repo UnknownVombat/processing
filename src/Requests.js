@@ -163,7 +163,7 @@ export async function getAllMethods() {
 export async function switchMethodActive(team_id, method_id, active, key) {
     const url = base_url + '/teams/method/switch_active'
     console.log(active)
-    const data = {'team_id': team_id, 'method_id': method_id, 'active': !active}
+    const data = {'team_id': team_id, 'method_id': method_id, 'active': active}
     console.log(data)
     const headers = {
         'accept': 'application/json',

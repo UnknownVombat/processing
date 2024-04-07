@@ -4,7 +4,9 @@ import {switchMethodActive} from "../../../Requests";
 
 const MethodRow = (method, key) => {
     async function switchActive() {
-        const result = await switchMethodActive(method['id'], method['method_id'], method['active'], key)
+        const active = method['active']
+        alert(active)
+        const result = await switchMethodActive(method['id'], method['method_id'], !active, key)
         window.location.reload()
         return result
     }
