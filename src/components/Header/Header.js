@@ -17,7 +17,7 @@ const Header = () => {
     const resetKey = authStorage((state) => state.resetKey)
     const user = dataStorage((state) => state.user)
     const resetUser = dataStorage((state) => state.resetStatus)
-    let bot = ''
+    const [bot, setBot] = useState('')
     function logoutF(){
         resetKey('')
         logoutUser(key)
@@ -42,7 +42,9 @@ const Header = () => {
     }
 
     async function onLoadPage() {
-        bot = await getBot(key)
+        const result = await getBot(key)
+        alert(result)
+        setBot(result)
     }
 
     onLoadPage()

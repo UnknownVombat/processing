@@ -6,8 +6,7 @@ const MethodRow = (method, key) => {
     async function switchActive() {
         const active = method['active']
         const result = await switchMethodActive(method['id'], method['method_id'], !active, key)
-        alert(active)
-        // window.location.reload()
+        window.location.reload()
         return result
     }
     return (

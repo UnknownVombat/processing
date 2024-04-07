@@ -44,6 +44,8 @@ const Settings = () => {
         const bot_name = document.getElementById('bot_name').value
         const tg_id = document.getElementById('tg_id').value
         addBot(bot_token, bot_name, tg_id, key)
+        alert('Успешно!')
+        window.location.reload()
     }
     if (authented === true){
         if (status === 'user') {
