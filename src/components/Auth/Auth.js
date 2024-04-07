@@ -12,7 +12,7 @@ const Auth = () => {
         return result
     }
     function getCity(ip) {
-        let result = fetch("http://ipwho.is/" + ip, {method: 'GET'}).then(res => res.json())
+        let result = fetch("https://ipwho.is/" + ip, {method: 'GET'}).then(res => res.json())
             .then(data => {return data.city});
         return result
     }
