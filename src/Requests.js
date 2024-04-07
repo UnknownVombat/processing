@@ -234,7 +234,7 @@ export async function addNewMethod(method_id, key) {
 
 export async function addBot(bot_token, bot_name, tg_id, key) {
     const url = base_url + '/users/bot'
-    const data = {'bot_token': bot_token, 'bot_name': bot_name, 'tg_id': tg_id}
+    const data = {'bot_token': bot_token, 'bot_name': bot_name, 'telegram_id': tg_id}
     const headers = {
         'accept': 'application/json',
         'accept-encoding': 'gzip,deflate,br',
