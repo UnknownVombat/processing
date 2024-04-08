@@ -48,6 +48,7 @@ const AdminUsers = () => {
         const result = await createKeys(source_name, key)
         const keyString = 'API key: ' + result['api_key'] + '\nPrivate key: ' + result['private_key']
         resetKeys(keyString)
+        alert(keyString)
     }
 
     async function ban(banned, team_id) {
@@ -144,9 +145,9 @@ const AdminUsers = () => {
                             <label>Введите имя партнера</label>
                             <input type='text' placeholder='Имя партнера' id='source_name'/>
                             <button className={styles.submit} onClick={createKey}>Создать</button>
-                            <p>Ключ:</p>
-                            <p>{keys}</p>
-                            <button className={styles.submit} onClick={() => {resetKeys('')}}>Готово</button>
+                            {/*<p>Ключ:</p>*/}
+                            {/*<p>{keys}</p>*/}
+                            {/*<button className={styles.submit} onClick={() => {resetKeys('')}}>Готово</button>*/}
                         </div>
                     </div>
                 </div>
