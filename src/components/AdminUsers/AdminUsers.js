@@ -46,7 +46,8 @@ const AdminUsers = () => {
     async function createKey() {
         const source_name = document.getElementById('source_name').value
         const result = await createKeys(source_name, key)
-        resetKeys(result)
+        const keyString = 'API key: ' + result['api_key'] + '\nPrivate key: ' + result['private_key']
+        resetKeys(keyString)
     }
 
     async function ban(banned, team_id) {
