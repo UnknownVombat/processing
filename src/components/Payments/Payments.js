@@ -15,7 +15,7 @@ const Payments = () => {
     let methodDict = {}
     const socket = useRef()
     function connect() {
-        socket.current = new WebSocket('wss://proc.sunrise-dev.online/applications/ws/new_applications/' + key)
+        socket.current = new WebSocket('wss://176.57.69.49/applications/ws/new_applications/' + key)
 
         socket.current.onopen = () => {
             console.log('Я открылся')
