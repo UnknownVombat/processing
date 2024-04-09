@@ -66,8 +66,7 @@ const Payments = () => {
     }
 
     useEffect(() => {
-        const applications = applicationStorage((state) => state.applications)
-        resetApplications(applications)
+
     }, [applications, resetApplications]);
     window.addEventListener('load', () => {
         onLoadPage()
