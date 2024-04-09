@@ -31,6 +31,7 @@ const Payments = () => {
             applications.unshift(chunk)
             resetApplications(applications)
             setCount(count + 1)
+            console.log(count)
             console.log('Need rerender')
         }
         socket.current.onclose= () => {
@@ -68,7 +69,7 @@ const Payments = () => {
 
     useEffect(() => {
         console.log('rerender')
-    }, [applications, resetApplications, count]);
+    }, [applications, resetApplications]);
     window.addEventListener('load', () => {
         onLoadPage()
     })
