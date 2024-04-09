@@ -27,7 +27,9 @@ const Payments = () => {
             const objKey = data['foreign_id']
             const obgArray = [data['amount'], data['requisite'], methodDict[data['method_id']], data['client_initials'],
                 data['status'], data['express'], data['created_at']]
-            applications[objKey] = obgArray
+            let chunk = {}
+            chunk[objKey] = obgArray
+            applications.unshift(chunk)
             console.log('Apps after:' + applications)
             resetApplications(applications)
             console.log(data)
@@ -110,8 +112,8 @@ const Payments = () => {
                 </div>
             );
         } catch (e) {
-            // window.location.reload()
-            window.location.href = '/payments'
+            window.location.reload()
+            // window.location.href = '/payments'
         }
     } else {
         window.location.href = '/auth'

@@ -13,8 +13,7 @@ const PaymentRow = (element, keys) => {
         document.getElementById(key[0]).remove()
         return result
     }
-    try {
-        return (
+    return (
             <tr className={style[element[key][5]]} id={key[0]}>
                 <th>{key}</th>
                 <th>{element[key][0]}</th>
@@ -33,10 +32,6 @@ const PaymentRow = (element, keys) => {
                 </th>
             </tr>
         );
-    } catch (e) {
-        window.location.reload()
-    }
-
 };
 
 export default PaymentRow;
