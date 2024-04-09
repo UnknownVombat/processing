@@ -28,6 +28,7 @@ const Payments = () => {
                 data['status'], data['express'], data['created_at']]
             let chunk = {}
             chunk[objKey] = obgArray
+            console.log(chunk)
             applications.unshift(chunk)
             resetApplications(applications)
             setCount(count + 1)
