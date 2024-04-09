@@ -11,7 +11,7 @@ const Payments = () => {
     const resetApplications = applicationStorage((state) => state.resetApplications)
     const [authented, setAuth] = useState(true)
     const [connected, setConnected] = useState(false)
-    let methodDict = {}
+    const [methods, setMethods] = useState({})
     const socket = useRef()
     function connect() {
         socket.current = new WebSocket('wss://proc.sunrise-dev.online/applications/ws/new_applications/' + key)
@@ -24,7 +24,7 @@ const Payments = () => {
             const data = JSON.parse(message.data)
             console.log('Apps before:' + applications)
             const objKey = data['foreign_id']
-            const obgArray = [data['amount'], data['requisite'], methodDict[data['method_id']], data['client_initials'],
+            const obgArray = [data['amount'], data['requisite'], methods[data['method_id']], data['client_initials'],
                 data['status'], data['express'], data['created_at']]
             let chunk = {}
             chunk[objKey] = obgArray
@@ -48,6 +48,7 @@ const Payments = () => {
         for (var method of methods['result']) {
             methodsDict[method['PaymentMethods']['id']] = method['PaymentMethods']['name']
         }
+        setMethods(methodsDict)
         const apps = await getActiveApplications(key)
         const new_apps = apps.map((app) => {
             let data = {}
