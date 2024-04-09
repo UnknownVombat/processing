@@ -70,7 +70,7 @@ const Payments = () => {
 
     useEffect(() => {
         console.log('rerender')
-    }, [applications, resetApplications]);
+    }, [applications, resetApplications, count]);
     window.addEventListener('load', () => {
         onLoadPage()
     })
