@@ -35,7 +35,7 @@ const AdminUsers = () => {
     async function addUser() {
         const user_name = document.getElementById('user_name').value
         const login = document.getElementById('login').value
-        const is_admin = document.getElementById('is_admin').value
+        const is_admin = document.getElementById('is_admin_true').checked
         const team_id = document.getElementById('team_id').value
         const password = document.getElementById('password').value
         console.log(is_admin)
@@ -122,7 +122,7 @@ const AdminUsers = () => {
                             <div className={styles.column_div}>
                                 <label>Пользователь админ?</label>
                                 <div className={styles.row_div}>
-                                    <input type='radio' name='admin' value='true' id='is_admin'/>
+                                    <input type='radio' name='admin' value='true' id='is_admin_true'/>
                                     <label htmlFor='admin_true'>Да</label>
                                     <input type='radio' name='admin' value='false' id='is_admin'/>
                                     <label htmlFor='admin_false'>Нет</label>

@@ -58,7 +58,7 @@ const Settings = () => {
                     <input type='text' placeholder='Имя бота' id='bot_name'/>
                     <label>Введите ваш телеграм ID</label>
                     <input type='text' placeholder='Телеграм ID' id='tg_id'/>
-                    <button className={styles.submit} onClick={addNewBot}>Добавить бота</button>
+                    <button className={styles.submit} onClick={addNewBot}>Добавить</button>
                 </div>
             )
         } else {
@@ -72,7 +72,7 @@ const Settings = () => {
                         <input type='text' placeholder='Имя бота' id='bot_name'/>
                         <label>Введите ваш телеграм ID</label>
                         <input type='text' placeholder='Телеграм ID' id='tg_id'/>
-                        <button className={styles.submit} onClick={addNewBot}>Добавить бота</button>
+                        <button className={styles.submit} onClick={addNewBot}>Добавить</button>
                     </div>
                     <div className={styles.settings_div}>
                         <h2>Реквизиты</h2>
