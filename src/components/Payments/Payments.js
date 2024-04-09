@@ -24,8 +24,10 @@ const Payments = () => {
             console.log('Получил сообщение')
             const data = JSON.parse(message.data)
             console.log('Apps before:' + applications)
-            applications[data['foreign_id']] = [data['amount'], data['requisite'],
-                methodDict[data['method_id']], data['client_initials'], data['status'], data['express'], data['created_at']]
+            const objKey = data['foreign_id']
+            const obgArray = [data['amount'], data['requisite'], methodDict[data['method_id']], data['client_initials'],
+                data['status'], data['express'], data['created_at']]
+            applications[objKey] = obgArray
             console.log('Apps after:' + applications)
             resetApplications(applications)
             console.log(data)
