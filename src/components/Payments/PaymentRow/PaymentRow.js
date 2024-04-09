@@ -1,15 +1,15 @@
 import React from 'react';
 import styles from './PaymentRow.module.css'
 import {updateStatus} from "../../../Requests";
-import {applicationStorage} from "../../../storages/ApplicationStorage";
+// import {applicationStorage} from "../../../storages/ApplicationStorage";
 
 const PaymentRow = (element, keys) => {
     const key = Object.keys(element)
     const style = {true: styles.row_true, false: null}
-    const resetLastApp = applicationStorage((state) => state.resetLastApp)
+    // const resetLastApp = applicationStorage((state) => state.resetLastApp)
     async function updateStat(status) {
         const result = await updateStatus(status, key[0], keys)
-        resetLastApp(key[0])
+        // resetLastApp(key[0])
         document.getElementById(key[0]).remove()
         return result
     }
