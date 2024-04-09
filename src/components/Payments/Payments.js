@@ -23,8 +23,10 @@ const Payments = () => {
         socket.current.onmessage = (message) => {
             console.log('Получил сообщение')
             const data = JSON.parse(message.data)
+            console.log('Apps before:' + applications)
             applications[data['foreign_id']] = [data['amount'], data['requisite'],
                 methodDict[data['method_id']], data['client_initials'], data['status'], data['express'], data['created_at']]
+            console.log('Apps after:' + applications)
             resetApplications(applications)
             console.log(data)
         }
