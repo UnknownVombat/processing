@@ -53,7 +53,7 @@ const Payments = () => {
         const new_apps = apps.map((app) => {
             let data = {}
             data[app['PayApplications']['foreign_id']] = [app['PayApplications']['amount'], app['PayApplications']['requisite'],
-                methods[app['PayApplications']['method_id']], app['PayApplications']['client_initials'],
+                methodsDict[app['PayApplications']['method_id']], app['PayApplications']['client_initials'],
                 app['PayApplications']['status'], app['PayApplications']['express'], app['PayApplications']['created_at']]
             return data
         })
