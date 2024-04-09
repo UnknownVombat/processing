@@ -19,10 +19,10 @@ const SupportIcons = () => {
                 <div className={styles.image_div}><img src={cog} alt='Dash'/></div>
                 <div className={styles.text_div}>Настройки</div>
             </div></NavLink>
-            <NavLink to='/auth'><div className={styles.inline_block} onClick={logoutF}>
+            <a href='/auth'><div className={styles.inline_block} onClick={logoutF}>
                 <div className={styles.image_div}><img src={logout} alt='Login'/></div>
                 <div className={styles.text_div}>Выход</div>
-            </div></NavLink>
+            </div></a>
         </div>
     );
 };
