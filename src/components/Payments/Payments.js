@@ -22,16 +22,14 @@ const Payments = () => {
         socket.current.onmessage = (message) => {
             console.log('Получил сообщение')
             const data = JSON.parse(message.data)
-            console.log('Apps before:' + applications)
             const objKey = data['foreign_id']
             const obgArray = [data['amount'], data['requisite'], methods[data['method_id']], data['client_initials'],
                 data['status'], data['express'], data['created_at']]
             let chunk = {}
             chunk[objKey] = obgArray
             applications.unshift(chunk)
-            console.log('Apps after:' + applications)
             resetApplications(applications)
-            console.log(data)
+            console.log('Need rerender')
         }
         socket.current.onclose= () => {
             console.log('Socket закрыт')
@@ -67,7 +65,7 @@ const Payments = () => {
     }
 
     useEffect(() => {
-
+        console.log('rerender')
     }, [applications, resetApplications]);
     window.addEventListener('load', () => {
         onLoadPage()
