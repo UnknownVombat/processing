@@ -9,10 +9,11 @@ const Payments = () => {
     const key = authStorage((state) => state.key)
     const applications = applicationStorage((state) => state.applications)
     const resetApplications = applicationStorage((state) => state.resetApplications)
+    const methods = applicationStorage((state) => state.methods)
+    const resetMethods = applicationStorage((state) => state.resetMethods)
     const [authented, setAuth] = useState(true)
     const [connected, setConnected] = useState(false)
     const [count, setCount] = useState(0)
-    const [methods, setMethods] = useState({})
     const socket = useRef()
     function connect() {
         socket.current = new WebSocket('wss://proc.sunrise-dev.online/applications/ws/new_applications/' + key)
@@ -24,17 +25,13 @@ const Payments = () => {
             console.log('Получил сообщение')
             const data = JSON.parse(message.data)
             const objKey = data['foreign_id']
-            console.log(data['method_id'])
             const obgArray = [data['amount'], data['requisite'], methods[data['method_id']], data['client_initials'],
                 data['status'], data['express'], data['created_at']]
             let chunk = {}
             chunk[objKey] = obgArray
-            console.log(chunk)
             applications.unshift(chunk)
             resetApplications(applications)
             setCount(objKey)
-            console.log(count)
-            console.log('Need rerender')
         }
         socket.current.onclose= () => {
             console.log('Socket закрыт')
@@ -51,12 +48,12 @@ const Payments = () => {
         for (var method of methods['result']) {
             methodsDict[method['PaymentMethods']['id']] = method['PaymentMethods']['name']
         }
-        setMethods(methodsDict)
+        resetMethods(methodsDict)
         const apps = await getActiveApplications(key)
         const new_apps = apps.map((app) => {
             let data = {}
             data[app['PayApplications']['foreign_id']] = [app['PayApplications']['amount'], app['PayApplications']['requisite'],
-                methodsDict[app['PayApplications']['method_id']], app['PayApplications']['client_initials'],
+                methods[app['PayApplications']['method_id']], app['PayApplications']['client_initials'],
                 app['PayApplications']['status'], app['PayApplications']['express'], app['PayApplications']['created_at']]
             return data
         })
@@ -66,7 +63,6 @@ const Payments = () => {
             connect()
             setConnected(true)
         }
-        return methodsDict
     }
 
     useEffect(() => {
