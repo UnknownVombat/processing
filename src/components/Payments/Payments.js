@@ -24,6 +24,7 @@ const Payments = () => {
             console.log('Получил сообщение')
             const data = JSON.parse(message.data)
             const objKey = data['foreign_id']
+            console.log(data['method_id'])
             const obgArray = [data['amount'], data['requisite'], methods[data['method_id']], data['client_initials'],
                 data['status'], data['express'], data['created_at']]
             let chunk = {}
@@ -31,7 +32,7 @@ const Payments = () => {
             console.log(chunk)
             applications.unshift(chunk)
             resetApplications(applications)
-            setCount(count + 1)
+            setCount(objKey)
             console.log(count)
             console.log('Need rerender')
         }
