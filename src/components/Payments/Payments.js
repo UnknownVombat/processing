@@ -9,7 +9,6 @@ const Payments = () => {
     const key = authStorage((state) => state.key)
     const applications = applicationStorage((state) => state.applications)
     const resetApplications = applicationStorage((state) => state.resetApplications)
-    // const lastApp = applicationStorage((state) => state.lastApp)
     const [authented, setAuth] = useState(true)
     const [connected, setConnected] = useState(false)
     let methodDict = {}
@@ -67,8 +66,9 @@ const Payments = () => {
     }
 
     useEffect(() => {
-
-    }, [applications]);
+        const applications = applicationStorage((state) => state.applications)
+        resetApplications(applications)
+    }, [applications, resetApplications]);
     window.addEventListener('load', () => {
         onLoadPage()
     })
