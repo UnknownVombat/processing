@@ -111,8 +111,7 @@ const Payments = () => {
                 </div>
             );
         } catch (e) {
-            alert(e)
-            // window.location.reload()
+            window.location.reload()
             // window.location.href = '/payments'
         }
     } else {
