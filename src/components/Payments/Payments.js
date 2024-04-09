@@ -11,6 +11,7 @@ const Payments = () => {
     const resetApplications = applicationStorage((state) => state.resetApplications)
     const [authented, setAuth] = useState(true)
     const [connected, setConnected] = useState(false)
+    const [count, setCount] = useState(0)
     const [methods, setMethods] = useState({})
     const socket = useRef()
     function connect() {
@@ -29,6 +30,7 @@ const Payments = () => {
             chunk[objKey] = obgArray
             applications.unshift(chunk)
             resetApplications(applications)
+            setCount(count + 1)
             console.log('Need rerender')
         }
         socket.current.onclose= () => {
@@ -66,7 +68,7 @@ const Payments = () => {
 
     useEffect(() => {
         console.log('rerender')
-    }, [applications, resetApplications]);
+    }, [applications, resetApplications, count]);
     window.addEventListener('load', () => {
         onLoadPage()
     })
