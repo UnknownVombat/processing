@@ -7,7 +7,7 @@ import PaymentRow from "./PaymentRow/PaymentRow";
 
 const Payments = () => {
     const key = authStorage((state) => state.key)
-    const applications = applicationStorage((state) => state.applications)
+    let applications = applicationStorage((state) => state.applications)
     const resetApplications = applicationStorage((state) => state.resetApplications)
     // const lastApp = applicationStorage((state) => state.lastApp)
     const [authented, setAuth] = useState(true)
