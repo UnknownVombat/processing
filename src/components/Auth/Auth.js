@@ -1,10 +1,11 @@
 import React from 'react';
 import styles from './Auth.module.css'
-import {loginUser} from "../../Requests";
 import {authStorage} from "../../storages/AuthStorage";
+import {userapi} from "../../api/userApi";
 
 const Auth = () => {
     const resetKey = authStorage((state) => state.resetKey)
+    const [auth, {data, isError, isLoading, error}] = userapi.useLoginMutation()
     function getIP() {
         let result = fetch('https://api.ipify.org?format=json')
             .then(res => res.json())
@@ -21,15 +22,21 @@ const Auth = () => {
         const password = document.getElementById('password').value
         const ip = await getIP()
         const city = await getCity(ip)
-        const result = await loginUser(login, password, ip, city)
-        if (result['result']){
-            resetKey(result['token'])
-            window.location.href = '/'
-            // console.log('Запрос прошел')
-        } else {
-            alert('Ошибка авторизации!')
-        }
+        const body = {'login': login, 'password': password, 'ip': ip, 'city': city}
+        auth(body)
     }
+
+    if (isError) {
+        console.log(error)
+    }
+    if (data) {
+        console.log(data)
+        resetKey(data)
+    }
+    if (isLoading) {
+        console.log('Ты пидор')
+    }
+
     return (
         <div className={styles.container}>
             <div className={styles.vertical}>
