@@ -17,4 +17,8 @@ export const store = configureStore({
     },
     middleware: (getDefaultMiddlware) => getDefaultMiddlware()
         .concat(userapi.middleware)
+        .concat(withdrawsapi.middleware)
+        .concat(methodsapi.middleware)
+        .concat(applicationsapi.middleware)
+        .concat(teamsapi.middleware)
 })
