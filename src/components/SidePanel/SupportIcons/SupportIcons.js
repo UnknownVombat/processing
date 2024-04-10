@@ -2,16 +2,28 @@ import React from 'react';
 import styles from './SupportIcons.module.css'
 import cog from "../../../icons/bxs-cog.svg";
 import logout from "../../../icons/bxs-log-out.svg";
-import {NavLink} from "react-router-dom";
-import {logoutUser} from "../../../Requests";
+import {NavLink, useNavigate} from "react-router-dom";
 import {authStorage} from "../../../storages/AuthStorage";
+import {userapi} from "../../../api/userApi";
 
 const SupportIcons = () => {
     const key = authStorage((state) => state.key)
     const resetKey = authStorage((state) => state.resetKey)
+
+    const header = {'Authorization': key}
+    const [logOut, {data: logoutData, error: logoutError}] = userapi.useLogoutMutation()
+
+    const navigate = useNavigate()
     function logoutF(){
         resetKey('')
-        logoutUser(key)
+        logOut(header)
+    }
+    if (logoutData) {
+        navigate('/auth')
+    }
+    if (logoutError) {
+        console.error(logoutError)
+        navigate('/auth')
     }
     return (
         <div className={styles.support_icons}>
