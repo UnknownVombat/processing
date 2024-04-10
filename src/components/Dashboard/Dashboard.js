@@ -13,9 +13,9 @@ const Dashboard = () => {
     const resetStatus = dataStorage((state) => state.resetStatus)
     const setSessions = dataStorage((state) => state.resetSessions)
     const header = {'Authorization': key}
-    const {data: authData, error: authError} = userapi.useGetAuth(header)
-    const {data: workersData, error: workersError} = userapi.useGetWorkers(header)
-    const {data: codeData, error: codeError} = withdrawsapi.useGetCode(header)
+    const {data: authData, error: authError} = userapi.useAuthQuery(header)
+    const {data: workersData, error: workersError} = userapi.useWorkersQuery(header)
+    const {data: codeData, error: codeError} = withdrawsapi.useGetCodeQuery(header)
     const [sendWithdraw, {data: withdrawData, error: withdrawError}] = withdrawsapi.useSendWithdrawMutation()
     const [authented, setAuth] = useState(true)
     const [status, setStatus] = useState('user')
