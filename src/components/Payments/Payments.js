@@ -16,7 +16,7 @@ const Payments = () => {
     const [count, setCount] = useState(0)
     const socket = useRef()
     function connect() {
-        socket.current = new WebSocket('wss://proc.sunrise-dev.online/applications/ws/new_applications/' + key)
+        socket.current = new WebSocket('wss://proc.sunrise-dev.online/applications/ws/new_applications/' + key + '/')
 
         socket.current.onopen = () => {
             console.log('Я открылся')
