@@ -9,15 +9,13 @@ const Auth = () => {
     const [auth, {data, isError, isLoading, error}] = userapi.useLoginMutation()
     const navigate = useNavigate()
     function getIP() {
-        let result = fetch('https://api.ipify.org?format=json')
+        return fetch('https://api.ipify.org?format=json')
             .then(res => res.json())
             .then(data => {return data.ip});
-        return result
     }
     function getCity(ip) {
-        let result = fetch("https://ipwho.is/" + ip, {method: 'GET'}).then(res => res.json())
+        return fetch("https://ipwho.is/" + ip, {method: 'GET'}).then(res => res.json())
             .then(data => {return data.city});
-        return result
     }
     async function loginResult(){
         const login = document.getElementById('login').value
@@ -37,9 +35,8 @@ const Auth = () => {
         navigate('/')
     }
     if (isLoading) {
-        console.log('Ты пидор')
+        console.log('Загрузка')
     }
-
     return (
         <div className={styles.container}>
             <div className={styles.vertical}>

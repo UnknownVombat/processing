@@ -1,51 +1,76 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import styles from './Settings.module.css'
 import {authStorage} from "../../storages/AuthStorage";
 import {dataStorage} from "../../storages/DataStorage";
-import {addBot, checkAuth, getAllMethods, getMethods, getWorkers} from "../../Requests";
 import MethodRow from "./MethodRow/MethodRow";
 import AddMethodRow from "./AddMethodRow/AddMethodRow";
+import {userapi} from "../../api/userApi";
+import {methodsapi} from "../../api/methodsApi";
 
 const Settings = () => {
     const key = authStorage((state) => state.key)
     const resetStatus = dataStorage((state) => state.resetStatus)
     const resetMethods = dataStorage((state) => state.resetMethods)
     const resetOtherMethods = dataStorage((state) => state.resetOtherMethods)
+
+    const header = {'Authorization': key}
+    const {data: authData, error: authError} = userapi.useGetAuth(header)
+    const {data: workersData, error: workersError} = userapi.useGetWorkers(header)
+    const {data: methodsData, error: methodsError} = methodsapi.useGetMethods(header)
+    const [addBot, {data, error}] = userapi.useAddBotMutation()
+
     const [authented, setAuth] = useState(true)
     const [status, setStatus] = useState('user')
-    useEffect(() => {
-        async function auth() {
-            let result = await checkAuth(key)
-            let data = await getWorkers(key)
-            let methods = await getMethods(key)
-            let otherMethods = await getAllMethods()
-            setAuth(result)
-            setStatus(data['status'])
-            resetStatus(data['user']['name'], data['user']['balance'], data['user']['status'])
-            resetMethods(methods['result'])
-            resetOtherMethods(otherMethods['result'])
-        }
-        auth()
-    }, [setAuth, key, resetStatus, resetMethods, resetOtherMethods]);
+    let notHaveMethods = ''
     const methods = dataStorage((state) => state.methods)
     const otherMethods = dataStorage((state) => state.otherMethods)
     const haveMethods = methods.map((element) => {return element['method_id']})
-    function contains(arr, elem) {
-        return arr.find((i) => i === elem);
+
+    if (authData) {
+        setAuth(authData['access'])
     }
-    // eslint-disable-next-line array-callback-return
-    let notHaveMethods = otherMethods.map((element) => {
-        if (!contains(haveMethods, element['PaymentMethods']['id'])) {
-            return element
+    if (authError) {
+        console.error(authError)
+    }
+    if (workersData) {
+        setStatus(workersData['status'])
+        resetStatus(workersData['user']['name'], workersData['user']['balance'], workersData['user']['status'])}
+    if (methodsData) {
+        if (methodsData['access'] === true) {
+            resetMethods(methods['result'])
+            resetOtherMethods(otherMethods['result'])
+            function contains(arr, elem) {
+                return arr.find((i) => i === elem);
+            }
+            // eslint-disable-next-line array-callback-return
+            notHaveMethods = otherMethods.map((element) => {
+                if (!contains(haveMethods, element['PaymentMethods']['id'])) {
+                    return element
+                }
+            })
         }
-    })
+    }
+    if (methodsError) {
+        console.error(methodsError)
+    }
+    if (workersError) {
+        console.error(workersError)
+    }
+    if (data) {
+        if (data['access'] === true) {
+            alert('Успешно!')
+            window.location.reload()
+        }
+    }
+    if (error) {
+        console.error(error)
+    }
     async function addNewBot(){
         const bot_token = document.getElementById('bot_token').value
         const bot_name = document.getElementById('bot_name').value
         const tg_id = document.getElementById('tg_id').value
-        addBot(bot_token, bot_name, tg_id, key)
-        alert('Успешно!')
-        window.location.reload()
+        const body = {'bot_token': bot_token, 'bot_name': bot_name, 'telegram_id': tg_id}
+        addBot(body, header)
     }
     if (authented === true){
         if (status === 'user') {
@@ -87,6 +112,8 @@ const Settings = () => {
                 </div>
             )
         }
+    } else {
+        window.location.href = '/auth'
     }
 
 };

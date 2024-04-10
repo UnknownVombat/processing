@@ -1,24 +1,18 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { API_URL } from "../const";
-import {authStorage} from "../storages/AuthStorage";
-const key = authStorage((state) => state.key)
-
-const headers = {
-    'Authorization': key
-}
 
 export const teamsapi = createApi({
-    reducerPath: 'apiteams',
+    reducerPath: 'teamsapi',
     baseQuery: fetchBaseQuery({baseUrl: API_URL}),
     endpoints: (build) => ({
         getMethods: build.query({
-            query: () => ({
+            query: (headers) => ({
                 url: '/teams/methods/',
                 headers: headers
             })
         }),
         switchActive: build.mutation({
-            query: (body) => ({
+            query: (body, headers) => ({
                 url: '/teams/method/switch_active/',
                 method: 'POST',
                 headers: headers,
@@ -26,7 +20,7 @@ export const teamsapi = createApi({
             })
         }),
         addMethod: build.mutation({
-            query: (method_id) => ({
+            query: (method_id, headers) => ({
                 url: '/teams/add_method/',
                 method: 'POST',
                 headers: headers,
@@ -34,13 +28,13 @@ export const teamsapi = createApi({
             })
         }),
         getTeams: build.query({
-            query: () => ({
+            query: (headers) => ({
                 url: '/teams/get/',
                 headers: headers,
             })
         }),
         banTeam: build.mutation({
-            query: (body) => ({
+            query: (body, headers) => ({
                 url: '/teams/ban/',
                 method: 'POST',
                 headers: headers,

@@ -1,45 +1,65 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import styles from './Dashboard.module.css'
-import {checkAuth, getCode, getWorkers, sendWithdraw} from "../../Requests";
 import {authStorage} from "../../storages/AuthStorage";
 import {dataStorage} from "../../storages/DataStorage";
 import UserRow from "./UserRow/UserRow";
 import SessionRow from "./SessionRow/SessionRow";
+import {userapi} from "../../api/userApi";
+import {withdrawsapi} from "../../api/withdrawsApi";
 
 const Dashboard = () => {
     const key = authStorage((state) => state.key)
     const setUsers = dataStorage((state) => state.resetUsers)
     const resetStatus = dataStorage((state) => state.resetStatus)
     const setSessions = dataStorage((state) => state.resetSessions)
+    const header = {'Authorization': key}
+    const {data: authData, error: authError} = userapi.useGetAuth(header)
+    const {data: workersData, error: workersError} = userapi.useGetWorkers(header)
+    const {data: codeData, error: codeError} = withdrawsapi.useGetCode(header)
+    const [sendWithdraw, {data: withdrawData, error: withdrawError}] = withdrawsapi.useSendWithdrawMutation()
     const [authented, setAuth] = useState(true)
     const [status, setStatus] = useState('user')
     const [code, setCode] = useState('')
-    useEffect(() => {
-        async function auth() {
-            let result = await checkAuth(key)
-            let data = await getWorkers(key)
-            const codeRes = await getCode(key)
-            setCode(codeRes)
-            setAuth(result)
-            setUsers(data['users'])
-            setSessions(data['sessions'])
-            setStatus(data['status'])
-            resetStatus(data['user']['name'], data['user']['balance'], data['user']['status'])
+    if (authData) {
+        setAuth(authData['access'])
+    }
+    if (authError) {
+        console.error(authError)
+    }
+    if (workersData) {
+        setStatus(workersData['status'])
+        if (workersData['status'] === 'admin') {
+            setUsers(workersData['users'])
+            setSessions(workersData['sessions'])
         }
-        auth()
-    }, [setAuth, key, setUsers, setSessions, resetStatus]);
+        resetStatus(workersData['user']['name'], workersData['user']['balance'], workersData['user']['status'])
+    }
+    if (codeData) {
+        setCode(codeData['result'])
+    }
+    if (codeError) {
+        console.error(codeError)
+    }
+    if (workersError) {
+        console.error(workersError)
+    }
+    if (withdrawData) {
+        if (withdrawData['access'] === true) {
+            alert('Успешно!')
+        } else {
+            alert('Не хватает средств!')
+        }
+    }
+    if (withdrawError) {
+        console.error(withdrawError)
+    }
     const user = dataStorage((state) => state.user)
     const users = dataStorage((state) => state.users)
     const sessions = dataStorage((state) => state.sessions)
     async function withdraw() {
         const amount = document.getElementById('amount').value
-        const result = await sendWithdraw(amount, key)
-        if (result === true) {
-            alert('Успешно!')
-        } else {
-            alert('Не хватает средств!')
-        }
-        return result
+        const body = {'amount': amount}
+        sendWithdraw(body, header)
     }
     if (authented === true){
         if (status === 'user'){
@@ -90,7 +110,6 @@ const Dashboard = () => {
         }
 
     } else {
-        // console.log('suka')
         window.location.href = '/auth'
     }
 };

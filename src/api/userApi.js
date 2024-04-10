@@ -33,7 +33,7 @@ export const userapi = createApi({
                 headers: headers
             })
         }),
-        getWorkers: build.query({
+        workers: build.query({
             query: (headers) => ({
                 url: '/users/get/',
                 headers: headers

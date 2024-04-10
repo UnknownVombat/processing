@@ -1,17 +1,23 @@
 import React from 'react';
 import styles from './PaymentRow.module.css'
-import {updateStatus} from "../../../Requests";
-// import {applicationStorage} from "../../../storages/ApplicationStorage";
+import {applicationsapi} from "../../../api/applicationsApi";
 
 const PaymentRow = (element, keys) => {
     const key = Object.keys(element)
     const style = {true: styles.row_true, false: null}
-    // const resetLastApp = applicationStorage((state) => state.resetLastApp)
+    const header = {'Authorization': keys}
+    const [update, {data, error}] = applicationsapi.useUpdateStatusMutation()
     async function updateStat(status) {
-        const result = await updateStatus(status, key[0], keys)
-        // resetLastApp(key[0])
-        document.getElementById(key[0]).remove()
-        return result
+        const body = {'foreign_id': key[0], 'status': status}
+        update(body, header)
+    }
+    if (data) {
+        if (data['access']) {
+            document.getElementById(key[0]).remove()
+        }
+    }
+    if (error) {
+        console.error(error)
     }
     return (
             <tr className={style[element[key][5]]} id={key[0]}>

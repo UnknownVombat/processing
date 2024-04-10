@@ -1,13 +1,22 @@
 import React from 'react';
 import styles from "../../Dashboard/UserRow/UserRow.module.css";
-import {switchMethodActive} from "../../../Requests";
+import {teamsapi} from "../../../api/teamsApi";
 
 const MethodRow = (method, key) => {
+    const [switchMethod, {data, error}] = teamsapi.useSwitchActiveMutation()
     async function switchActive() {
         const active = method['active']
-        const result = await switchMethodActive(method['id'], method['method_id'], !active, key)
-        window.location.reload()
-        return result
+        const header = {'Authorization': key}
+        const body = {'team_id': method['id'], 'method_id': method['method_id'], 'active': !active}
+        switchMethod(body, header)
+    }
+    if (data) {
+        if (data['access'] === true) {
+            window.location.reload()
+        }
+    }
+    if (error) {
+        console.error(error)
     }
     return (
         <div className={styles.user_row_block} key={method['method_id']}>

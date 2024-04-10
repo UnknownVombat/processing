@@ -1,9 +1,13 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {authStorage} from "../../storages/AuthStorage";
 import {applicationStorage} from "../../storages/ApplicationStorage";
-import {checkAuth, getActiveApplications, getAllMethods} from "../../Requests";
 import './Payments.css'
 import PaymentRow from "./PaymentRow/PaymentRow";
+import { io } from 'socket.io-client';
+import {userapi} from "../../api/userApi";
+import {methodsapi} from "../../api/methodsApi";
+import {applicationsapi} from "../../api/applicationsApi";
+import {useNavigate} from "react-router-dom";
 
 const Payments = () => {
     const key = authStorage((state) => state.key)
@@ -11,16 +15,27 @@ const Payments = () => {
     const resetApplications = applicationStorage((state) => state.resetApplications)
     const methods = applicationStorage((state) => state.methods)
     const resetMethods = applicationStorage((state) => state.resetMethods)
+
+    const header = {'Authorization': key}
+    const {data: authData, error: authError} = userapi.useGetAuth(header)
+    const {data: methodsData, error: methodsError} = methodsapi.useGetMethods(header)
+    const {data: applicationsData, error: applicationsError} = applicationsapi.useGetActiveApplications(header)
+
     const [authented, setAuth] = useState(true)
     const [connected, setConnected] = useState(false)
     const [count, setCount] = useState(0)
     const socket = useRef()
+    const navigate = useNavigate()
     function connect() {
-        socket.current = new WebSocket('wss://proc.sunrise-dev.online/applications/ws/new_applications/' + key + '/')
+        socket.current = new io('wss://proc.sunrise-dev.online/applications/ws/new_applications/' + key + '/')
 
         socket.current.onopen = () => {
             console.log('Я открылся')
+            console.log(connected)
         }
+        // socket.current.on('open', () => {
+        //     console.log('Я открылся')
+        // })
         socket.current.onmessage = (message) => {
             console.log('Получил сообщение')
             const data = JSON.parse(message.data)
@@ -41,45 +56,53 @@ const Payments = () => {
             console.log(event)
         }
     }
-    async function onLoadPage(){
-        const result = await checkAuth(key)
-        const methods = await getAllMethods()
-        const methodsDict = {}
-        for (var method of methods['result']) {
-            methodsDict[method['PaymentMethods']['id']] = method['PaymentMethods']['name']
-        }
-        resetMethods(methodsDict)
-        const apps = await getActiveApplications(key)
-        const new_apps = apps.map((app) => {
-            let data = {}
-            data[app['PayApplications']['foreign_id']] = [app['PayApplications']['amount'], app['PayApplications']['requisite'],
-                methodsDict[app['PayApplications']['method_id']], app['PayApplications']['client_initials'],
-                app['PayApplications']['status'], app['PayApplications']['express'], app['PayApplications']['created_at']]
-            return data
-        })
-        resetApplications(new_apps)
-        setAuth(result)
-        if (connected === false) {
+    if (authData) {
+        setAuth(authData['access'])
+        if (authData['access']) {
             connect()
             setConnected(true)
         }
     }
+    if (authError) {
+        console.error(authError)
+    }
+    if (methodsData) {
+        if (methodsData['access'] === true) {
+            const methodsDict = {}
+            for (var method of methodsData['result']) {
+                methodsDict[method['PaymentMethods']['id']] = method['PaymentMethods']['name']
+            }
+            resetMethods(methodsDict)
+        }
+    }
+    if (methodsError) {
+        console.error(methodsError)
+    }
 
+    if (applicationsData) {
+        const apps = applicationsData['result']
+        const new_apps = apps.map((app) => {
+            let data = {}
+            data[app['PayApplications']['foreign_id']] = [app['PayApplications']['amount'], app['PayApplications']['requisite'],
+                methods[app['PayApplications']['method_id']], app['PayApplications']['client_initials'],
+                app['PayApplications']['status'], app['PayApplications']['express'], app['PayApplications']['created_at']]
+            return data
+        })
+        resetApplications(new_apps)
+    }
+    if (applicationsError) {
+        console.error(applicationsError)
+    }
     useEffect(() => {
         console.log('rerender')
-    }, [applications, resetApplications, count]);
-    window.addEventListener('load', () => {
-        onLoadPage()
-    })
-
+    }, [count]);
     function clickButton(el_id){
         if (el_id === 'active') {
             window.location.reload()
         } else {
-            window.location.href = '/history'
+            navigate('/history')
         }
     }
-    // }
     if (authented === true) {
         try {
             return (
