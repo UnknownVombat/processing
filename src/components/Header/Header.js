@@ -19,8 +19,8 @@ const Header = () => {
     const resetUser = dataStorage((state) => state.resetStatus)
 
     const header = {'Authorization': key}
-    const {data: authData, error: authError} = userapi.useGetAuth(header)
-    const {data: botData, error: botError} = userapi.useGetGetBot(header)
+    const {data: authData, error: authError} = userapi.useAuthQuery(header)
+    const {data: botData, error: botError} = userapi.useBotQuery(header)
     const [logout, {data: logoutData, error: logoutError}] = userapi.useLogoutMutation()
     const [switchActive, {data: activeData, error: activeError}] = userapi.useSwitchActiveMutation()
 

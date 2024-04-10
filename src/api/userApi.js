@@ -55,7 +55,7 @@ export const userapi = createApi({
                 body: body
             })
         }),
-        getBot: build.query({
+        Bot: build.query({
             query: (headers) => ({
                 url: '/users/bot/',
                 headers: headers

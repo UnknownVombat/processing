@@ -17,9 +17,9 @@ const Payments = () => {
     const resetMethods = applicationStorage((state) => state.resetMethods)
 
     const header = {'Authorization': key}
-    const {data: authData, error: authError} = userapi.useGetAuth(header)
-    const {data: methodsData, error: methodsError} = methodsapi.useGetMethods(header)
-    const {data: applicationsData, error: applicationsError} = applicationsapi.useGetActiveApplications(header)
+    const {data: authData, error: authError} = userapi.useAuthQuery(header)
+    const {data: methodsData, error: methodsError} = methodsapi.useMethodsQuery(header)
+    const {data: applicationsData, error: applicationsError} = applicationsapi.useActiveApplicationsQuery(header)
 
     const [authented, setAuth] = useState(true)
     const [connected, setConnected] = useState(false)

@@ -14,9 +14,9 @@ const Settings = () => {
     const resetOtherMethods = dataStorage((state) => state.resetOtherMethods)
 
     const header = {'Authorization': key}
-    const {data: authData, error: authError} = userapi.useGetAuth(header)
-    const {data: workersData, error: workersError} = userapi.useGetWorkers(header)
-    const {data: methodsData, error: methodsError} = methodsapi.useGetMethods(header)
+    const {data: authData, error: authError} = userapi.useAuthQuery(header)
+    const {data: workersData, error: workersError} = userapi.useWorkersQuery(header)
+    const {data: methodsData, error: methodsError} = methodsapi.useMethodsQuery(header)
     const [addBot, {data, error}] = userapi.useAddBotMutation()
 
     const [authented, setAuth] = useState(true)
