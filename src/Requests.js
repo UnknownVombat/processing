@@ -1,7 +1,7 @@
 const base_url = 'https://proc.sunrise-dev.online'
 
 export async function loginUser(login, password, ip, city) {
-    const url = base_url + '/users/login'
+    const url = base_url + '/users/login/'
     const data = {'login': login, 'password': password, 'ip': ip, 'city': city}
     const headers = {
         'accept': 'application/json',
@@ -24,7 +24,7 @@ export async function loginUser(login, password, ip, city) {
 }
 
 export async function logoutUser(key) {
-    const url = base_url + '/users/logout'
+    const url = base_url + '/users/logout/'
     const headers = {
         'accept': 'application/json',
         'accept-encoding': 'gzip,deflate,br',
@@ -47,7 +47,7 @@ export async function logoutUser(key) {
 }
 
 export async function switchActive(active, key) {
-    const url = base_url + '/users/switch_active'
+    const url = base_url + '/users/switch_active/'
     const status = {true: 'active', false: 'paused'}
     console.log(status[active])
     const data = {'status': status[active]}
@@ -73,7 +73,7 @@ export async function switchActive(active, key) {
 }
 
 export async function checkAuth(key) {
-    const url = base_url + '/users/check_auth'
+    const url = base_url + '/users/check_auth/'
     const headers = {
         'accept': 'application/json',
         'accept-encoding': 'gzip,deflate,br',
@@ -96,7 +96,7 @@ export async function checkAuth(key) {
 }
 
 export async function getWorkers(key) {
-    const url = base_url + '/users/get'
+    const url = base_url + '/users/get/'
     const headers = {
         'accept': 'application/json',
         'accept-encoding': 'gzip,deflate,br',
@@ -118,7 +118,7 @@ export async function getWorkers(key) {
 }
 
 export async function getMethods(key) {
-    const url = base_url + '/teams/methods'
+    const url = base_url + '/teams/methods/'
     const headers = {
         'accept': 'application/json',
         'accept-encoding': 'gzip,deflate,br',
@@ -140,7 +140,7 @@ export async function getMethods(key) {
 }
 
 export async function getAllMethods() {
-    const url = base_url + '/methods/get'
+    const url = base_url + '/methods/get/'
     const headers = {
         'accept': 'application/json',
         'accept-encoding': 'gzip,deflate,br',
@@ -161,7 +161,7 @@ export async function getAllMethods() {
 }
 
 export async function switchMethodActive(team_id, method_id, active, key) {
-    const url = base_url + '/teams/method/switch_active'
+    const url = base_url + '/teams/method/switch_active/'
     console.log(active)
     const data = {'team_id': team_id, 'method_id': method_id, 'active': active}
     console.log(data)
@@ -186,7 +186,7 @@ export async function switchMethodActive(team_id, method_id, active, key) {
 }
 
 export async function deleteSession(key, user_id) {
-    const url = base_url + '/users/session'
+    const url = base_url + '/users/session/'
     const headers = {
         'accept': 'application/json',
         'accept-encoding': 'gzip,deflate,br',
@@ -196,7 +196,7 @@ export async function deleteSession(key, user_id) {
         'Authorization': key}
     const data = {'user_id': user_id}
     try {
-        const response = await fetch(url, {method: 'DELETE', body: JSON.stringify(data), headers: headers})
+        const response = await fetch(url, {method: 'POST', body: JSON.stringify(data), headers: headers})
         console.log(response)
         if (!response.ok){
             return false
@@ -210,7 +210,7 @@ export async function deleteSession(key, user_id) {
 }
 
 export async function addNewMethod(method_id, key) {
-    const url = base_url + '/teams/add_method'
+    const url = base_url + '/teams/add_method/'
     const data = {'method_id': method_id}
     const headers = {
         'accept': 'application/json',
@@ -233,7 +233,7 @@ export async function addNewMethod(method_id, key) {
 }
 
 export async function addBot(bot_token, bot_name, tg_id, key) {
-    const url = base_url + '/users/bot'
+    const url = base_url + '/users/bot/'
     const data = {'bot_token': bot_token, 'bot_name': bot_name, 'telegram_id': tg_id}
     const headers = {
         'accept': 'application/json',
@@ -256,7 +256,7 @@ export async function addBot(bot_token, bot_name, tg_id, key) {
 }
 
 export async function getActiveApplications(key) {
-    const url = base_url + '/applications/get'
+    const url = base_url + '/applications/get/'
     const headers = {
         'accept': 'application/json',
         'accept-encoding': 'gzip,deflate,br',
@@ -279,7 +279,7 @@ export async function getActiveApplications(key) {
 }
 
 export async function getAllApplications(key) {
-    const url = base_url + '/applications/get/success'
+    const url = base_url + '/applications/get/success/'
     const headers = {
         'accept': 'application/json',
         'accept-encoding': 'gzip,deflate,br',
@@ -302,7 +302,7 @@ export async function getAllApplications(key) {
 }
 
 export async function getAdminAllApplications(key) {
-    const url = base_url + '/applications/all'
+    const url = base_url + '/applications/all/'
     const headers = {
         'accept': 'application/json',
         'accept-encoding': 'gzip,deflate,br',
@@ -325,7 +325,7 @@ export async function getAdminAllApplications(key) {
 }
 
 export async function updateStatus(status, foreign_id, key) {
-    const url = base_url + '/applications/update'
+    const url = base_url + '/applications/update/'
     const data = {'foreign_id': foreign_id, 'status': status}
     const headers = {
         'accept': 'application/json',
@@ -335,7 +335,7 @@ export async function updateStatus(status, foreign_id, key) {
         'Access-Control-Allow-Credentials': '*',
         'Authorization': key}
     try {
-        const response = await fetch(url, {method: 'PATCH', body: JSON.stringify(data), headers: headers})
+        const response = await fetch(url, {method: 'POST', body: JSON.stringify(data), headers: headers})
         if (!response.ok){
             return false
         }
@@ -348,7 +348,7 @@ export async function updateStatus(status, foreign_id, key) {
 }
 
 export async function sendWithdraw(amount, key){
-    const url = base_url + '/withdraws/new'
+    const url = base_url + '/withdraws/new/'
     const data = {'amount': amount}
     const headers = {
         'accept': 'application/json',
@@ -371,7 +371,7 @@ export async function sendWithdraw(amount, key){
 }
 
 export async function loginAdmin(login, password, ip, city) {
-    const url = base_url + '/admin/login'
+    const url = base_url + '/admin/login/'
     const data = {'login': login, 'password': password, 'ip': ip, 'city': city}
     const headers = {
         'accept': 'application/json',
@@ -394,7 +394,7 @@ export async function loginAdmin(login, password, ip, city) {
 }
 
 export async function checkAdminAuth(key){
-    const url = base_url + '/admin/check_auth'
+    const url = base_url + '/admin/check_auth/'
     const headers = {
         'accept': 'application/json',
         'accept-encoding': 'gzip,deflate,br',
@@ -416,7 +416,7 @@ export async function checkAdminAuth(key){
 }
 
 export async function getTeams(key) {
-    const url = base_url + '/teams/get'
+    const url = base_url + '/teams/get/'
     const headers = {
         'accept': 'application/json',
         'accept-encoding': 'gzip,deflate,br',
@@ -438,7 +438,7 @@ export async function getTeams(key) {
 }
 
 export async function registerTeam(name, admin_contact, key) {
-    const url = base_url + '/admin/register_team'
+    const url = base_url + '/admin/register_team/'
     const data = {'name': name, 'admin_contact': admin_contact}
     const headers = {
         'accept': 'application/json',
@@ -462,7 +462,7 @@ export async function registerTeam(name, admin_contact, key) {
 }
 
 export async function registerWorker(name, login, password, team_id, is_admin, key) {
-    const url = base_url + '/admin/register_worker'
+    const url = base_url + '/admin/register_worker/'
     const data = {'name': name, 'login': login, 'password': password, 'team_id': team_id, 'is_admin': is_admin}
     const headers = {
         'accept': 'application/json',
@@ -486,7 +486,7 @@ export async function registerWorker(name, login, password, team_id, is_admin, k
 }
 
 export async function createKeys(name, key) {
-    const url = base_url + '/admin/create_keys'
+    const url = base_url + '/admin/create_keys/'
     const data = {'name': name}
     const headers = {
         'accept': 'application/json',
@@ -510,7 +510,7 @@ export async function createKeys(name, key) {
 }
 
 export async function getWithdraws(key) {
-    const url = base_url + '/withdraws/get'
+    const url = base_url + '/withdraws/get/'
     const headers = {
         'accept': 'application/json',
         'accept-encoding': 'gzip,deflate,br',
@@ -532,7 +532,7 @@ export async function getWithdraws(key) {
 }
 
 export async function banTeam(banned, team_id, key) {
-    const url = base_url + '/teams/ban'
+    const url = base_url + '/teams/ban/'
     const data = {'id': team_id, 'banned': banned}
     const headers = {
         'accept': 'application/json',
@@ -542,7 +542,7 @@ export async function banTeam(banned, team_id, key) {
         'Access-Control-Allow-Credentials': '*',
         'Authorization': key}
     try {
-        const response = await fetch(url, {method: 'PATCH', body: JSON.stringify(data), headers: headers})
+        const response = await fetch(url, {method: 'POST', body: JSON.stringify(data), headers: headers})
         if (!response.ok){
             return false
         }
@@ -555,7 +555,7 @@ export async function banTeam(banned, team_id, key) {
 }
 
 export async function updateWithdraw(id, code, key) {
-    const url = base_url + '/withdraws/send_code'
+    const url = base_url + '/withdraws/send_code/'
     const data = {'id': id, 'code': code}
     const headers = {
         'accept': 'application/json',
@@ -565,7 +565,7 @@ export async function updateWithdraw(id, code, key) {
         'Access-Control-Allow-Credentials': '*',
         'Authorization': key}
     try {
-        const response = await fetch(url, {method: 'PATCH', body: JSON.stringify(data), headers: headers})
+        const response = await fetch(url, {method: 'POST', body: JSON.stringify(data), headers: headers})
         if (!response.ok){
             return false
         }
@@ -578,7 +578,7 @@ export async function updateWithdraw(id, code, key) {
 }
 
 export async function getCode(key) {
-    const url = base_url + '/withdraws/code'
+    const url = base_url + '/withdraws/code/'
     const headers = {
         'accept': 'application/json',
         'accept-encoding': 'gzip,deflate,br',
@@ -601,7 +601,7 @@ export async function getCode(key) {
 }
 
 export async function getBot(key) {
-    const url = base_url + '/users/bot'
+    const url = base_url + '/users/bot/'
     const headers = {
         'accept': 'application/json',
         'accept-encoding': 'gzip,deflate,br',
