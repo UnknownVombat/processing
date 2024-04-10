@@ -5,7 +5,7 @@ export const teamsapi = createApi({
     reducerPath: 'teamsapi',
     baseQuery: fetchBaseQuery({baseUrl: API_URL}),
     endpoints: (build) => ({
-        getMethods: build.query({
+        methods: build.query({
             query: (headers) => ({
                 url: '/teams/methods/',
                 headers: headers
@@ -27,7 +27,7 @@ export const teamsapi = createApi({
                 body: method_id
             })
         }),
-        getTeams: build.query({
+        teams: build.query({
             query: (headers) => ({
                 url: '/teams/get/',
                 headers: headers,

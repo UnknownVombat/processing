@@ -13,7 +13,7 @@ export const withdrawsapi = createApi({
                 body: body
             })
         }),
-        getWithdraws: build.query({
+        withdraws: build.query({
             query: (headers) => ({
                 url: '/withdraws/get/',
                 headers: headers,

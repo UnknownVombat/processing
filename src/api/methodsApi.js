@@ -5,7 +5,7 @@ export const methodsapi = createApi({
     reducerPath: 'methodsapi',
     baseQuery: fetchBaseQuery({baseUrl: API_URL}),
     endpoints: (build) => ({
-        getMethods: build.query({
+        methods: build.query({
             query: (headers) => ({
                 url: '/methods/get/',
                 headers: headers,
