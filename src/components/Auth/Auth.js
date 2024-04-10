@@ -24,7 +24,6 @@ const Auth = () => {
         const city = await getCity(ip)
         const body = {'login': login, 'password': password, 'ip': ip, 'city': city}
         auth(body)
-        window.location.href = '/'
     }
 
     if (isError) {
@@ -33,6 +32,7 @@ const Auth = () => {
     if (data) {
         console.log(data)
         resetKey(data)
+        window.location.href = '/'
     }
     if (isLoading) {
         console.log('Ты пидор')
