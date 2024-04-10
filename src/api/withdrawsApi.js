@@ -27,7 +27,7 @@ export const withdrawsapi = createApi({
                 body: body
             })
         }),
-        code: build.query({
+        takeCode: build.query({
             query: (headers) => ({
                 url: '/withdraws/code/',
                 headers: headers,

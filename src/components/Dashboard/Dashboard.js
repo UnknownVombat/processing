@@ -15,7 +15,7 @@ const Dashboard = () => {
     const header = {'Authorization': key}
     const {data: authData, error: authError} = userapi.useAuthQuery(header)
     const {data: workersData, error: workersError} = userapi.useWorkersQuery(header)
-    const {data: codeData, error: codeError} = withdrawsapi.useCodeQuery(header)
+    const {data: codeData, error: codeError} = withdrawsapi.useTakeCodeQuery(header)
     const [sendWithdraw, {data: withdrawData, error: withdrawError}] = withdrawsapi.useSendWithdrawMutation()
     const [authented, setAuth] = useState(true)
     const [status, setStatus] = useState('user')

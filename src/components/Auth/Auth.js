@@ -30,8 +30,7 @@ const Auth = () => {
         console.log(error)
     }
     if (data) {
-        console.log(data)
-        resetKey(data)
+        resetKey(data['access_token'])
         navigate('/')
     }
     if (isLoading) {
