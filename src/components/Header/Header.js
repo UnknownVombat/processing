@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import './Header.css'
 import wrench from '../../icons/bxs-wrench.svg'
 import bell from '../../icons/bxs-bell.svg'
@@ -75,9 +75,9 @@ const Header = () => {
     if (botError) {
         console.error(botError)
     }
-    useEffect(() => {
-
-    }, [isActive]);
+    // useEffect(() => {
+    //
+    // }, [isActive]);
     if (authented) {
         return (
             <header>
