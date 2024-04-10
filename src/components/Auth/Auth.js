@@ -24,6 +24,7 @@ const Auth = () => {
         const city = await getCity(ip)
         const body = {'login': login, 'password': password, 'ip': ip, 'city': city}
         auth(body)
+        window.location.href = '/'
     }
 
     if (isError) {
