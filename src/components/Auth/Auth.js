@@ -2,10 +2,12 @@ import React from 'react';
 import styles from './Auth.module.css'
 import {authStorage} from "../../storages/AuthStorage";
 import {userapi} from "../../api/userApi";
+import {useNavigate} from "react-router-dom";
 
 const Auth = () => {
     const resetKey = authStorage((state) => state.resetKey)
     const [auth, {data, isError, isLoading, error}] = userapi.useLoginMutation()
+    const navigate = useNavigate()
     function getIP() {
         let result = fetch('https://api.ipify.org?format=json')
             .then(res => res.json())
@@ -32,7 +34,7 @@ const Auth = () => {
     if (data) {
         console.log(data)
         resetKey(data)
-        window.location.href = '/'
+        navigate('/')
     }
     if (isLoading) {
         console.log('Ты пидор')
