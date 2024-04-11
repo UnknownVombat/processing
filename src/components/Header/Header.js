@@ -34,13 +34,13 @@ const Header = () => {
     }
     function handleToggle(){
         const status = {true: 'active', false: 'paused'}
-        const body = {'status': status[!authData['result']]}
+        const body = {'status': status[!activeData['result']]}
         switchActive(body)
     }
     if (activeData) {
         console.log(activeData)
         if (activeData['access'] === true) {
-            console.log(authData['result'])
+            console.log(activeData['result'])
         }
     }
     if (activeIsError) {
