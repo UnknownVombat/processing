@@ -7,7 +7,7 @@ import { API_URL } from "../const";
 //     key = JSON.parse(window.sessionStorage.auth_data_storage)['state']['key']
 // }
 
-const key = JSON.parse(window.sessionStorage.auth_data_storage.get('state'))['key']
+const key = JSON.parse(window.sessionStorage.auth_data_storage)['state']['key']
 
 export const userapi = createApi({
     reducerPath: 'userapi',
