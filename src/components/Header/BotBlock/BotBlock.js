@@ -11,7 +11,8 @@ const BotBlock = () => {
     const header = {'Authorization': key}
     const {data: botData, error: botError, isLoading: botLoading, isError: botIsError} = userapi.useBotQuery(header)
     if (botIsError) {
-        console.error(botError)
+        alert('Пидорасня в бот дате, возвращаю ошибку')
+        alert(botError)
     }
     if (botLoading) {
         return <div>Loading</div>
