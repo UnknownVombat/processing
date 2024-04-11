@@ -3,27 +3,32 @@ import React from "react";
 import styles from './Dashboard.module.css'
 import {authStorage} from "../../storages/AuthStorage";
 import UserRow from "./UserRow/UserRow";
-import SessionRow from "./SessionRow/SessionRow";
 import {userapi} from "../../api/userApi";
 import {useNavigate} from "react-router-dom";
 import WithdrawBlock from "./WithdrawBlock/WithdrawBlock";
 
 const Dashboard = () => {
     const key = authStorage((state) => state.key)
-    // const setUsers = dataStorage((state) => state.resetUsers)
-    // const resetStatus = dataStorage((state) => state.resetStatus)
-    // const setSessions = dataStorage((state) => state.resetSessions)
     const header = {'Authorization': key}
     const {data: workersData, error: workersError, isError: workersIsError} = userapi.useWorkersQuery(header)
     const navigate = useNavigate()
-    // if (workersData) {
-    //     // setStatus(workersData['status'])
-    //     // if (workersData['status'] === 'admin') {
-    //     //     setUsers(workersData['users'])
-    //     //     setSessions(workersData['sessions'])
-    //     // }
-    //     // resetStatus(workersData['user']['name'], workersData['user']['balance'], workersData['user']['status'])
-    // }
+    const [deleteSession, {data, error, isError}] = userapi.useDeleteSessionMutation()
+    function delSession(element) {
+        const body = {'user_id': element.id}
+        deleteSession(body, header)
+        element.remove()
+    }
+    if (data) {
+        if (data['success'] === true) {
+            // document.getElementById('session' + session['id']).remove()
+            alert('Успешно!')
+        } else {
+            alert('Не успешно!')
+        }
+    }
+    if (isError) {
+        console.error(error)
+    }
     if (workersIsError) {
         if (workersError.status === 401) {
             console.error(workersError)
@@ -32,12 +37,6 @@ const Dashboard = () => {
             console.error(workersError.status)
         }
     }
-    // if (workersLoading) {
-    //     return <div>Loading</div>
-    // }
-    // const user = dataStorage((state) => state.user)
-    // const users = dataStorage((state) => state.users)
-    // const sessions = dataStorage((state) => state.sessions)
     if (workersData) {
         if (workersData['status'] === 'user'){
             return (
@@ -69,7 +68,14 @@ const Dashboard = () => {
                         </div>
                         <div className={styles.user_dashboard}>
                             <p className={styles.session_p}>Данные о сессиях:</p>
-                            {workersData['sessions'].map((element) => {return SessionRow(element['WorkersSessions'], key)})}
+                            {workersData['sessions'].map((element) => {return (
+                                <div className={styles.user_row_block} key={element['WorkersSessions']['id']} id={element['WorkersSessions']['id']}>
+                                    <p>Пользователь: {element['WorkersSessions']['user']} IP: {element['WorkersSessions']['ip']} ({element['WorkersSessions']['city']})</p>
+                                    <button className={styles.submit} onClick={delSession}>Завершить</button>
+                                </div>
+                            )})}
+
+                            {/*{workersData['sessions'].map((element) => {return SessionRow(element['WorkersSessions'], key)})}*/}
                         </div>
                     </div>
                 </div>
