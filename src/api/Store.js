@@ -15,7 +15,11 @@ export const store = configureStore({
         [applicationsapi.reducerPath]: applicationsapi.reducer,
         [teamsapi.reducerPath]: teamsapi.reducer,
     },
-    middleware: (getDefaultMiddlware) => getDefaultMiddlware()
+    middleware: (getDefaultMiddlware) => getDefaultMiddlware({
+        thunk: true,
+        immutableCheck: false,
+        serializableCheck: false,
+    })
         .concat(userapi.middleware)
         .concat(withdrawsapi.middleware)
         .concat(methodsapi.middleware)
