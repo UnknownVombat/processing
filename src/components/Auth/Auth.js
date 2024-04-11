@@ -31,7 +31,7 @@ const Auth = () => {
     }
     if (data) {
         resetKey(data['access_token'])
-        window.location.reload()
+        // window.location.reload()
         navigate('/')
     }
     if (isLoading) {

@@ -53,7 +53,7 @@ const Header = () => {
     if (authIsError) {
         console.error(authError)
         resetKey('')
-        navigate('/auth')
+        // navigate('/auth')
     }
     if (logoutData) {
         navigate('/auth')
