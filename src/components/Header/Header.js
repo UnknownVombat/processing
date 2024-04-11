@@ -7,22 +7,19 @@ import start from '../../icons/play-regular-24.png'
 import stop from '../../icons/pause-regular-24.png'
 import {NavLink, useNavigate} from "react-router-dom";
 import {authStorage} from "../../storages/AuthStorage";
-import {dataStorage} from "../../storages/DataStorage";
 import {userapi} from "../../api/userApi";
 import BotBlock from "./BotBlock/BotBlock";
 
 
 const Header = () => {
     const resetKey = authStorage((state) => state.resetKey)
-    const user = dataStorage((state) => state.user)
-    const resetUser = dataStorage((state) => state.resetStatus)
 
-    const {data: authData, error: authError, isError: authIsError} = userapi.useAuthQuery()
+    const {data: authData, error: authError, isError: authIsError} = userapi.useWorkersQuery()
     const [logout, {data: logoutData, error: logoutError, isError: logoutIsError}] = userapi.useLogoutMutation()
     const [switchActive, {data: activeData, error: activeError, isError: activeIsError}] = userapi.useSwitchActiveMutation()
 
     const [authented, setAuth] = useState(true)
-    const [isActive, setActive] = useState(user['status']);
+    const [isActive, setActive] = useState(authData['user']['status']);
     const navigate = useNavigate()
 
     function logoutF(){
@@ -46,7 +43,6 @@ const Header = () => {
     if (activeData) {
         if (activeData['access'] === true) {
             setActive(!isActive);
-            resetUser(user['name'], user['balance'], !isActive)
         }
     }
     if (activeIsError) {
@@ -58,6 +54,8 @@ const Header = () => {
     }
     if (authIsError) {
         console.error(authError)
+        resetKey('')
+        navigate('/auth')
     }
     if (logoutData) {
         navigate('/auth')
@@ -89,7 +87,7 @@ const Header = () => {
                     <div className={'user_block_big'}>
                         <div className={'user_block'} id='user_block' onClick={changeUserActive}>
                             <img src={user_img} alt='Us'/>
-                            <p>{user['name']}</p>
+                            <p>{authData['user']['name']}</p>
                             <img src={arrow} alt='Ar'/>
                         </div>
                         <div className={'user_hidden_block'} id='user_hidden_block'>

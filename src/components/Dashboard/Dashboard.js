@@ -12,13 +12,12 @@ const Dashboard = () => {
     const [deleteSession, {data, error, isError}] = userapi.useDeleteSessionMutation()
     function delSession(user_id) {
         const body = {'user_id': user_id}
-        // document.getElementById(user_id).remove()
+        document.getElementById(user_id).remove()
         deleteSession(body)
-        alert('Сделал запрос')
     }
     if (data) {
         if (data['success'] === true) {
-            // document.getElementById('session' + session['id']).remove()
+            // document.getElementById().remove()
             alert('Успешно!')
         } else {
             alert('Не успешно!')
