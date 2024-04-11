@@ -40,7 +40,7 @@ const Header = () => {
     if (activeData) {
         console.log(activeData)
         if (activeData['access'] === true) {
-            console.log(activeData['result'])
+            window.location.reload()
         }
     }
     if (activeIsError) {
