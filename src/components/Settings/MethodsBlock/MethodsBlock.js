@@ -7,6 +7,7 @@ import {teamsapi} from "../../../api/teamsApi";
 const MethodsBlock = () => {
     const {data: methodsData, error: methodsError, isError: methodsIsError} = teamsapi.useMethodsQuery()
     if (methodsData) {
+        console.log(methodsData)
         if (methodsData['access'] === true) {
             return (
                 <div className={styles.settings_div}>
