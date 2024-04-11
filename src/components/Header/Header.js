@@ -38,6 +38,7 @@ const Header = () => {
         switchActive(body)
     }
     if (activeData) {
+        console.log(activeData)
         if (activeData['access'] === true) {
             console.log(authData['result'])
         }
