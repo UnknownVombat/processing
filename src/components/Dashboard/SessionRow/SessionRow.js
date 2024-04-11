@@ -16,9 +16,6 @@ const SessionRow = (session) => {
     if (isError) {
         console.error(error)
     }
-    // if (isLoading) {
-    //     console.log('Loading...')
-    // }
     return (
         <div className={styles.user_row_block} key={session['id']} id={'session' + session['id']}>
             <p>Пользователь: {session['user']} IP: {session['ip']} ({session['city']})</p>

@@ -2,19 +2,18 @@ import React from 'react';
 import styles from "../../Dashboard/UserRow/UserRow.module.css";
 import {teamsapi} from "../../../api/teamsApi";
 
-const AddMethodRow = (method, key) => {
-    const [addNewMethod, {data, error}] = teamsapi.useAddMethodMutation()
-    async function addMethod() {
+const AddMethodRow = (method) => {
+    const [addNewMethod, {data, error, isError}] = teamsapi.useAddMethodMutation()
+    function addMethod() {
         const body = {'method_id': method['PaymentMethods']['id']}
-        const header = {'Authorization': key}
-        addNewMethod(body, header)
+        addNewMethod(body)
     }
     if (data) {
         if (data['access'] === true) {
             window.location.reload()
         }
     }
-    if (error) {
+    if (isError) {
         console.error(error)
     }
     return (
