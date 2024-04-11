@@ -20,8 +20,8 @@ const Header = () => {
 
     const header = {'Authorization': key}
     const {data: authData, error: authError, isLoading: authLoading, isError: authIsError} = userapi.useAuthQuery(header)
-    const [logout, {data: logoutData, error: logoutError}] = userapi.useLogoutMutation()
-    const [switchActive, {data: activeData, error: activeError}] = userapi.useSwitchActiveMutation()
+    const [logout, {data: logoutData, error: logoutError, isError: logoutIsError, isLoading: logoutIsLoading}] = userapi.useLogoutMutation()
+    const [switchActive, {data: activeData, error: activeError, isError: activeIsError, isLoading: activeIsLoading}] = userapi.useSwitchActiveMutation()
 
     const [authented, setAuth] = useState(true)
     const [isActive, setActive] = useState(user['status']);
@@ -50,7 +50,7 @@ const Header = () => {
             resetUser(user['name'], user['balance'], !isActive)
         }
     }
-    if (activeError) {
+    if (activeIsError) {
         console.error(activeError)
     }
     if (authData) {
@@ -62,11 +62,11 @@ const Header = () => {
     if (logoutData) {
         navigate('/auth')
     }
-    if (logoutError) {
+    if (logoutIsError) {
         console.error(logoutError)
         navigate('/auth')
     }
-    if (authLoading) {
+    if (authLoading || logoutIsLoading || activeIsLoading) {
         console.log('Loading...')
     }
     // useEffect(() => {

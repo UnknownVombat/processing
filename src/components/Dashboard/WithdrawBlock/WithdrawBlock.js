@@ -8,7 +8,7 @@ const WithdrawBlock = () => {
     const key = authStorage((state) => state.key)
 
     const header = {'Authorization': key}
-    const [sendWithdraw, {data: withdrawData, error: withdrawError}] = withdrawsapi.useSendWithdrawMutation()
+    const [sendWithdraw, {data: withdrawData, error: withdrawError, isLoading, isError}] = withdrawsapi.useSendWithdrawMutation()
     const {data: codeData, error: codeError, isLoading: codeLoading, isError: codeIsError} = withdrawsapi.useTakeCodeQuery(header)
 
     // const [code, setCode] = useState('')
@@ -25,8 +25,11 @@ const WithdrawBlock = () => {
             alert('Не хватает средств!')
         }
     }
-    if (withdrawError) {
+    if (isError) {
         console.error(withdrawError)
+    }
+    if (isLoading) {
+        console.log('Loading...')
     }
     if (codeData) {
         // setCode(codeData['result'])

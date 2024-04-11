@@ -4,7 +4,7 @@ import {userapi} from "../../../api/userApi";
 
 const SessionRow = (session, key) => {
     const header = {'Authorization': key}
-    const [deleteSession, {data, error}] = userapi.useDeleteSessionMutation()
+    const [deleteSession, {data, error, isError, isLoading}] = userapi.useDeleteSessionMutation()
     async function delSession() {
         const body = {'user_id': session['id']}
         deleteSession(body, header)
@@ -14,8 +14,11 @@ const SessionRow = (session, key) => {
             document.getElementById('session' + session['id']).remove()
         }
     }
-    if (error) {
+    if (isError) {
         console.error(error)
+    }
+    if (isLoading) {
+        console.log('Loading...')
     }
     return (
         <div className={styles.user_row_block} key={session['id']} id={'session' + session['id']}>
