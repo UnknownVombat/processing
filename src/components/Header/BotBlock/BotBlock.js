@@ -8,7 +8,7 @@ const BotBlock = () => {
     const key = authStorage((state) => state.key)
 
     const header = {'Authorization': key}
-    const {data: botData, error: botError} = userapi.useBotQuery(header)
+    const {data: botData, error: botError, isLoading: botLoading} = userapi.useBotQuery(header)
 
     const [bot, setBot] = useState('')
 
@@ -19,6 +19,9 @@ const BotBlock = () => {
     }
     if (botError) {
         console.error(botError)
+    }
+    if (botLoading) {
+        console.log('Loading...')
     }
     return (
         <div className={'little_icons'}>

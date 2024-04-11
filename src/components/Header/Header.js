@@ -19,7 +19,7 @@ const Header = () => {
     const resetUser = dataStorage((state) => state.resetStatus)
 
     const header = {'Authorization': key}
-    const {data: authData, error: authError} = userapi.useAuthQuery(header)
+    const {data: authData, error: authError, isLoading: authLoading} = userapi.useAuthQuery(header)
     const [logout, {data: logoutData, error: logoutError}] = userapi.useLogoutMutation()
     const [switchActive, {data: activeData, error: activeError}] = userapi.useSwitchActiveMutation()
 
@@ -65,6 +65,9 @@ const Header = () => {
     if (logoutError) {
         console.error(logoutError)
         navigate('/auth')
+    }
+    if (authLoading) {
+        console.log('Loading...')
     }
     // useEffect(() => {
     //

@@ -8,7 +8,7 @@ const WithdrawBlock = () => {
 
     const header = {'Authorization': key}
     const [sendWithdraw, {data: withdrawData, error: withdrawError}] = withdrawsapi.useSendWithdrawMutation()
-    const {data: codeData, error: codeError} = withdrawsapi.useTakeCodeQuery(header)
+    const {data: codeData, error: codeError, isLoading: codeLoading} = withdrawsapi.useTakeCodeQuery(header)
 
     const [code, setCode] = useState('')
     async function withdraw() {
@@ -31,6 +31,9 @@ const WithdrawBlock = () => {
     }
     if (codeError) {
         console.error(codeError)
+    }
+    if (codeLoading) {
+        console.log('Loading...')
     }
     return (
         <div className={styles.withdraw}>
