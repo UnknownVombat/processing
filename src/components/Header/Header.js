@@ -36,6 +36,7 @@ const Header = () => {
         document.getElementById('user_hidden_block').classList.toggle('active')
     }
     function changePauseActive() {
+        setAuth(false)
         document.getElementById('is_paused').classList.toggle('active')
         document.getElementById('check_pause').classList.toggle('active')
     }
@@ -56,8 +57,7 @@ const Header = () => {
     if (authData) {
         alert('Получил данные')
         console.log(authData)
-        alert(authData['access'] === true)
-        setAuth(authData['access'])
+        // setAuth(authData['access'])
     }
     if (authIsError) {
         console.error(authError)
