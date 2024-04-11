@@ -49,7 +49,6 @@ const Header = () => {
         console.error(activeError)
     }
     if (authData) {
-        setActive(authData['user']['status'])
         console.log(authData)
         // setAuth(authData['access'])
     }
@@ -77,8 +76,8 @@ const Header = () => {
                 <div className={'block'}>
                     <div className={'little_icons_block'}>
                         <div className={'is_paused'} onClick={handleToggle} id='is_paused'>
-                            <img src={isActive ? stop: start} alt='St'/>
-                            <p>{isActive ? 'Остановить': 'Активировать'}</p>
+                            <img src={authData['user']['status'] ? authData['user']['status'] === true ? stop: start: stop} alt='St'/>
+                            <p>{authData['user']['status'] ? authData['user']['status'] === true ? 'Остановить': 'Активировать': 'Остановить'}</p>
                         </div>
                         <div className={'little_icons'} onClick={changePauseActive} id='check_pause'>
                             <img src={wrench} alt='Wr'/>
