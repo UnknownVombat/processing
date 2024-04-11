@@ -20,12 +20,14 @@ const Dashboard = () => {
     // const status = 'admin'
     const navigate = useNavigate()
     if (workersData) {
+        console.log('Получил данные, обновляю все')
         setStatus(workersData['status'])
         if (workersData['status'] === 'admin') {
             setUsers(workersData['users'])
             setSessions(workersData['sessions'])
         }
         resetStatus(workersData['user']['name'], workersData['user']['balance'], workersData['user']['status'])
+        alert('Ререндер')
     }
     if (workersIsError) {
         if (workersError.status === 401) {
