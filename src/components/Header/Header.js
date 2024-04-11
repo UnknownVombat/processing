@@ -33,7 +33,8 @@ const Header = () => {
         document.getElementById('check_pause').classList.toggle('active')
     }
     function handleToggle(){
-        const body = {'status': !authData['result']}
+        const status = {true: 'active', false: 'paused'}
+        const body = {'status': status[!authData['result']]}
         switchActive(body)
     }
     if (activeData) {
