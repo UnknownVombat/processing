@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import './Header.css'
 import wrench from '../../icons/bxs-wrench.svg'
-import bell from '../../icons/bxs-bell.svg'
 import user_img from '../../icons/bxs-user.svg'
 import arrow from '../../icons/bx-chevron-down.svg'
 import start from '../../icons/play-regular-24.png'
@@ -10,6 +9,7 @@ import {NavLink, useNavigate} from "react-router-dom";
 import {authStorage} from "../../storages/AuthStorage";
 import {dataStorage} from "../../storages/DataStorage";
 import {userapi} from "../../api/userApi";
+import BotBlock from "./BotBlock/BotBlock";
 
 
 const Header = () => {
@@ -20,14 +20,13 @@ const Header = () => {
 
     const header = {'Authorization': key}
     const {data: authData, error: authError} = userapi.useAuthQuery(header)
-    const {data: botData, error: botError} = userapi.useBotQuery(header)
     const [logout, {data: logoutData, error: logoutError}] = userapi.useLogoutMutation()
     const [switchActive, {data: activeData, error: activeError}] = userapi.useSwitchActiveMutation()
 
     const [authented, setAuth] = useState(true)
     const [isActive, setActive] = useState(user['status']);
     const navigate = useNavigate()
-    const [bot, setBot] = useState('')
+
     function logoutF(){
         resetKey('')
         logout(header)
@@ -67,14 +66,6 @@ const Header = () => {
         console.error(logoutError)
         navigate('/auth')
     }
-    if (botData) {
-        if (botData['access']) {
-            setBot(botData['result'])
-        }
-    }
-    if (botError) {
-        console.error(botError)
-    }
     // useEffect(() => {
     //
     // }, [isActive]);
@@ -90,9 +81,7 @@ const Header = () => {
                         <div className={'little_icons'} onClick={changePauseActive} id='check_pause'>
                             <img src={wrench} alt='Wr'/>
                         </div>
-                        <div className={'little_icons'}>
-                            <a href={'https://t.me/' + bot} target="_blank" rel="noreferrer"><img src={bell} alt='Bl'/></a>
-                        </div>
+                        <BotBlock />
                     </div>
                     <div className={'user_block_big'}>
                         <div className={'user_block'} id='user_block' onClick={changeUserActive}>
@@ -106,7 +95,6 @@ const Header = () => {
                         </div>
                     </div>
                 </div>
-
             </header>
         );
     } else {
