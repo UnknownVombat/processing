@@ -52,7 +52,7 @@ const Header = () => {
     }
     if (authIsError) {
         console.error(authError)
-        resetKey('')
+        // resetKey('')
         // navigate('/auth')
     }
     if (logoutData) {
