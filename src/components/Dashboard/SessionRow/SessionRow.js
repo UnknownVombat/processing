@@ -5,7 +5,7 @@ import {userapi} from "../../../api/userApi";
 const SessionRow = (session, key) => {
     const header = {'Authorization': key}
     const [deleteSession, {data, error, isError, isLoading}] = userapi.useDeleteSessionMutation()
-    async function delSession() {
+    function delSession() {
         const body = {'user_id': session['id']}
         deleteSession(body, header)
     }

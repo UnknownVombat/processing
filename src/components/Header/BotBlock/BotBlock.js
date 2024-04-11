@@ -10,16 +10,6 @@ const BotBlock = () => {
 
     const header = {'Authorization': key}
     const {data: botData, error: botError, isLoading: botLoading, isError: botIsError} = userapi.useBotQuery(header)
-
-    // const [bot, setBot] = useState('')
-    const bot = ''
-
-    if (botData) {
-        if (botData['access']) {
-            // setBot(botData['result'])
-            console.log(botData['result'])
-        }
-    }
     if (botIsError) {
         console.error(botError)
     }
@@ -28,7 +18,7 @@ const BotBlock = () => {
     }
     return (
         <div className={'little_icons'}>
-            <a href={'https://t.me/' + bot} target="_blank" rel="noreferrer"><img src={bell} alt='Bl'/></a>
+            <a href={'https://t.me/' + (botData ? botData['result']: '')} target="_blank" rel="noreferrer"><img src={bell} alt='Bl'/></a>
         </div>
     );
 };

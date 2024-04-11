@@ -39,7 +39,7 @@ const Header = () => {
         document.getElementById('is_paused').classList.toggle('active')
         document.getElementById('check_pause').classList.toggle('active')
     }
-    async function handleToggle(){
+    function handleToggle(){
         const status = {true: 'active', false: 'paused'}
         const body = {'status': status[!isActive]}
         switchActive(body, header)

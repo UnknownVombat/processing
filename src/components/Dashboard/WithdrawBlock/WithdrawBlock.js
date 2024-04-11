@@ -11,9 +11,7 @@ const WithdrawBlock = () => {
     const [sendWithdraw, {data: withdrawData, error: withdrawError, isLoading, isError}] = withdrawsapi.useSendWithdrawMutation()
     const {data: codeData, error: codeError, isLoading: codeLoading, isError: codeIsError} = withdrawsapi.useTakeCodeQuery(header)
 
-    // const [code, setCode] = useState('')
-    const code = ''
-    async function withdraw() {
+    function withdraw() {
         const amount = document.getElementById('amount').value
         const body = {'amount': amount}
         sendWithdraw(body, header)
@@ -31,10 +29,6 @@ const WithdrawBlock = () => {
     if (isLoading) {
         console.log('Loading...')
     }
-    if (codeData) {
-        // setCode(codeData['result'])
-        console.log(codeData['result'])
-    }
     if (codeIsError) {
         console.error(codeError)
     }
@@ -46,7 +40,7 @@ const WithdrawBlock = () => {
             <label>Вывести баланс</label>
             <input id='amount' type='number' placeholder='Сумма вывода'/>
             <button className={styles.submit} onClick={withdraw}>Вывести</button>
-            <p>Код гарантекс для последней заявки на вывод: {code}</p>
+            <p>Код гарантекс для последней заявки на вывод: {codeData ? codeData['result']: ''}</p>
         </div>
     );
 };
