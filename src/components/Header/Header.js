@@ -18,7 +18,6 @@ const Header = () => {
     const [logout, {data: logoutData, error: logoutError, isError: logoutIsError}] = userapi.useLogoutMutation()
     const [switchActive, {data: activeData, error: activeError, isError: activeIsError}] = userapi.useSwitchActiveMutation()
 
-    const [authented, setAuth] = useState(true)
     const [isActive, setActive] = useState();
     const navigate = useNavigate()
 
@@ -31,7 +30,6 @@ const Header = () => {
         document.getElementById('user_hidden_block').classList.toggle('active')
     }
     function changePauseActive() {
-        setAuth(false)
         document.getElementById('is_paused').classList.toggle('active')
         document.getElementById('check_pause').classList.toggle('active')
     }
@@ -64,44 +62,33 @@ const Header = () => {
         console.error(logoutError)
         navigate('/auth')
     }
-    // if (authLoading || logoutIsLoading || activeIsLoading) {
-    //     return <div>Loading</div>
-    // }
-    // useEffect(() => {
-    //
-    // }, [isActive]);
-    if (authented) {
-        return (
-            <header>
-                <div className={'block'}>
-                    <div className={'little_icons_block'}>
-                        <div className={'is_paused'} onClick={handleToggle} id='is_paused'>
-                            <img src={authData ? authData['user']['status'] === true ? stop: start: stop} alt='St'/>
-                            <p>{authData ? authData['user']['status'] === true ? 'Остановить': 'Активировать': 'Остановить'}</p>
-                        </div>
-                        <div className={'little_icons'} onClick={changePauseActive} id='check_pause'>
-                            <img src={wrench} alt='Wr'/>
-                        </div>
-                        <BotBlock />
+    return (
+        <header>
+            <div className={'block'}>
+                <div className={'little_icons_block'}>
+                    <div className={'is_paused'} onClick={handleToggle} id='is_paused'>
+                        <img src={authData ? authData['user']['status'] === true ? stop: start: stop} alt='St'/>
+                        <p>{authData ? authData['user']['status'] === true ? 'Остановить': 'Активировать': 'Остановить'}</p>
                     </div>
-                    <div className={'user_block_big'}>
-                        <div className={'user_block'} id='user_block' onClick={changeUserActive}>
-                            <img src={user_img} alt='Us'/>
-                            <p>{authData ? authData['user']['name']: ''}</p>
-                            <img src={arrow} alt='Ar'/>
-                        </div>
-                        <div className={'user_hidden_block'} id='user_hidden_block'>
-                            <NavLink to='/settings'><div className={'user_block_little'}>Настройки</div></NavLink>
-                            <NavLink to='/auth'><div className={'user_block_little'} onClick={logoutF}>Выйти</div></NavLink>
-                        </div>
+                    <div className={'little_icons'} onClick={changePauseActive} id='check_pause'>
+                        <img src={wrench} alt='Wr'/>
+                    </div>
+                    <BotBlock />
+                </div>
+                <div className={'user_block_big'}>
+                    <div className={'user_block'} id='user_block' onClick={changeUserActive}>
+                        <img src={user_img} alt='Us'/>
+                        <p>{authData ? authData['user']['name']: ''}</p>
+                        <img src={arrow} alt='Ar'/>
+                    </div>
+                    <div className={'user_hidden_block'} id='user_hidden_block'>
+                        <NavLink to='/settings'><div className={'user_block_little'}>Настройки</div></NavLink>
+                        <NavLink to='/auth'><div className={'user_block_little'} onClick={logoutF}>Выйти</div></NavLink>
                     </div>
                 </div>
-            </header>
-        );
-    } else {
-        window.location.href = '/auth'
-    }
-
+            </div>
+        </header>
+    );
 };
 
 export default Header;
