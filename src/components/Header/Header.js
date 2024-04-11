@@ -88,7 +88,7 @@ const Header = () => {
                     <div className={'user_block_big'}>
                         <div className={'user_block'} id='user_block' onClick={changeUserActive}>
                             <img src={user_img} alt='Us'/>
-                            <p>{authData['user']['name']}</p>
+                            <p>{authData ? authData['user']['name']: ''}</p>
                             <img src={arrow} alt='Ar'/>
                         </div>
                         <div className={'user_hidden_block'} id='user_hidden_block'>
