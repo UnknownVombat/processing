@@ -55,7 +55,7 @@ const Header = () => {
     }
     if (authData) {
         alert('Получил данные')
-        alert(authData)
+        alert(authData['access'])
         setAuth(authData['access'])
     }
     if (authIsError) {
