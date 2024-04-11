@@ -7,25 +7,25 @@ export const applicationsapi = createApi({
     endpoints: (build) => ({
         ActiveApplications: build.query({
             query: (headers) => ({
-                url: '/applications/get/',
+                url: '/applications/get',
                 headers: headers,
             })
         }),
         AllApplications: build.query({
             query: (headers) => ({
-                url: '/applications/get/success/',
+                url: '/applications/get/success',
                 headers: headers,
             })
         }),
         AdminAllApplications: build.query({
             query: (headers) => ({
-                url: '/applications/all/',
+                url: '/applications/all',
                 headers: headers,
             })
         }),
         updateStatus: build.mutation({
             query: (body, headers) => ({
-                url: '/applications/update/',
+                url: '/applications/update',
                 method: 'POST',
                 headers: headers,
                 body: body

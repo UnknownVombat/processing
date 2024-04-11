@@ -7,21 +7,21 @@ export const userapi = createApi({
     endpoints: (build) => ({
         login: build.mutation({
             query: (body) => ({
-                url: '/users/login/',
+                url: '/users/login',
                 method: 'POST',
                 body: body
             })
         }),
         logout: build.mutation({
             query: (headers) => ({
-                url: '/users/logout/',
+                url: '/users/logout',
                 method: 'POST',
                 headers: headers
             })
         }),
         switchActive: build.mutation({
             query: (active, headers) => ({
-                url: '/users/switch_active/',
+                url: '/users/switch_active',
                 method: 'POST',
                 headers: headers,
                 body: active
@@ -29,19 +29,19 @@ export const userapi = createApi({
         }),
         auth: build.query({
             query: (headers) => ({
-                url: '/users/check_auth/',
+                url: '/users/check_auth',
                 headers: headers
             })
         }),
         workers: build.query({
             query: (headers) => ({
-                url: '/users/get/',
+                url: '/users/get',
                 headers: headers
             })
         }),
         deleteSession: build.mutation({
             query: (user_id, headers) => ({
-                url: '/users/session/',
+                url: '/users/session',
                 method: 'POST',
                 headers: headers,
                 body: user_id
@@ -49,7 +49,7 @@ export const userapi = createApi({
         }),
         addBot: build.mutation({
             query: (body, headers) => ({
-                url: '/users/bot/',
+                url: '/users/bot',
                 method: 'POST',
                 headers: headers,
                 body: body
@@ -57,7 +57,7 @@ export const userapi = createApi({
         }),
         Bot: build.query({
             query: (headers) => ({
-                url: '/users/bot/',
+                url: '/users/bot',
                 headers: headers
             })
         })

@@ -7,7 +7,7 @@ export const methodsapi = createApi({
     endpoints: (build) => ({
         methods: build.query({
             query: (headers) => ({
-                url: '/methods/get/',
+                url: '/methods/get',
                 headers: headers,
             })
         })

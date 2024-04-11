@@ -7,7 +7,7 @@ export const withdrawsapi = createApi({
     endpoints: (build) => ({
         sendWithdraw: build.mutation({
             query: (body, headers) => ({
-                url: '/withdraws/new/',
+                url: '/withdraws/new',
                 method: 'POST',
                 headers: headers,
                 body: body
@@ -15,13 +15,13 @@ export const withdrawsapi = createApi({
         }),
         withdraws: build.query({
             query: (headers) => ({
-                url: '/withdraws/get/',
+                url: '/withdraws/get',
                 headers: headers,
             })
         }),
         updateWithdraw: build.mutation({
             query: (body, headers) => ({
-                url: '/withdraws/send_code/',
+                url: '/withdraws/send_code',
                 method: 'POST',
                 headers: headers,
                 body: body
@@ -29,7 +29,7 @@ export const withdrawsapi = createApi({
         }),
         takeCode: build.query({
             query: (headers) => ({
-                url: '/withdraws/code/',
+                url: '/withdraws/code',
                 headers: headers,
             })
         })

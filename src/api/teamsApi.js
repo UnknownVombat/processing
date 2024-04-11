@@ -7,13 +7,13 @@ export const teamsapi = createApi({
     endpoints: (build) => ({
         methods: build.query({
             query: (headers) => ({
-                url: '/teams/methods/',
+                url: '/teams/methods',
                 headers: headers
             })
         }),
         switchActive: build.mutation({
             query: (body, headers) => ({
-                url: '/teams/method/switch_active/',
+                url: '/teams/method/switch_active',
                 method: 'POST',
                 headers: headers,
                 body: body
@@ -21,7 +21,7 @@ export const teamsapi = createApi({
         }),
         addMethod: build.mutation({
             query: (method_id, headers) => ({
-                url: '/teams/add_method/',
+                url: '/teams/add_method',
                 method: 'POST',
                 headers: headers,
                 body: method_id
@@ -29,13 +29,13 @@ export const teamsapi = createApi({
         }),
         teams: build.query({
             query: (headers) => ({
-                url: '/teams/get/',
+                url: '/teams/get',
                 headers: headers,
             })
         }),
         banTeam: build.mutation({
             query: (body, headers) => ({
-                url: '/teams/ban/',
+                url: '/teams/ban',
                 method: 'POST',
                 headers: headers,
                 body: body
