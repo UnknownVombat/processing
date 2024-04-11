@@ -54,13 +54,13 @@ const MethodsBlock = () => {
                     {methodsData['haveMethods'].map((method) => {return (
                         <div className={styles.user_row_block} key={method['method_id']}>
                             <p className={styles.big_p}>Банк: {method['name']} Статус: {method['active'] === true ? 'Включен': 'Выключен'}</p>
-                            <button className={styles.submit} onClick={() => switchActive(method)}>{method['active'] === true ? 'Выключить': 'Включить'}</button>
+                            <button className={styles.row_submit} onClick={() => switchActive(method)}>{method['active'] === true ? 'Выключить': 'Включить'}</button>
                         </div>
                     )})}
                     {methodsData['notHaveMethods'].map((method) => {return (
                         <div className={styles.user_row_block} key={method['PaymentMethods']['id']}>
                             <p className={styles.big_p}>Банк: {method['PaymentMethods']['name']}</p>
-                            <button className={styles.submit} onClick={() => addMethod(method)}>Добавить</button>
+                            <button className={styles.row_submit} onClick={() => addMethod(method)}>Добавить</button>
                         </div>
                     )})}
                 </div>

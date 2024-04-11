@@ -75,6 +75,10 @@
     margin: auto 10px;
 }
 
+.row_submit:hover {
+    background-color: #3c6930;
+}
+
 .submit:hover {
     background-color: #3c6930;
 }

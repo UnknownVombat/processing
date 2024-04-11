@@ -59,6 +59,21 @@
     background-color: #3c6930;
 }
 
+.row_submit {
+    width: 120px;
+    height: 30px;
+    font-size: 1rem;
+    background-color: #d8e8cd;
+    border-radius: 10px;
+    border: #3c6930 2px solid;
+    cursor: pointer;
+    margin: auto 10px;
+}
+
+.row_submit:hover {
+    background-color: #3c6930;
+}
+
 .user_row_block {
     width: 100%;
     height: auto;
