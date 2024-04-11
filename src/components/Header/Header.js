@@ -55,7 +55,6 @@ const Header = () => {
         console.error(activeError)
     }
     if (authData) {
-        alert('Получил данные')
         console.log(authData)
         // setAuth(authData['access'])
     }
