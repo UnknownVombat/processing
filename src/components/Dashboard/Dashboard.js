@@ -38,7 +38,7 @@ const Dashboard = () => {
         }
     }
     if (workersLoading) {
-        console.log('Loading...')
+        return <div>Loading</div>
     }
     const user = dataStorage((state) => state.user)
     const users = dataStorage((state) => state.users)

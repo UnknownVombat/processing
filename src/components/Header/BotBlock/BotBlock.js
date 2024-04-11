@@ -14,7 +14,7 @@ const BotBlock = () => {
         console.error(botError)
     }
     if (botLoading) {
-        console.log('Loading...')
+        return <div>Loading</div>
     }
     return (
         <div className={'little_icons'}>

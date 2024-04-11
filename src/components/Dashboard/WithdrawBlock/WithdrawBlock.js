@@ -27,13 +27,13 @@ const WithdrawBlock = () => {
         console.error(withdrawError)
     }
     if (isLoading) {
-        console.log('Loading...')
+        return <div>Loading</div>
     }
     if (codeIsError) {
         console.error(codeError)
     }
     if (codeLoading) {
-        console.log('Loading...')
+        return <div>Loading</div>
     }
     return (
         <div className={styles.withdraw}>

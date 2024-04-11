@@ -67,7 +67,7 @@ const Header = () => {
         navigate('/auth')
     }
     if (authLoading || logoutIsLoading || activeIsLoading) {
-        console.log('Loading...')
+        return <div>Loading</div>
     }
     // useEffect(() => {
     //
