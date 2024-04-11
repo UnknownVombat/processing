@@ -2,12 +2,11 @@ import React from 'react';
 import styles from './SessionRow.module.css'
 import {userapi} from "../../../api/userApi";
 
-const SessionRow = (session, key) => {
-    const header = {'Authorization': key}
+const SessionRow = (session) => {
     const [deleteSession, {data, error, isError}] = userapi.useDeleteSessionMutation()
     function delSession() {
         const body = {'user_id': session['id']}
-        deleteSession(body, header)
+        deleteSession(body)
     }
     if (data) {
         if (data['success'] === true) {

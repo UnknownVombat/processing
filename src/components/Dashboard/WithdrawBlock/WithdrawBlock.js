@@ -2,19 +2,15 @@
 import React from "react";
 import styles from "../Dashboard.module.css";
 import {withdrawsapi} from "../../../api/withdrawsApi";
-import {authStorage} from "../../../storages/AuthStorage";
 
 const WithdrawBlock = () => {
-    const key = authStorage((state) => state.key)
-
-    const header = {'Authorization': key}
     const [sendWithdraw, {data: withdrawData, error: withdrawError, isError}] = withdrawsapi.useSendWithdrawMutation()
-    const {data: codeData, error: codeError, isError: codeIsError} = withdrawsapi.useTakeCodeQuery(header)
+    const {data: codeData, error: codeError, isError: codeIsError} = withdrawsapi.useTakeCodeQuery()
 
     function withdraw() {
         const amount = document.getElementById('amount').value
         const body = {'amount': amount}
-        sendWithdraw(body, header)
+        sendWithdraw(body)
     }
     if (withdrawData) {
         if (withdrawData['access'] === true) {

@@ -1,43 +1,45 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { API_URL } from "../const";
 
+const key = JSON.parse(window.sessionStorage.auth_data_storage)['state']['key']
+
 export const teamsapi = createApi({
     reducerPath: 'teamsapi',
     baseQuery: fetchBaseQuery({baseUrl: API_URL}),
     endpoints: (build) => ({
         methods: build.query({
-            query: (headers) => ({
+            query: () => ({
                 url: '/teams/methods',
-                headers: headers
+                headers: {'Authorization': key}
             })
         }),
         switchActive: build.mutation({
-            query: (body, headers) => ({
+            query: (body) => ({
                 url: '/teams/method/switch_active',
                 method: 'POST',
-                headers: headers,
+                headers: {'Authorization': key},
                 body: body
             })
         }),
         addMethod: build.mutation({
-            query: (method_id, headers) => ({
+            query: (method_id) => ({
                 url: '/teams/add_method',
                 method: 'POST',
-                headers: headers,
+                headers: {'Authorization': key},
                 body: method_id
             })
         }),
         teams: build.query({
-            query: (headers) => ({
+            query: () => ({
                 url: '/teams/get',
-                headers: headers,
+                headers: {'Authorization': key},
             })
         }),
         banTeam: build.mutation({
-            query: (body, headers) => ({
+            query: (body) => ({
                 url: '/teams/ban',
                 method: 'POST',
-                headers: headers,
+                headers: {'Authorization': key},
                 body: body
             })
         })

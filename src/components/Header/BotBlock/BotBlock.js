@@ -3,16 +3,11 @@ import React from "react";
 import bell from "../../../icons/bxs-bell.svg";
 import '../Header.css'
 import {userapi} from "../../../api/userApi";
-import {authStorage} from "../../../storages/AuthStorage";
 
 const BotBlock = () => {
-    const key = authStorage((state) => state.key)
-
-    const header = {'Authorization': key}
-    const {data: botData, error: botError, isLoading: botLoading, isError: botIsError} = userapi.useBotQuery(header)
+    const {data: botData, error: botError, isLoading: botLoading, isError: botIsError} = userapi.useBotQuery()
     if (botIsError) {
-        alert('Пидорасня в бот дате, возвращаю ошибку')
-        alert(botError)
+        console.log(botError)
     }
     if (botLoading) {
         return <div>Loading</div>

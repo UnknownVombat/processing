@@ -1,24 +1,19 @@
 // import React, {useState} from 'react';
 import React from "react";
 import styles from './Dashboard.module.css'
-import {authStorage} from "../../storages/AuthStorage";
 import UserRow from "./UserRow/UserRow";
 import {userapi} from "../../api/userApi";
 import {useNavigate} from "react-router-dom";
 import WithdrawBlock from "./WithdrawBlock/WithdrawBlock";
 
 const Dashboard = () => {
-    const key = authStorage((state) => state.key)
-    const header = {'Authorization': key}
-    const {data: workersData, error: workersError, isError: workersIsError} = userapi.useWorkersQuery(header)
+    const {data: workersData, error: workersError, isError: workersIsError} = userapi.useWorkersQuery()
     const navigate = useNavigate()
     const [deleteSession, {data, error, isError}] = userapi.useDeleteSessionMutation()
-    function delSession(user_id, keys) {
-        console.log(keys)
-        const header = {'Authorization': keys}
+    function delSession(user_id) {
         const body = {'user_id': user_id}
-        document.getElementById(user_id).remove()
-        deleteSession(body, header)
+        // document.getElementById(user_id).remove()
+        deleteSession(body)
         alert('Сделал запрос')
     }
     if (data) {
@@ -75,7 +70,7 @@ const Dashboard = () => {
                                 return (
                                 <div className={styles.user_row_block} key={element['WorkersSessions']['id']} id={element['WorkersSessions']['id']}>
                                     <p>Пользователь: {element['WorkersSessions']['user']} IP: {element['WorkersSessions']['ip']} ({element['WorkersSessions']['city']})</p>
-                                    <button className={styles.row_submit} onClick={() => delSession(element['WorkersSessions']['id'], key)}>Завершить</button>
+                                    <button className={styles.row_submit} onClick={() => delSession(element['WorkersSessions']['id'])}>Завершить</button>
                                 </div>
                             )})}
 

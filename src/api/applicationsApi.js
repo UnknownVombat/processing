@@ -1,33 +1,35 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { API_URL } from "../const";
 
+const key = JSON.parse(window.sessionStorage.auth_data_storage)['state']['key']
+
 export const applicationsapi = createApi({
     reducerPath: 'applicationsapi',
     baseQuery: fetchBaseQuery({baseUrl: API_URL}),
     endpoints: (build) => ({
         ActiveApplications: build.query({
-            query: (headers) => ({
+            query: () => ({
                 url: '/applications/get',
-                headers: headers,
+                headers: {'Authorization': key},
             })
         }),
         AllApplications: build.query({
-            query: (headers) => ({
+            query: () => ({
                 url: '/applications/get/success',
-                headers: headers,
+                headers: {'Authorization': key},
             })
         }),
         AdminAllApplications: build.query({
-            query: (headers) => ({
+            query: () => ({
                 url: '/applications/all',
-                headers: headers,
+                headers: {'Authorization': key},
             })
         }),
         updateStatus: build.mutation({
-            query: (body, headers) => ({
+            query: (body) => ({
                 url: '/applications/update',
                 method: 'POST',
-                headers: headers,
+                headers: {'Authorization': key},
                 body: body
             })
         })

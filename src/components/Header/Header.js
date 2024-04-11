@@ -13,13 +13,11 @@ import BotBlock from "./BotBlock/BotBlock";
 
 
 const Header = () => {
-    const key = authStorage((state) => state.key)
     const resetKey = authStorage((state) => state.resetKey)
     const user = dataStorage((state) => state.user)
     const resetUser = dataStorage((state) => state.resetStatus)
 
-    const header = {'Authorization': key}
-    const {data: authData, error: authError, isError: authIsError} = userapi.useAuthQuery(header)
+    const {data: authData, error: authError, isError: authIsError} = userapi.useAuthQuery()
     const [logout, {data: logoutData, error: logoutError, isError: logoutIsError}] = userapi.useLogoutMutation()
     const [switchActive, {data: activeData, error: activeError, isError: activeIsError}] = userapi.useSwitchActiveMutation()
 
@@ -29,7 +27,7 @@ const Header = () => {
 
     function logoutF(){
         resetKey('')
-        logout(header)
+        logout()
     }
     function changeUserActive() {
         document.getElementById('user_block').classList.toggle('active')
@@ -43,7 +41,7 @@ const Header = () => {
     function handleToggle(){
         const status = {true: 'active', false: 'paused'}
         const body = {'status': status[!isActive]}
-        switchActive(body, header)
+        switchActive(body)
     }
     if (activeData) {
         if (activeData['access'] === true) {

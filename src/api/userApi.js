@@ -1,6 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { API_URL } from "../const";
 
+
+const key = JSON.parse(window.sessionStorage.auth_data_storage)['state']['key']
+
 export const userapi = createApi({
     reducerPath: 'userapi',
     baseQuery: fetchBaseQuery({baseUrl: API_URL}),
@@ -13,52 +16,52 @@ export const userapi = createApi({
             })
         }),
         logout: build.mutation({
-            query: (headers) => ({
+            query: () => ({
                 url: '/users/logout',
                 method: 'POST',
-                headers: headers
+                headers: {'Authorization': key}
             })
         }),
         switchActive: build.mutation({
-            query: (active, headers) => ({
+            query: (active) => ({
                 url: '/users/switch_active',
                 method: 'POST',
-                headers: headers,
+                headers: {'Authorization': key},
                 body: active
             })
         }),
         auth: build.query({
-            query: (headers) => ({
+            query: () => ({
                 url: '/users/check_auth',
-                headers: headers
+                headers: {'Authorization': key}
             })
         }),
         workers: build.query({
-            query: (headers) => ({
+            query: () => ({
                 url: '/users/get',
-                headers: headers
+                headers: {'Authorization': key}
             })
         }),
         deleteSession: build.mutation({
-            query: (user_id, headers) => ({
+            query: (user_id) => ({
                 url: '/users/session',
                 method: 'POST',
-                headers: headers,
+                headers: {'Authorization': key},
                 body: user_id
             })
         }),
         addBot: build.mutation({
-            query: (body, headers) => ({
+            query: (body) => ({
                 url: '/users/bot',
                 method: 'POST',
-                headers: headers,
+                headers: {'Authorization': key},
                 body: body
             })
         }),
         Bot: build.query({
-            query: (headers) => ({
+            query: () => ({
                 url: '/users/bot',
-                headers: headers
+                headers: {'Authorization': key}
             })
         })
     })
