@@ -8,8 +8,8 @@ const WithdrawBlock = () => {
     const key = authStorage((state) => state.key)
 
     const header = {'Authorization': key}
-    const [sendWithdraw, {data: withdrawData, error: withdrawError, isLoading, isError}] = withdrawsapi.useSendWithdrawMutation()
-    const {data: codeData, error: codeError, isLoading: codeLoading, isError: codeIsError} = withdrawsapi.useTakeCodeQuery(header)
+    const [sendWithdraw, {data: withdrawData, error: withdrawError, isError}] = withdrawsapi.useSendWithdrawMutation()
+    const {data: codeData, error: codeError, isError: codeIsError} = withdrawsapi.useTakeCodeQuery(header)
 
     function withdraw() {
         const amount = document.getElementById('amount').value
@@ -26,15 +26,15 @@ const WithdrawBlock = () => {
     if (isError) {
         console.error(withdrawError)
     }
-    if (isLoading) {
-        return <div>Loading</div>
-    }
+    // if (isLoading) {
+    //     return <div>Loading</div>
+    // }
     if (codeIsError) {
         console.error(codeError)
     }
-    if (codeLoading) {
-        return <div>Loading</div>
-    }
+    // if (codeLoading) {
+    //     return <div>Loading</div>
+    // }
     return (
         <div className={styles.withdraw}>
             <label>Вывести баланс</label>

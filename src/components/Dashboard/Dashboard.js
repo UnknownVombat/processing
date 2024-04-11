@@ -15,12 +15,12 @@ const Dashboard = () => {
     const resetStatus = dataStorage((state) => state.resetStatus)
     const setSessions = dataStorage((state) => state.resetSessions)
     const header = {'Authorization': key}
-    const {data: workersData, error: workersError, isLoading: workersLoading, isError: workersIsError} = userapi.useWorkersQuery(header)
+    const {data: workersData, error: workersError, isError: workersIsError} = userapi.useWorkersQuery(header)
     const [status, setStatus] = useState('admin')
     // const status = 'admin'
     const navigate = useNavigate()
     if (workersData) {
-        console.log('Получил данные, обновляю все')
+        alert('Получил данные, обновляю все')
         setStatus(workersData['status'])
         if (workersData['status'] === 'admin') {
             setUsers(workersData['users'])
@@ -37,9 +37,9 @@ const Dashboard = () => {
             console.error(workersError.status)
         }
     }
-    if (workersLoading) {
-        return <div>Loading</div>
-    }
+    // if (workersLoading) {
+    //     return <div>Loading</div>
+    // }
     const user = dataStorage((state) => state.user)
     const users = dataStorage((state) => state.users)
     const sessions = dataStorage((state) => state.sessions)
