@@ -35,12 +35,16 @@ const WithdrawBlock = () => {
     // if (codeLoading) {
     //     return <div>Loading</div>
     // }
+    if (codeData){
+        alert('Code data')
+        console.log(codeData)
+    }
     return (
         <div className={styles.withdraw}>
             <label>Вывести баланс</label>
             <input id='amount' type='number' placeholder='Сумма вывода'/>
             <button className={styles.submit} onClick={withdraw}>Вывести</button>
-            <p>Код гарантекс для последней заявки на вывод: {codeData['access'] === true ? codeData['result']: ''}</p>
+            {/*<p>Код гарантекс для последней заявки на вывод: {codeData['access'] === true ? codeData['result']: ''}</p>*/}
         </div>
     );
 };
