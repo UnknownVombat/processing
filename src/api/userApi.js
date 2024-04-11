@@ -2,7 +2,11 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { API_URL } from "../const";
 
 
-const key = JSON.parse(window.sessionStorage.auth_data_storage)['state']['key']
+let key = null
+if (window.sessionStorage.auth_data_storage){
+    key = JSON.parse(window.sessionStorage.auth_data_storage)['state']['key']
+}
+
 
 export const userapi = createApi({
     reducerPath: 'userapi',
