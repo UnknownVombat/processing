@@ -33,8 +33,8 @@ const Header = () => {
         document.getElementById('check_pause').classList.toggle('active')
     }
     function handleToggle(){
-        const status = {true: 'active', false: 'paused'}
-        const body = {'status': status[!activeData['result']]}
+        const status = {'paused': 'active', 'active': 'paused'}
+        const body = {'status': status[!authData['user']['status']]}
         switchActive(body)
     }
     if (activeData) {
@@ -67,8 +67,8 @@ const Header = () => {
             <div className={'block'}>
                 <div className={'little_icons_block'}>
                     <div className={'is_paused'} onClick={handleToggle} id='is_paused'>
-                        <img src={authData ? authData['user']['status'] === true ? stop: start: stop} alt='St'/>
-                        <p>{authData ? authData['user']['status'] === true ? 'Остановить': 'Активировать': 'Остановить'}</p>
+                        <img src={authData ? authData['user']['status'] === 'active' ? stop: start: stop} alt='St'/>
+                        <p>{authData ? authData['user']['status'] === 'active' ? 'Остановить': 'Активировать': 'Остановить'}</p>
                     </div>
                     <div className={'little_icons'} onClick={changePauseActive} id='check_pause'>
                         <img src={wrench} alt='Wr'/>
