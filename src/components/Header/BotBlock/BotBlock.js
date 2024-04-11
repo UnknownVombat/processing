@@ -19,7 +19,7 @@ const BotBlock = () => {
     }
     return (
         <div className={'little_icons'}>
-            <a href={'https://t.me/' + (botData ? botData['result']: '')} target="_blank" rel="noreferrer"><img src={bell} alt='Bl'/></a>
+            <a href={'https://t.me/' + (botData['success'] === true ? botData['result']: '')} target="_blank" rel="noreferrer"><img src={bell} alt='Bl'/></a>
         </div>
     );
 };

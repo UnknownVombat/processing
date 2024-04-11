@@ -40,7 +40,7 @@ const WithdrawBlock = () => {
             <label>Вывести баланс</label>
             <input id='amount' type='number' placeholder='Сумма вывода'/>
             <button className={styles.submit} onClick={withdraw}>Вывести</button>
-            <p>Код гарантекс для последней заявки на вывод: {codeData ? codeData['result']: ''}</p>
+            <p>Код гарантекс для последней заявки на вывод: {codeData['access'] === true ? codeData['result']: ''}</p>
         </div>
     );
 };
