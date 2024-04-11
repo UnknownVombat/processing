@@ -58,3 +58,17 @@
 .submit:hover {
     background-color: #3c6930;
 }
+
+.user_row_block {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    font-size: 1rem;
+}
+
+.big_p {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
