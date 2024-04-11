@@ -17,7 +17,7 @@ function App() {
     <div className="App">
         <Routes>
             <Route path='/' element={<Layout/>}>
-                <Route path='/' element={<Dashboard/>}/>
+                <Route path='/' index element={<Dashboard/>}/>
                 <Route path='/payments' element={<Payments />} />
                 <Route path='/settings' element={<Settings />} />
                 <Route path='/history' element={<AllPayments />} />
@@ -27,7 +27,7 @@ function App() {
                 <Route path='/admin/withdraws' element={<AdminWithdraws />}/>
                 <Route path='/admin/all_payments' element={<AdminAllPayments />} />
             </Route>
-            <Route index path='/auth' element={<Auth />} />
+            <Route path='/auth' element={<Auth />} />
             <Route path='/admin/auth' element={<AdminAuth />} />
         </Routes>
     </div>

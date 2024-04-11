@@ -3,12 +3,12 @@ import React from "react";
 import styles from './Dashboard.module.css'
 import UserRow from "./UserRow/UserRow";
 import {userapi} from "../../api/userApi";
-// import {useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import WithdrawBlock from "./WithdrawBlock/WithdrawBlock";
 
 const Dashboard = () => {
     const {data: workersData, error: workersError, isError: workersIsError} = userapi.useWorkersQuery()
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
     const [deleteSession, {data, error, isError}] = userapi.useDeleteSessionMutation()
     function delSession(user_id) {
         const body = {'user_id': user_id}
@@ -26,7 +26,7 @@ const Dashboard = () => {
     if (isError) {
         if (error.status === 401) {
             console.error(error)
-            // navigate('/auth')
+            navigate('/auth')
         } else {
             console.error(error)
         }
@@ -34,7 +34,7 @@ const Dashboard = () => {
     if (workersIsError) {
         if (workersError.status === 401) {
             console.error(workersError)
-            // navigate('/auth')
+            navigate('/auth')
         } else {
             console.error(workersError.status)
         }
