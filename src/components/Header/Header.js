@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './Header.css'
 import wrench from '../../icons/bxs-wrench.svg'
 import user_img from '../../icons/bxs-user.svg'
@@ -18,7 +18,6 @@ const Header = () => {
     const [logout, {data: logoutData, error: logoutError, isError: logoutIsError}] = userapi.useLogoutMutation()
     const [switchActive, {data: activeData, error: activeError, isError: activeIsError}] = userapi.useSwitchActiveMutation()
 
-    const [isActive, setActive] = useState();
     const navigate = useNavigate()
 
     function logoutF(){
@@ -34,13 +33,12 @@ const Header = () => {
         document.getElementById('check_pause').classList.toggle('active')
     }
     function handleToggle(){
-        const status = {true: 'active', false: 'paused'}
-        const body = {'status': status[!isActive]}
+        const body = {'status': !authData['result']}
         switchActive(body)
     }
     if (activeData) {
         if (activeData['access'] === true) {
-            setActive(!isActive);
+            console.log(authData['result'])
         }
     }
     if (activeIsError) {
