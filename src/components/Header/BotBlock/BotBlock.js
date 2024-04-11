@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import bell from "../../../icons/bxs-bell.svg";
-import './Header.css'
+import '../Header.css'
 import {userapi} from "../../../api/userApi";
 import {authStorage} from "../../../storages/AuthStorage";
 
