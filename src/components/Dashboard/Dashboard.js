@@ -24,7 +24,12 @@ const Dashboard = () => {
         }
     }
     if (isError) {
-        console.error(error)
+        if (error.status === 401) {
+            console.error(error)
+            navigate('/auth')
+        } else {
+            console.error(error)
+        }
     }
     if (workersIsError) {
         if (workersError.status === 401) {
