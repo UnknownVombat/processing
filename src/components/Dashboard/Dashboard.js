@@ -14,7 +14,7 @@ const Dashboard = () => {
     const resetStatus = dataStorage((state) => state.resetStatus)
     const setSessions = dataStorage((state) => state.resetSessions)
     const header = {'Authorization': key}
-    const {data: workersData, error: workersError, isLoading: workersLoading} = userapi.useWorkersQuery(header)
+    const {data: workersData, error: workersError, isLoading: workersLoading, isError: workersIsError} = userapi.useWorkersQuery(header)
     const [status, setStatus] = useState('user')
     const navigate = useNavigate()
     if (workersData) {
@@ -25,7 +25,7 @@ const Dashboard = () => {
         }
         resetStatus(workersData['user']['name'], workersData['user']['balance'], workersData['user']['status'])
     }
-    if (workersError) {
+    if (workersIsError) {
         if (workersError.status === 401) {
             console.error(workersError)
             navigate('/auth')

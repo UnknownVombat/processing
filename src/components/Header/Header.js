@@ -19,7 +19,7 @@ const Header = () => {
     const resetUser = dataStorage((state) => state.resetStatus)
 
     const header = {'Authorization': key}
-    const {data: authData, error: authError, isLoading: authLoading} = userapi.useAuthQuery(header)
+    const {data: authData, error: authError, isLoading: authLoading, isError: authIsError} = userapi.useAuthQuery(header)
     const [logout, {data: logoutData, error: logoutError}] = userapi.useLogoutMutation()
     const [switchActive, {data: activeData, error: activeError}] = userapi.useSwitchActiveMutation()
 
@@ -56,7 +56,7 @@ const Header = () => {
     if (authData) {
         setAuth(authData['access'])
     }
-    if (authError) {
+    if (authIsError) {
         console.error(authError)
     }
     if (logoutData) {

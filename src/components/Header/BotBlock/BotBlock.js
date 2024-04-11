@@ -8,7 +8,7 @@ const BotBlock = () => {
     const key = authStorage((state) => state.key)
 
     const header = {'Authorization': key}
-    const {data: botData, error: botError, isLoading: botLoading} = userapi.useBotQuery(header)
+    const {data: botData, error: botError, isLoading: botLoading, isError: botIsError} = userapi.useBotQuery(header)
 
     const [bot, setBot] = useState('')
 
@@ -17,7 +17,7 @@ const BotBlock = () => {
             setBot(botData['result'])
         }
     }
-    if (botError) {
+    if (botIsError) {
         console.error(botError)
     }
     if (botLoading) {
