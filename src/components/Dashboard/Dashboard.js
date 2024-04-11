@@ -13,12 +13,10 @@ const Dashboard = () => {
     const {data: workersData, error: workersError, isError: workersIsError} = userapi.useWorkersQuery(header)
     const navigate = useNavigate()
     const [deleteSession, {data, error, isError}] = userapi.useDeleteSessionMutation()
-    function delSession(element) {
-        console.log(element.target)
-        console.log(element.target.id)
-        const body = {'user_id': element.id}
+    function delSession(element, user_id) {
+        const body = {'user_id': user_id}
         deleteSession(body, header)
-        element.remove()
+        element.target.remove()
     }
     if (data) {
         if (data['success'] === true) {
@@ -71,11 +69,10 @@ const Dashboard = () => {
                         <div className={styles.user_dashboard}>
                             <p className={styles.session_p}>Данные о сессиях:</p>
                             {workersData['sessions'].map((element) => {
-                                console.log(element['WorkersSessions']['id'])
                                 return (
                                 <div className={styles.user_row_block} key={element['WorkersSessions']['id']} id={element['WorkersSessions']['id']}>
                                     <p>Пользователь: {element['WorkersSessions']['user']} IP: {element['WorkersSessions']['ip']} ({element['WorkersSessions']['city']})</p>
-                                    <button className={styles.row_submit} onClick={delSession}>Завершить</button>
+                                    <button className={styles.row_submit} onClick={() => delSession(this, element['WorkersSessions']['id'])}>Завершить</button>
                                 </div>
                             )})}
 
