@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-// import React from "react";
+// import React, {useState} from 'react';
+import React from "react";
 import styles from './Dashboard.module.css'
 import {authStorage} from "../../storages/AuthStorage";
 import {dataStorage} from "../../storages/DataStorage";
@@ -11,23 +11,22 @@ import WithdrawBlock from "./WithdrawBlock/WithdrawBlock";
 
 const Dashboard = () => {
     const key = authStorage((state) => state.key)
-    const setUsers = dataStorage((state) => state.resetUsers)
-    const resetStatus = dataStorage((state) => state.resetStatus)
-    const setSessions = dataStorage((state) => state.resetSessions)
+    // const setUsers = dataStorage((state) => state.resetUsers)
+    // const resetStatus = dataStorage((state) => state.resetStatus)
+    // const setSessions = dataStorage((state) => state.resetSessions)
     const header = {'Authorization': key}
     const {data: workersData, error: workersError, isError: workersIsError} = userapi.useWorkersQuery(header)
-    const [status, setStatus] = useState('admin')
-    // const status = 'admin'
+    // const [status, setStatus] = useState('admin')
+    const status = 'admin'
     const navigate = useNavigate()
     if (workersData) {
-        alert('Получил данные, обновляю все')
-        setStatus(workersData['status'])
-        if (workersData['status'] === 'admin') {
-            setUsers(workersData['users'])
-            setSessions(workersData['sessions'])
-        }
-        resetStatus(workersData['user']['name'], workersData['user']['balance'], workersData['user']['status'])
-        alert('Ререндер')
+        alert('Получил данные, не обновляю вообще нихуя')
+        // setStatus(workersData['status'])
+        // if (workersData['status'] === 'admin') {
+        //     setUsers(workersData['users'])
+        //     setSessions(workersData['sessions'])
+        // }
+        // resetStatus(workersData['user']['name'], workersData['user']['balance'], workersData['user']['status'])
     }
     if (workersIsError) {
         if (workersError.status === 401) {
