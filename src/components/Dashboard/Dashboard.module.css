@@ -117,6 +117,7 @@
 }
 
 .user_row_block {
+    margin-left: 10px;
     width: 100%;
     height: auto;
     display: flex;
