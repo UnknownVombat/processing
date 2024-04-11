@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+// import React, {useState} from 'react';
+import React from "react";
 import bell from "../../../icons/bxs-bell.svg";
 import '../Header.css'
 import {userapi} from "../../../api/userApi";
@@ -10,11 +11,13 @@ const BotBlock = () => {
     const header = {'Authorization': key}
     const {data: botData, error: botError, isLoading: botLoading, isError: botIsError} = userapi.useBotQuery(header)
 
-    const [bot, setBot] = useState('')
+    // const [bot, setBot] = useState('')
+    const bot = ''
 
     if (botData) {
         if (botData['access']) {
-            setBot(botData['result'])
+            // setBot(botData['result'])
+            console.log(botData['result'])
         }
     }
     if (botIsError) {

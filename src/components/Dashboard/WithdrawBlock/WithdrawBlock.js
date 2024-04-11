@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+// import React, {useState} from 'react';
+import React from "react";
 import styles from "../Dashboard.module.css";
 import {withdrawsapi} from "../../../api/withdrawsApi";
 import {authStorage} from "../../../storages/AuthStorage";
@@ -10,7 +11,8 @@ const WithdrawBlock = () => {
     const [sendWithdraw, {data: withdrawData, error: withdrawError}] = withdrawsapi.useSendWithdrawMutation()
     const {data: codeData, error: codeError, isLoading: codeLoading, isError: codeIsError} = withdrawsapi.useTakeCodeQuery(header)
 
-    const [code, setCode] = useState('')
+    // const [code, setCode] = useState('')
+    const code = ''
     async function withdraw() {
         const amount = document.getElementById('amount').value
         const body = {'amount': amount}
@@ -27,7 +29,8 @@ const WithdrawBlock = () => {
         console.error(withdrawError)
     }
     if (codeData) {
-        setCode(codeData['result'])
+        // setCode(codeData['result'])
+        console.log(codeData['result'])
     }
     if (codeIsError) {
         console.error(codeError)

@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+// import React, {useState} from 'react';
+import React from "react";
 import styles from './Dashboard.module.css'
 import {authStorage} from "../../storages/AuthStorage";
 import {dataStorage} from "../../storages/DataStorage";
@@ -15,10 +16,11 @@ const Dashboard = () => {
     const setSessions = dataStorage((state) => state.resetSessions)
     const header = {'Authorization': key}
     const {data: workersData, error: workersError, isLoading: workersLoading, isError: workersIsError} = userapi.useWorkersQuery(header)
-    const [status, setStatus] = useState('user')
+    // const [status, setStatus] = useState('admin')
+    const status = 'admin'
     const navigate = useNavigate()
     if (workersData) {
-        setStatus(workersData['status'])
+        // setStatus(workersData['status'])
         if (workersData['status'] === 'admin') {
             setUsers(workersData['users'])
             setSessions(workersData['sessions'])
