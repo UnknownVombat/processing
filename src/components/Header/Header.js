@@ -19,7 +19,7 @@ const Header = () => {
     const [switchActive, {data: activeData, error: activeError, isError: activeIsError}] = userapi.useSwitchActiveMutation()
 
     const [authented, setAuth] = useState(true)
-    const [isActive, setActive] = useState(authData['user']['status']);
+    const [isActive, setActive] = useState();
     const navigate = useNavigate()
 
     function logoutF(){
@@ -49,6 +49,7 @@ const Header = () => {
         console.error(activeError)
     }
     if (authData) {
+        setActive(authData['user']['status'])
         console.log(authData)
         // setAuth(authData['access'])
     }
