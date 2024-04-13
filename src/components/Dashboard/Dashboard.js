@@ -54,9 +54,8 @@ const Dashboard = () => {
     function delSession(user_id) {
         const body = {'user_id': user_id}
         deleteSession(body)
-        workersRefetch()
         toast.success("Сессия удалена!")
-        window.location.reload()
+        workersRefetch()
     }
 
 
