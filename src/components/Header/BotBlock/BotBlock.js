@@ -5,6 +5,7 @@ import '../Header.css'
 import {userapi} from "../../../api/userApi";
 
 const BotBlock = () => {
+
     const {data: botData, error: botError, isLoading: botLoading, isError: botIsError} = userapi.useBotQuery()
     if (botIsError) {
         console.log(botError)
@@ -12,9 +13,10 @@ const BotBlock = () => {
     if (botLoading) {
         return <div>Loading</div>
     }
+    
     return (
         <div className={'little_icons'}>
-            <a href={'https://t.me/' + (botData['success'] === true ? botData['result']: '')} target="_blank" rel="noreferrer"><img src={bell} alt='Bl'/></a>
+            <a href={'https://t.me/' + (botData && botData['success'] === true ? botData['result']: '')} target="_blank" rel="noreferrer"><img src={bell} alt='Bl'/></a>
         </div>
     );
 };

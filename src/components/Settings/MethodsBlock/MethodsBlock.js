@@ -2,41 +2,46 @@ import React from 'react';
 import styles from "../Settings.module.css";
 import {teamsapi} from "../../../api/teamsApi";
 import {useNavigate} from "react-router-dom";
+import { MethodsTable } from '../../Table/MethodsTable'
+import { toast } from 'react-toastify';
+
+
+
 
 const MethodsBlock = () => {
-    const {data: methodsData, error: methodsError, isError: methodsIsError} = teamsapi.useMethodsQuery()
-    const [switchMethod, {data, error, isError}] = teamsapi.useSwitchActiveMutation()
+    const {data: methodsData, error: methodsError, isError: methodsIsError, refetch: methodRefetch} = teamsapi.useMethodsQuery()
+    const [switchMethod, {error, isError}] = teamsapi.useSwitchActiveMutation()
+    const [addNewMethod, {data: addData, error: addError, isError: addIsError}] = teamsapi.useAddMethodMutation()
 
     const navigate = useNavigate()
+
     function switchActive(method) {
         const active = method['active']
         const body = {'team_id': method['id'], 'method_id': method['method_id'], 'active': !active}
         switchMethod(body)
+        methodRefetch()
     }
-    if (data) {
-        if (data['access'] === true) {
-            window.location.reload()
-        }
-    }
+
     if (isError) {
         if (error.status === 401) {
             console.error(error)
             navigate('/auth')
         } else {
+            toast.error("Активность не изменена")
             console.error(error)
         }
     }
-    const [addNewMethod, {data: addData, error: addError, isError: addIsError}] = teamsapi.useAddMethodMutation()
+
+    if(addData) {
+        toast.success("Метод добавлен", {autoClose: 2000})
+    }
 
     function addMethod(method) {
         const body = {'method_id': method['PaymentMethods']['id']}
         addNewMethod(body)
+        methodRefetch()
     }
-    if (addData) {
-        if (data['access'] === true) {
-            window.location.reload()
-        }
-    }
+
     if (addIsError) {
         if (addError.status === 401) {
             console.error(addError)
@@ -51,12 +56,8 @@ const MethodsBlock = () => {
             return (
                 <div className={styles.settings_div}>
                     <h2>Реквизиты</h2>
-                    {methodsData['haveMethods'].map((method) => {return (
-                        <div className={styles.user_row_block} key={method['method_id']}>
-                            <p className={styles.big_p}>Банк: {method['name']} Статус: {method['active'] === true ? 'Включен': 'Выключен'}</p>
-                            <button className={styles.row_submit} onClick={() => switchActive(method)}>{method['active'] === true ? 'Выключить': 'Включить'}</button>
-                        </div>
-                    )})}
+                    <MethodsTable methodsData={methodsData['haveMethods']} switchActive={switchActive} />
+
                     {methodsData['notHaveMethods'].map((method) => {return (
                         <div className={styles.user_row_block} key={method['PaymentMethods']['id']}>
                             <p className={styles.big_p}>Банк: {method['PaymentMethods']['name']}</p>

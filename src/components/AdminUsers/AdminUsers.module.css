@@ -1,13 +1,32 @@
 .dashboard {
-    width: 100%;
-    right: 0;
-    height: auto;
-    min-height: 100vh;
+    flex: 1;
+    height: 100svh;
     display: flex;
     flex-direction: column;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+
 }
 
-.create_block {
+.table_container{
+    display: flex;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-height: 30%;
+    max-height: 30svh;
+    border-bottom: grey 3px solid;
+}
+
+
+.forms_block{
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* .create_block {
     margin: 5px auto;
     width: auto;
     height: auto;
@@ -81,20 +100,17 @@ tbody th {
     padding: 3px 5px;
 }
 
-.payments_table_container {
+.table_container {
+    height: 50%;
+    max-height: 40svh;
     border: #8ad814 3px solid;
     border-radius: 20px;
-    margin: 0 auto;
-    width: auto;
-    max-width: 80%;
-    padding: 0 0 5px;
-    overflow-y: scroll;
+    /* margin: 0 auto; */
+    /* overflow-y: scroll;
     scroll-behavior: auto;
     display: flex;
     flex-direction: column;
     flex: 1;
-    height: 50%;
-    max-height: 40svh;
 }
 
 input {
@@ -134,4 +150,4 @@ h3 {
     display: flex;
     flex-direction: column;
     margin: 0 10px;
-}
+} */

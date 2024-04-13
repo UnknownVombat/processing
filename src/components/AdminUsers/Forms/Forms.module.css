@@ -1,0 +1,63 @@
+
+
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: max-content;
+    flex: 1;
+    overflow: auto !important;
+    overflow-x: hidden !important;
+    text-align: center;
+}
+
+
+.form:not(:last-of-type){
+    border-right: 1px grey solid;
+}
+
+
+.form input[type="text"], .form input[type="number"] {
+    font-size: 18px;
+    padding: 10px 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.field_block{
+    display: flex;
+    flex-direction: column;
+    min-height: max-content;
+}
+
+.radio_div{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.radio_div input[type="radio"] {
+    margin: 0;
+    width: 20px;
+}
+
+.form input[type="submit"], .form button {
+    font-size: 15px;
+    margin-top: 10px;
+    padding: 10px 20px;
+    width: 30%;
+    cursor: pointer;
+}
+
+
+.api_key{
+    display: flex;
+    background-color: rgb(215, 212, 212);
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 5px;
+    font-size: 22px;
+    cursor: pointer;
+    justify-content: center;
+}

@@ -2,8 +2,10 @@
 import React from "react";
 import styles from "../Dashboard.module.css";
 import {withdrawsapi} from "../../../api/withdrawsApi";
+import useAuthRedirect from "../../../hooks/keyCheckHook";
 
 const WithdrawBlock = () => {
+    useAuthRedirect()
     const [sendWithdraw, {data: withdrawData, error: withdrawError, isError}] = withdrawsapi.useSendWithdrawMutation()
     const {data: codeData, error: codeError, isError: codeIsError} = withdrawsapi.useTakeCodeQuery()
 
@@ -37,7 +39,7 @@ const WithdrawBlock = () => {
     return (
         <div className={styles.withdraw}>
             <label>Вывести баланс</label>
-            <input id='amount' type='number' placeholder='Сумма вывода'/>
+            <input id='amount' type='number' placeholder='Сумма вывода' min={0}/>
             <button className={styles.submit} onClick={withdraw}>Вывести</button>
             {/*<p>Код гарантекс для последней заявки на вывод: {codeData['access'] === false ? '': codeData['result']}</p>*/}
         </div>

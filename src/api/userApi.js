@@ -2,12 +2,6 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { API_URL } from "../const";
 
 
-let key = null
-if (window.sessionStorage.auth_data_storage){
-    key = JSON.parse(window.sessionStorage.auth_data_storage)['state']['key']
-}
-
-// const key = JSON.parse(window.sessionStorage.auth_data_storage)['state']['key']
 
 export const userapi = createApi({
     reducerPath: 'userapi',
@@ -24,34 +18,34 @@ export const userapi = createApi({
             query: () => ({
                 url: '/users/logout',
                 method: 'POST',
-                headers: {'Authorization': key}
+                headers: {'Authorization': JSON.parse(window.sessionStorage.auth_data_storage)['state']['key']}
             })
         }),
         switchActive: build.mutation({
             query: (active) => ({
                 url: '/users/switch_active',
                 method: 'POST',
-                headers: {'Authorization': key},
+                headers: {'Authorization': JSON.parse(window.sessionStorage.auth_data_storage)['state']['key']},
                 body: active
             })
         }),
         auth: build.query({
             query: () => ({
                 url: '/users/check_auth',
-                headers: {'Authorization': key}
+                headers: {'Authorization': JSON.parse(window.sessionStorage.auth_data_storage)['state']['key']}
             })
         }),
         workers: build.query({
             query: () => ({
                 url: '/users/get',
-                headers: {'Authorization': key}
+                headers: {'Authorization': JSON.parse(window.sessionStorage.auth_data_storage)['state']['key']}
             })
         }),
         deleteSession: build.mutation({
             query: (user_id) => ({
                 url: '/users/session',
                 method: 'POST',
-                headers: {'Authorization': key},
+                headers: {'Authorization': JSON.parse(window.sessionStorage.auth_data_storage)['state']['key']},
                 body: user_id
             })
         }),
@@ -59,14 +53,14 @@ export const userapi = createApi({
             query: (body) => ({
                 url: '/users/bot',
                 method: 'POST',
-                headers: {'Authorization': key},
+                headers: {'Authorization': JSON.parse(window.sessionStorage.auth_data_storage)['state']['key']},
                 body: body
             })
         }),
         Bot: build.query({
             query: () => ({
                 url: '/users/bot',
-                headers: {'Authorization': key}
+                headers: {'Authorization': JSON.parse(window.sessionStorage.auth_data_storage)['state']['key']}
             })
         })
     })

@@ -1,9 +1,15 @@
 .user_row_block {
-    width: 100%;
+    /* width: 100%; */
     height: auto;
     display: flex;
     flex-direction: row;
     font-size: 1rem;
+    justify-content: space-between;
+}
+
+.user_row_block span{
+    display: flex;
+    align-items: center;
 }
 
 .little_p {

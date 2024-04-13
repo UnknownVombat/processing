@@ -1,14 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './Settings.module.css'
 import {userapi} from "../../api/userApi";
 import {useNavigate} from "react-router-dom";
 import MethodsBlock from "./MethodsBlock/MethodsBlock";
+import useAuthRedirect from "../../hooks/keyCheckHook"
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 const Settings = () => {
+    useAuthRedirect()
+    const { handleSubmit, register, reset } = useForm()
     const {data: workersData, error: workersError, isError: workersIsError} = userapi.useWorkersQuery()
     const [addBot, {data, error}] = userapi.useAddBotMutation()
 
     const navigate = useNavigate()
+
+    useEffect(() => {
+        if (data && data['success'] === true) {
+            toast.success("Бот добавлен!")
+            reset()
+        }
+    }, [data, reset])
 
     if (workersIsError) {
         if (workersError.status === 401) {
@@ -18,56 +30,36 @@ const Settings = () => {
             console.error(workersError.status)
         }
     }
-    if (data) {
-        if (data['access'] === true) {
-            alert('Успешно!')
-            window.location.reload()
-        }
-    }
+
     if (error) {
         console.error(error)
     }
-    function addNewBot(){
-        const bot_token = document.getElementById('bot_token').value
-        const bot_name = document.getElementById('bot_name').value
-        const tg_id = document.getElementById('tg_id').value
-        const body = {'bot_token': bot_token, 'bot_name': bot_name, 'telegram_id': tg_id}
-        addBot(body)
+
+    const addNewBot = (data) => {
+        addBot(data)
     }
-    if (workersData){
-        if (workersData['status'] === 'user') {
-            return (
-                <div className={styles.settings_div}>
-                    <h2>Настройки</h2>
-                    <label>Введите токен бота</label>
-                    <input type='text' placeholder='Токен бота' id='bot_token'/>
-                    <label>Введите имя бота</label>
-                    <input type='text' placeholder='Имя бота' id='bot_name'/>
-                    <label>Введите ваш телеграм ID</label>
-                    <input type='text' placeholder='Телеграм ID' id='tg_id'/>
-                    <button className={styles.submit} onClick={addNewBot}>Добавить</button>
-                </div>
-            )
-        } else {
-            return (
-                <div className={styles.block}>
-                    <div className={styles.settings_div}>
-                        <h2>Настройки</h2>
-                        <label>Введите токен бота</label>
-                        <input type='text' placeholder='Токен бота' id='bot_token'/>
-                        <label>Введите имя бота</label>
-                        <input type='text' placeholder='Имя бота' id='bot_name'/>
-                        <label>Введите ваш телеграм ID</label>
-                        <input type='text' placeholder='Телеграм ID' id='tg_id'/>
-                        <button className={styles.submit} onClick={addNewBot}>Добавить</button>
-                    </div>
-                    <MethodsBlock />
-                </div>
-            )
-        }
-    } else {
-        window.location.href = '/auth'
-    }
+
+    return (
+        <div className={styles.block}>
+          <div className={styles.settings_div}>
+            <h2>Настройки</h2>
+            <form className={styles.form} onSubmit={handleSubmit(addNewBot)}>
+              <label>Введите токен бота</label>
+              <input type='text' placeholder='Токен бота' id='bot_token' 
+              {...register("bot_token", {required: true})}/>
+              <label>Введите имя бота</label>
+              <input type='text' placeholder='Имя бота' id='bot_name' 
+              {...register("bot_name", {required: true})}/>
+              <label>Введите ваш телеграм ID</label>
+              <input type='text' placeholder='Телеграм ID' id='tg_id' 
+              {...register("telegram_id", {required: true})}/>
+              <input type="submit" className={styles.submit} value={"Добавить"} />
+            </form>
+          </div>
+          {workersData && workersData.status === 'user' ? null : <MethodsBlock />}
+        </div>
+      );
+      
 
 };
 

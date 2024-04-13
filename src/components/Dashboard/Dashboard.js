@@ -1,44 +1,59 @@
-// import React, {useState} from 'react';
 import React from "react";
 import styles from './Dashboard.module.css'
-import UserRow from "./UserRow/UserRow";
-import {userapi} from "../../api/userApi";
-import {useNavigate} from "react-router-dom";
+import { userapi } from "../../api/userApi";
+import { useNavigate } from "react-router-dom";
+import SessionTable from "../Table/SessionTable";
 import WithdrawBlock from "./WithdrawBlock/WithdrawBlock";
+import useAuthRedirect from "../../hooks/keyCheckHook";
+import { Table } from "../Table/Table";
+import { toast } from "react-toastify";
+
+
+const columns = [
+    { id: "name", Header: "Имя", accessor: "name" },
+    { id: "balance", Header: "Баланс", accessor: "balance" },
+    { id: "status", Header: "Статус", accessor: "status" }
+  ];
+
+
 
 const Dashboard = () => {
-    const {data: workersData, error: workersError, isError: workersIsError} = userapi.useWorkersQuery()
+    useAuthRedirect()
     const navigate = useNavigate()
-    const [deleteSession, {data, error, isError}] = userapi.useDeleteSessionMutation()
+    
+    const { data: workersData, error: workersError, isError: workersIsError, refetch: workersRefetch } = userapi.useWorkersQuery()
+
+    const [deleteSession, {error, isError}] = userapi.useDeleteSessionMutation()
+
+    console.log(workersData)
+    if (isError || workersIsError) {
+        if (error) {
+            if (error.status === 401) {
+                console.log(error.message)
+                navigate('/auth')
+            } else {
+                console.log(error.message)
+            }
+        }
+        if(workersError) {
+            if (workersError.status === 401) {
+                console.log(workersError.message)
+                navigate('/auth')
+            } else {
+                console.log(workersError.message)
+            }
+        }
+        
+    }
+
     function delSession(user_id) {
         const body = {'user_id': user_id}
-        document.getElementById(user_id).remove()
         deleteSession(body)
+        workersRefetch()
+        toast.success("Сессия удалена!")
     }
-    if (data) {
-        if (data['success'] === true) {
-            // document.getElementById().remove()
-            alert('Успешно!')
-        } else {
-            alert('Не успешно!')
-        }
-    }
-    if (isError) {
-        if (error.status === 401) {
-            console.error(error)
-            navigate('/auth')
-        } else {
-            console.error(error)
-        }
-    }
-    if (workersIsError) {
-        if (workersError.status === 401) {
-            console.error(workersError)
-            navigate('/auth')
-        } else {
-            console.error(workersError.status)
-        }
-    }
+
+
     if (workersData) {
         if (workersData['status'] === 'user'){
             return (
@@ -64,21 +79,13 @@ const Dashboard = () => {
                         <div className={styles.user_dashboard}>
                             <div className={styles.users_row}>
                                 <p className={styles.big_p}>Данные о команде:</p>
-                                {workersData['users'].map((element) => {return UserRow(element)})}
+                                <Table columns={columns} data={workersData['users']}/>
                                 <WithdrawBlock />
                             </div>
                         </div>
                         <div className={styles.user_dashboard}>
                             <p className={styles.session_p}>Данные о сессиях:</p>
-                            {workersData['sessions'].map((element) => {
-                                return (
-                                <div className={styles.user_row_block} key={element['WorkersSessions']['id']} id={element['WorkersSessions']['id']}>
-                                    <p>Пользователь: {element['WorkersSessions']['user']} IP: {element['WorkersSessions']['ip']} ({element['WorkersSessions']['city']})</p>
-                                    <button className={styles.row_submit} onClick={() => delSession(element['WorkersSessions']['id'])}>Завершить</button>
-                                </div>
-                            )})}
-
-                            {/*{workersData['sessions'].map((element) => {return SessionRow(element['WorkersSessions'], key)})}*/}
+                            <SessionTable sessions={workersData.sessions.map(session => session.WorkersSessions)} delSession={delSession} />
                         </div>
                     </div>
                 </div>

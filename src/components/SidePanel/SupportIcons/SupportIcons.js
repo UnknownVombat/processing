@@ -7,16 +7,14 @@ import {authStorage} from "../../../storages/AuthStorage";
 import {userapi} from "../../../api/userApi";
 
 const SupportIcons = () => {
-    const key = authStorage((state) => state.key)
     const resetKey = authStorage((state) => state.resetKey)
 
-    const header = {'Authorization': key}
     const [logOut, {data: logoutData, error: logoutError}] = userapi.useLogoutMutation()
 
     const navigate = useNavigate()
     function logoutF(){
+        logOut()
         resetKey('')
-        logOut(header)
     }
     if (logoutData) {
         navigate('/auth')

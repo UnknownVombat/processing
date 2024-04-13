@@ -9,20 +9,24 @@ import {NavLink, useNavigate} from "react-router-dom";
 import {authStorage} from "../../storages/AuthStorage";
 import {userapi} from "../../api/userApi";
 import BotBlock from "./BotBlock/BotBlock";
+import useAuthRedirect from '../../hooks/keyCheckHook';
+import { dataStorage } from '../../storages/DataStorage';
 
 
 const Header = () => {
+    useAuthRedirect()
+    const navigate = useNavigate()
     const resetKey = authStorage((state) => state.resetKey)
+    const setUpdates = dataStorage((state) => state.setGetUpdates)
 
-    const {data: authData, error: authError, isError: authIsError} = userapi.useWorkersQuery()
+    const {data: workersData, error: workersError, isError: workersIsError} = userapi.useWorkersQuery()
     const [logout, {data: logoutData, error: logoutError, isError: logoutIsError}] = userapi.useLogoutMutation()
     const [switchActive, {data: activeData, error: activeError, isError: activeIsError}] = userapi.useSwitchActiveMutation()
 
-    const navigate = useNavigate()
 
     function logoutF(){
-        resetKey('')
         logout()
+        resetKey('')
     }
     function changeUserActive() {
         document.getElementById('user_block').classList.toggle('active')
@@ -32,11 +36,19 @@ const Header = () => {
         document.getElementById('is_paused').classList.toggle('active')
         document.getElementById('check_pause').classList.toggle('active')
     }
+
     function handleToggle(){
         const status = {'paused': 'active', 'active': 'paused'}
-        const body = {'status': status[authData['user']['status']]}
+        const body = {'status': status[workersData['user']['status']]}
+        console.log(`New status: ${status[workersData['user']['status']]}`)
+        if(status[workersData['user']['status']] === "active") {
+            setUpdates(true)
+        } else if (status[workersData['user']['status']] === "paused") {
+            setUpdates(false)
+        }
         switchActive(body)
     }
+
     if (activeData) {
         console.log(activeData)
         if (activeData['access'] === true) {
@@ -44,14 +56,14 @@ const Header = () => {
         }
     }
     if (activeIsError) {
-        console.error(activeError)
+        console.log(activeError)
     }
-    if (authData) {
-        console.log(authData)
+    if (workersData) {
+        console.log(workersData)
         // setAuth(authData['access'])
     }
-    if (authIsError) {
-        console.error(authError)
+    if (workersIsError) {
+        console.log(workersError)
         // resetKey('')
         // navigate('/auth')
     }
@@ -59,7 +71,7 @@ const Header = () => {
         navigate('/auth')
     }
     if (logoutIsError) {
-        console.error(logoutError)
+        console.log(logoutError)
         navigate('/auth')
     }
     return (
@@ -67,8 +79,8 @@ const Header = () => {
             <div className={'block'}>
                 <div className={'little_icons_block'}>
                     <div className={'is_paused'} onClick={handleToggle} id='is_paused'>
-                        <img src={authData ? authData['user']['status'] === 'active' ? stop: start: stop} alt='St'/>
-                        <p>{authData ? authData['user']['status'] === 'active' ? 'Остановить': 'Активировать': 'Остановить'}</p>
+                        <img src={workersData ? workersData['user']['status'] === 'active' ? stop: start: stop} alt='St'/>
+                        <p>{workersData ? workersData['user']['status'] === 'active' ? 'Остановить': 'Активировать': 'Остановить'}</p>
                     </div>
                     <div className={'little_icons'} onClick={changePauseActive} id='check_pause'>
                         <img src={wrench} alt='Wr'/>
@@ -78,7 +90,7 @@ const Header = () => {
                 <div className={'user_block_big'}>
                     <div className={'user_block'} id='user_block' onClick={changeUserActive}>
                         <img src={user_img} alt='Us'/>
-                        <p>{authData ? authData['user']['name']: ''}</p>
+                        <p>{workersData ? workersData['user']['name']: ''}</p>
                         <img src={arrow} alt='Ar'/>
                     </div>
                     <div className={'user_hidden_block'} id='user_hidden_block'>

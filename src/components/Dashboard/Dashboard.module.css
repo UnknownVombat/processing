@@ -1,22 +1,23 @@
 .dashboard {
-    width: 100%;
-    right: 0;
+    /* width: 100%;ыыыыы */
+    padding: 15px;
     height: auto;
-    min-height: 100vh;
     display: flex;
     flex-direction: row;
 }
 
 .user_dashboard {
-    width: 50%;
-    right: 0;
     height: auto;
     max-height: 70vh;
+    padding: 15px 15px;
+    overflow-y: auto;
+    flex: 1;
     flex-direction: column;
-    margin-left: 10px;
+    /* margin-left: 10px; */
     margin-right: 10px;
     border: #3c6930 2px solid;
     border-radius: 20px;
+    text-align: center;
 }
 
 .all_dashboard h2 {
@@ -41,7 +42,7 @@
     flex-direction: column;
     width: auto;
     height: auto;
-    margin: 5px;
+    /* margin: 5px; */
 }
 
 .big_p {
@@ -86,6 +87,8 @@
 .withdraw {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    text-align: end;
     margin-top: 10px;
     margin-right: 10px;
     width: 100%;
@@ -110,7 +113,7 @@
 
 .your_data {
     padding-left: 15px;
-    width: 100vw;
+    /* width: 100vw; */
 }
 
 .session_p {
@@ -121,10 +124,11 @@
 }
 
 .user_row_block {
-    margin-left: 10px;
-    width: 100%;
+    /* margin-left: 10px; */
+    /* width: 100%; */
     height: auto;
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
     font-size: 1rem;
 }

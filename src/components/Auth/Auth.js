@@ -8,12 +8,12 @@ const Auth = () => {
     const resetKey = authStorage((state) => state.resetKey)
     const [auth, {data, isError, isLoading, error}] = userapi.useLoginMutation()
     const navigate = useNavigate()
-    function getIP() {
+    async function getIP() {
         return fetch('https://api.ipify.org?format=json')
             .then(res => res.json())
             .then(data => {return data.ip});
     }
-    function getCity(ip) {
+    async function getCity(ip) {
         return fetch("https://ipwho.is/" + ip, {method: 'GET'}).then(res => res.json())
             .then(data => {return data.city});
     }
@@ -29,13 +29,16 @@ const Auth = () => {
     if (isError) {
         console.log(error)
     }
-    if (data) {
-        resetKey(data['access_token'])
-        // window.location.reload()
-        navigate('/')
-    }
+    
     if (isLoading) {
         console.log('Загрузка')
+    }
+    if (data) {
+        resetKey(data['access_token'])
+        setTimeout(() => {
+            console.log('After 3 seconds');
+            navigate('/')
+        }, 1500);
     }
     return (
         <div className={styles.container}>

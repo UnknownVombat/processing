@@ -4,6 +4,7 @@ import {withdrawsapi} from "./withdrawsApi";
 import {methodsapi} from "./methodsApi";
 import {applicationsapi} from "./applicationsApi";
 import {teamsapi} from "./teamsApi";
+import { adminApi } from './adminApi';
 
 
 
@@ -14,6 +15,7 @@ export const store = configureStore({
         [methodsapi.reducerPath]: methodsapi.reducer,
         [applicationsapi.reducerPath]: applicationsapi.reducer,
         [teamsapi.reducerPath]: teamsapi.reducer,
+        [adminApi.reducerPath]: adminApi.reducer
     },
     middleware: (getDefaultMiddlware) => getDefaultMiddlware({
         thunk: true,
@@ -25,4 +27,5 @@ export const store = configureStore({
         .concat(methodsapi.middleware)
         .concat(applicationsapi.middleware)
         .concat(teamsapi.middleware)
+        .concat(adminApi.middleware)
 })
