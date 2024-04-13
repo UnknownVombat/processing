@@ -37,10 +37,8 @@ export const teamsapi = createApi({
                 url: '/teams/get',
                 headers: {'Authorization': JSON.parse(window.sessionStorage.auth_data_storage)['state']['key']},
             }),
-            providesTags: (result) =>
-                result
-                ? [...result.map(({ id }) => ({ type: 'Team', id })), 'Team']
-                : ['Team'],
+            providesTags: () =>
+                ['Team']
         }),
         banTeam: build.mutation({
             query: (body) => ({
