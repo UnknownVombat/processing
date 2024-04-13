@@ -21,10 +21,8 @@ export const withdrawsapi = createApi({
                 url: '/withdraws/get',
                 headers: {'Authorization': JSON.parse(window.sessionStorage.auth_data_storage)['state']['key']},
             }),
-            providesTags: (result) =>
-                result
-                ? [...result.map(({ id }) => ({ type: 'Withdraws', id })), 'Withdraws']
-                : ['Withdraws'],
+            providesTags: () =>
+                ['Withdraws']
         }),
         updateWithdraw: build.mutation({
             query: (body) => ({
