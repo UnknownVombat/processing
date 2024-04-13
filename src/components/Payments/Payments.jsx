@@ -25,7 +25,7 @@ const Payments = () => {
         if (needUpdates) {
           id = setInterval(() => {
             allAppsRefetch();
-          }, 5000);
+          }, 2000);
           // setIntervalId(id);
         }
         return () => {
