@@ -19,7 +19,7 @@ const PaymentHistoryTable = ({ elements }) => {
             status: entry["status"],
             express: entry["express"],
             createdAt: formattedCreatedAt,
-            closedAt: formattedClosedAt
+            closedAt: entry["closed_at"] ? formattedClosedAt : ""
         };
     });
 
