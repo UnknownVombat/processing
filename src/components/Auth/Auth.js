@@ -35,10 +35,11 @@ const Auth = () => {
     }
     if (data) {
         resetKey(data['access_token'])
-        setTimeout(() => {
-            console.log('After 3 seconds');
-            navigate('/')
-        }, 1500);
+        navigate('/')
+        // setTimeout(() => {
+        //     console.log('After 3 seconds');
+        //     navigate('/')
+        // }, 1500);
     }
     return (
         <div className={styles.container}>
