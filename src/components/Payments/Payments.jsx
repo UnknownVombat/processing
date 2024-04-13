@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+// import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { applicationsapi } from "../../api/applicationsApi";
 import { useNavigate } from "react-router-dom";
 import useAuthRedirect from "../../hooks/keyCheckHook"
@@ -12,23 +13,25 @@ const Payments = () => {
     useAuthRedirect()
     const navigate = useNavigate()
     const needUpdates = dataStorage((state) => state.getAppsUpdate)
-    const [intervalId, setIntervalId] = useState(null);
+    // const [intervalId, setIntervalId] = useState(null);
     const {data: allApps, refetch: allAppsRefetch } = applicationsapi.useActiveApplicationsQuery("", {
         refetchOnMountOrArgChange: true
     })
     const [triggerStatus] = applicationsapi.useUpdateStatusMutation()
 
     useEffect(() => {
+        let id = 0
+        // console.log(intervalId)
         if (needUpdates) {
-          const id = setInterval(() => {
+          id = setInterval(() => {
             allAppsRefetch();
           }, 5000);
-          setIntervalId(id);
+          // setIntervalId(id);
         }
         return () => {
-          clearInterval(intervalId);
+          clearInterval(id);
         };
-      }, [needUpdates, allAppsRefetch, intervalId]);
+      }, [needUpdates, allAppsRefetch]);
     
 
     function updateStatus({ newStatus, key, clientName }) {
