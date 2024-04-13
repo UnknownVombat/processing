@@ -28,7 +28,7 @@ const Payments = () => {
         return () => {
           clearInterval(intervalId);
         };
-      }, [needUpdates, allAppsRefetch]);
+      }, [needUpdates, allAppsRefetch, intervalId]);
     
 
     function updateStatus({ newStatus, key, clientName }) {
