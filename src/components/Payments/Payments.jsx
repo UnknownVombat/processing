@@ -40,10 +40,11 @@ const Payments = () => {
         triggerStatus(body)
         if(newStatus === "paid") {
             toast.success(`Заявка для ${clientName} подтверждена!`)
+            allAppsRefetch()
         } else {
             toast.warn(`Заявка для ${clientName} отклонена!`)
+            allAppsRefetch()
         }
-        allAppsRefetch()
     }
 
     function clickButton(el_id){
