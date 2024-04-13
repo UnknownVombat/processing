@@ -37,7 +37,7 @@ const PaymentTable = ({elements, updateStat}) => {
         accessor: "requisites",
         Cell: ({ row }) => (
           <CopyToClipboard text={row?.original?.requisites}>
-            <span style={{ cursor: "pointer"}} onClick={()=> toast.info(`Реквизиты для ${row?.original?.clientName} скопированы!`)}>{row?.original?.requisites}</span>
+            <span style={{ cursor: "pointer", textDecoration: "underline"}} onClick={()=> toast.info(`Реквизиты для ${row?.original?.clientName} скопированы!`)}>{row?.original?.requisites}</span>
           </CopyToClipboard>
         )
       },
