@@ -17,6 +17,7 @@ const WithdrawBlock = () => {
     if (withdrawData) {
         if (withdrawData['access'] === true) {
             alert('Успешно!')
+            window.location.reload()
         } else {
             alert('Не хватает средств!')
         }
@@ -41,7 +42,7 @@ const WithdrawBlock = () => {
             <label>Вывести баланс</label>
             <input id='amount' type='number' placeholder='Сумма вывода' min={0}/>
             <button className={styles.submit} onClick={withdraw}>Вывести</button>
-            {/*<p>Код гарантекс для последней заявки на вывод: {codeData['access'] === false ? '': codeData['result']}</p>*/}
+            <p>Код гарантекс для последней заявки на вывод: {codeData['access'] === false ? '': codeData['result']}</p>
         </div>
     );
 };
