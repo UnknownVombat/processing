@@ -6,6 +6,7 @@ import { API_URL } from "../const";
 export const userapi = createApi({
     reducerPath: 'userapi',
     baseQuery: fetchBaseQuery({baseUrl: API_URL}),
+    tagTypes: ["Activity", "Session"],
     endpoints: (build) => ({
         login: build.mutation({
             query: (body) => ({
@@ -19,7 +20,7 @@ export const userapi = createApi({
                 url: '/users/logout',
                 method: 'POST',
                 headers: {'Authorization': JSON.parse(window.sessionStorage.auth_data_storage)['state']['key']}
-            })
+            }),
         }),
         switchActive: build.mutation({
             query: (active) => ({
@@ -27,19 +28,22 @@ export const userapi = createApi({
                 method: 'POST',
                 headers: {'Authorization': JSON.parse(window.sessionStorage.auth_data_storage)['state']['key']},
                 body: active
-            })
+            }),
+            // invalidatesTags: ["Activity"]
         }),
         auth: build.query({
             query: () => ({
                 url: '/users/check_auth',
                 headers: {'Authorization': JSON.parse(window.sessionStorage.auth_data_storage)['state']['key']}
-            })
+            }),
+            providesTags: ["Session"]
         }),
         workers: build.query({
             query: () => ({
                 url: '/users/get',
                 headers: {'Authorization': JSON.parse(window.sessionStorage.auth_data_storage)['state']['key']}
-            })
+            }),
+            providesTags: ["Activity"]
         }),
         deleteSession: build.mutation({
             query: (user_id) => ({
@@ -47,7 +51,8 @@ export const userapi = createApi({
                 method: 'POST',
                 headers: {'Authorization': JSON.parse(window.sessionStorage.auth_data_storage)['state']['key']},
                 body: user_id
-            })
+            }),
+            invalidatesTags: ["Session"]
         }),
         addBot: build.mutation({
             query: (body) => ({

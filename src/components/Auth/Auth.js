@@ -38,7 +38,7 @@ const Auth = () => {
         navigate('/')
         // setTimeout(() => {
         //     console.log('After 3 seconds');
-        //     navigate('/')
+            
         // }, 1500);
     }
     return (

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from './Dashboard.module.css'
 import { userapi } from "../../api/userApi";
 import { useNavigate } from "react-router-dom";
@@ -20,12 +20,17 @@ const columns = [
 const Dashboard = () => {
     useAuthRedirect()
     const navigate = useNavigate()
+    const [workerD, setWorkerD] = useState(null)
     
     const { data: workersData, error: workersError, isError: workersIsError, refetch: workersRefetch } = userapi.useWorkersQuery()
 
     const [deleteSession, {error, isError}] = userapi.useDeleteSessionMutation()
 
-    console.log(workersData)
+    useEffect(()=> {
+        setWorkerD(workersData)
+    }, [workersData ])
+
+    // console.log(workersData)
     if (isError || workersIsError) {
         if (error) {
             if (error.status === 401) {
@@ -85,7 +90,7 @@ const Dashboard = () => {
                         </div>
                         <div className={styles.user_dashboard}>
                             <p className={styles.session_p}>Данные о сессиях:</p>
-                            <SessionTable sessions={workersData.sessions.map(session => session.WorkersSessions)} delSession={delSession} />
+                            <SessionTable sessions={workerD ? workerD.sessions.map(session => session.WorkersSessions): []} delSession={delSession} />
                         </div>
                     </div>
                 </div>

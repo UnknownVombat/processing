@@ -10,15 +10,7 @@ const AllPayments = () => {
     useAuthRedirect()
     const navigate = useNavigate()
 
-    const {data: historyData, isError: historyError, error: historyErrorData } = applicationsapi.useAllApplicationsQuery()
-
-    function clickButton(el_id){
-        if (el_id === 'all') {
-            window.location.reload()
-        } else {
-            navigate('/payments')
-        }
-    }
+    const {data: historyData, isError: historyError, error: historyErrorData, refetch } = applicationsapi.useAllApplicationsQuery()
 
     if(historyError){
         if (historyErrorData.status === 401) {
@@ -31,8 +23,8 @@ const AllPayments = () => {
         <div className='payments_apps_container'>
             <h2>Выплаты</h2>
             <div className='payments_buttons_container'>
-                <button id='active' className='payments_submit' onClick={() => clickButton('active')}>Активные</button>
-                <button id='all' className='payments_submit clicked' onClick={() => clickButton('all')}>Все</button>
+                <button id='active' className='payments_submit' onClick={() => navigate("/payments")}>Активные</button>
+                <button id='all' className='payments_submit clicked' onClick={() => refetch}>Все</button>
             </div>
             <table>
 

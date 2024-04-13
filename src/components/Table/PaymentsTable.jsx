@@ -62,7 +62,7 @@ const PaymentTable = ({elements, updateStat}) => {
         Cell: ({ row }) => (
             <div>
                 <button className={styles.button_green} onClick={() => updateStat({ newStatus: "paid", key: row.original.id, clientName: row.original.clientName })}>Подтвердить</button>
-                <button className={styles.button_red} onClick={() => updateStat({ newStatus: "canceled", key: row.original.id, clientName: row.original.clientName })}>Отменить</button>
+                <button className={styles.button_red} onClick={() => updateStat({ newStatus: "canceled", key: row.original.id, clientName: row.original.clientName })}>Завершить</button>
             </div>
         )
       }
