@@ -17,7 +17,7 @@ export const MethodsTable = ({ methodsData, switchActive }) => {
         {
           Header: "Действия",
           Cell: ({ row }) => (
-            <button className='button_green' onClick={() => switchActive(row.original)}>
+            <button className='button green' onClick={() => switchActive(row.original)}>
               {row.original.active ? 'Выключить' : 'Включить'}
             </button>
           )
