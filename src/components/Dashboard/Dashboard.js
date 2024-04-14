@@ -107,7 +107,7 @@ const Dashboard = () => {
                     <h2>Дашборд</h2>
                     <div className={styles.your_data}>
                         <p className={styles.big_p}>Ваши данные:</p>
-                        <p className={styles.little_p}>Имя: {workersData['user']['name']} Баланс: {workersData['user']['balance']} Статус: {workersData['user']['status']}</p>
+                        <p className={styles.little_p}>Имя: {workersData['user']['name']} | Баланс: {workersData['user']['balance']} | Статус: {workersData['user']['status']}</p>
                     </div>
                     <div className={styles.dashboard}>
                         <div className={styles.user_dashboard}>

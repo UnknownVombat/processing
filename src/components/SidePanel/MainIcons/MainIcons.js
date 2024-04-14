@@ -17,10 +17,10 @@ const MainIcons = () => {
                 <div className={styles.image_div}><img src={logincircle} alt='Login'/></div>
                 <div className={styles.text_div}>Выплаты</div>
             </div></a>
-            <a href='https://t.me/forceud' target="_blank" rel="noreferrer"><div className={styles.inline_block}>
+            <div className={styles.inline_block}>
                 <div className={styles.image_div}><img src={receipt} alt='Dash'/></div>
                 <div className={styles.text_div}>Поддержка</div>
-            </div></a>
+            </div>
         </div>
     );
 };

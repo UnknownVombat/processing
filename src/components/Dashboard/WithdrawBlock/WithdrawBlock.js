@@ -41,10 +41,10 @@ const WithdrawBlock = () => {
 
     return (
         <div className={styles.withdraw}>
-            <label>Пополнить баланс</label>
+            <label>Создать заявку на пополнение</label>
             <input id='amount' type='number' placeholder='Сумма пополнения: ' min={0}/>
             <input id='trc20' type='text' placeholder='TRC20 реквизиты' min={0}/>
-            <button className={styles.submit} onClick={withdraw}>Пополнить</button>
+            <button className={styles.submit} onClick={withdraw}>Создать</button>
             <p>Курс последнего пополнения: { courseData && courseData["access"] !== false ? <span>{courseData["result"] } RUB\USDT</span> : "Не обнаружено"}</p>
         </div>
 

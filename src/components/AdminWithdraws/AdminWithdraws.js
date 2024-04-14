@@ -4,6 +4,7 @@ import useAuthRedirect from '../../hooks/keyCheckHook';
 import { withdrawsapi } from '../../api/withdrawsApi';
 import { toast } from 'react-toastify';
 import Table from '../Table/MainTable';
+import CopyToClipboard from 'react-copy-to-clipboard';
 
 const AdminWithdraws = () => {
 
@@ -57,6 +58,16 @@ const AdminWithdraws = () => {
                   row?.original?.amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$& ').replace(/\./, ',')
               )
           },
+          {
+            Header: "АДРЕС",
+            accessor: "address",
+            Cell: ({ row }) => (
+              <CopyToClipboard text={row?.original?.address}>
+                <div style={{ cursor: "pointer"}} onClick={() => toast.info(`Реквизиты заявки с ID ${row.original.id} скопированы!`)}>{row?.original?.address}</div>
+              </CopyToClipboard>
+            )
+          },
+          
           {
             Header: "ДЕЙСТВИЯ",
             Cell: ({ row }) => (
