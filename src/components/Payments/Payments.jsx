@@ -58,7 +58,7 @@ const Payments = () => {
             Header: "СУММА",
             accessor: "amount",
             Cell: ({ row }) => (
-                row?.original?.amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').replace(/\./, ',')
+                row?.original?.amount.toFixed(2).replace(/\d(?=(\d{3})+.)/g, '$& ').replace(/./, ',')
             )
           },
           {
