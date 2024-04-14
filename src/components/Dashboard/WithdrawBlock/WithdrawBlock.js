@@ -37,7 +37,7 @@ const WithdrawBlock = () => {
 
     if (courseData){
         console.log(courseData)
-        toast.error("Не отправлено!")
+        // toast.error("Не отправлено!")
     }
 
     return (
