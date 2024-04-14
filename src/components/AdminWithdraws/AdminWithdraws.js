@@ -32,7 +32,7 @@ const AdminWithdraws = () => {
                 }
             } else if (action === "cancel") {
                 toast.warn(`Вывод для команды ${userId} отклонен`)
-                trigger({"id": userId, "course": "Отмена"})
+                trigger({"id": userId, "course": 0})
             }
         }, [trigger, withdrawsRefetch]
     )
