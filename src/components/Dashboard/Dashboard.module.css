@@ -11,13 +11,30 @@
     max-height: 70vh;
     padding: 15px 15px;
     overflow-y: auto;
-    /* flex: 1; */
+    flex: 1;
     flex-direction: column;
     /* margin-left: 10px; */
     margin-right: 10px;
     border: #3c6930 2px solid;
     border-radius: 20px;
     text-align: center;
+}
+
+.user_dashboard_2{
+    height: auto;
+    max-height: 70vh;
+    padding: 15px 15px;
+    overflow-y: auto;
+    flex: 1;
+    flex-direction: column;
+    align-self: flex-start;
+    margin-right: 10px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.user_dashboard_2 h2 {
+    text-align: start;
 }
 
 .all_dashboard h2 {

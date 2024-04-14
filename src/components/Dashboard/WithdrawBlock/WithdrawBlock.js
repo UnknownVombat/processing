@@ -36,8 +36,7 @@ const WithdrawBlock = () => {
     }
 
     if (courseData){
-        console.log(courseData)
-        // toast.error("Не отправлено!")
+        console.log(`Course data ${JSON.stringify(courseData)}`)
     }
 
     return (
@@ -46,7 +45,7 @@ const WithdrawBlock = () => {
             <input id='amount' type='number' placeholder='Сумма пополнения: ' min={0}/>
             <input id='trc20' type='text' placeholder='TRC20 реквизиты' min={0}/>
             <button className={styles.submit} onClick={withdraw}>Пополнить</button>
-            <p>Курс последнего пополнения: { courseData && courseData.length !== 0 ? <span>{courseData["result"] } RUB\USDT</span> : "Не обнаружено"}</p>
+            <p>Курс последнего пополнения: { courseData && courseData["access"] !== false ? <span>{courseData["result"] } RUB\USDT</span> : "Не обнаружено"}</p>
         </div>
 
     );

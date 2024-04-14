@@ -64,9 +64,8 @@ const Header = () => {
     }
     if (workersIsError) {
         console.log(workersError)
-        // resetKey('')
-        // navigate('/auth')
     }
+    
     if (logoutData) {
         resetKey('')
         navigate('/auth')

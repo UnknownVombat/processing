@@ -91,7 +91,7 @@ const Dashboard = () => {
     if (workersData) {
         if (workersData['status'] === 'user'){
             return (
-                <div className={styles.user_dashboard}>
+                <div className={styles.user_dashboard_2}>
                     <h2>Дашборд</h2>
                     <div className={styles.user_row}>
                         <p>Имя: {workersData['user']['name']}</p>
