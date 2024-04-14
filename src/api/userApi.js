@@ -36,14 +36,14 @@ export const userapi = createApi({
                 url: '/users/check_auth',
                 headers: {'Authorization': JSON.parse(window.sessionStorage.auth_data_storage)['state']['key']}
             }),
-            providesTags: ["Session"]
+            providesTags: ["Session", "Activity"]
         }),
         workers: build.query({
             query: () => ({
                 url: '/users/get',
                 headers: {'Authorization': JSON.parse(window.sessionStorage.auth_data_storage)['state']['key']}
             }),
-            providesTags: ["Activity"]
+            providesTags: ["Session", "Activity"]
         }),
         deleteSession: build.mutation({
             query: (user_id) => ({

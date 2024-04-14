@@ -41,8 +41,9 @@ const Settings = () => {
 
     return (
         <div className={styles.block}>
-          <div className={styles.settings_div}>
+          <div className={workersData && workersData.status === "user" ? styles.settings_div_user : styles.settings_div}>
             <h2>Настройки</h2>
+            <button className='payments_submit clicked'>Уведомления</button>
             <form className={styles.form} onSubmit={handleSubmit(addNewBot)}>
               <label>Введите токен бота</label>
               <input type='text' placeholder='Токен бота' id='bot_token' 

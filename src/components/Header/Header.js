@@ -68,6 +68,7 @@ const Header = () => {
         // navigate('/auth')
     }
     if (logoutData) {
+        resetKey('')
         navigate('/auth')
     }
     if (logoutIsError) {

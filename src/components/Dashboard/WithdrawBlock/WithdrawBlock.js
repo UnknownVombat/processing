@@ -1,49 +1,54 @@
-// import React, {useState} from 'react';
 import React from "react";
 import styles from "../Dashboard.module.css";
 import {withdrawsapi} from "../../../api/withdrawsApi";
 import useAuthRedirect from "../../../hooks/keyCheckHook";
+import { toast } from "react-toastify";
 
 const WithdrawBlock = () => {
     useAuthRedirect()
     const [sendWithdraw, {data: withdrawData, error: withdrawError, isError}] = withdrawsapi.useSendWithdrawMutation()
-    const {data: codeData, error: codeError, isError: codeIsError} = withdrawsapi.useTakeCodeQuery()
+    const {data: courseData, error: courseError, isError: courseIsError} = withdrawsapi.useTakeCodeQuery()
 
     function withdraw() {
         const amount = document.getElementById('amount').value
-        const body = {'amount': amount}
+        const trc20 = document.getElementById('trc20').value
+        const body = {'amount': amount, 'address': trc20}
         sendWithdraw(body)
     }
     if (withdrawData) {
         if (withdrawData['access'] === true) {
             alert('Успешно!')
+            toast.success("Успешно отправлено!")
             window.location.reload()
         } else {
             alert('Не хватает средств!')
+            toast.error("Не отправлено!")
         }
     }
     if (isError) {
         console.error(withdrawError)
+        toast.error("Не отправлено!")
     }
-    // if (isLoading) {
-    //     return <div>Loading</div>
-    // }
-    if (codeIsError) {
-        console.error(codeError)
+
+    if (courseIsError) {
+        console.error(courseError)
+        toast.error("Не отправлено!")
     }
-    // if (codeLoading) {
-    //     return <div>Loading</div>
-    // }
-    if (codeData){
-        console.log(codeData)
+
+    if (courseData){
+        console.log(courseData)
+        toast.error("Не отправлено!")
     }
+
     return (
         <div className={styles.withdraw}>
-            <label>Вывести баланс</label>
-            <input id='amount' type='number' placeholder='Сумма вывода' min={0}/>
-            <button className={styles.submit} onClick={withdraw}>Вывести</button>
-            <p>Код гарантекс для последней заявки на вывод: {codeData ? codeData['access'] === false ? '': codeData['result']: null}</p>
+            <label>Пополнить баланс</label>
+            <input id='amount' type='number' placeholder='Сумма пополнения: ' min={0}/>
+            <input id='trc20' type='text' placeholder='TRC20 реквизиты' min={0}/>
+            <button className={styles.submit} onClick={withdraw}>Пополнить</button>
+            <p>Курс последнего пополнения: { courseData && courseData.length !== 0 ? <span>{courseData["result"] } RUB\USDT</span> : "Не обнаружено"}</p>
         </div>
+
     );
 };
 

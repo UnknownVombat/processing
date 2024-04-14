@@ -24,6 +24,13 @@
     height: auto;
 }
 
+.settings_div_user .form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 
 .settings_div label {
     font-size: 1.3rem;

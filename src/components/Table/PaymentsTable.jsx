@@ -1,11 +1,9 @@
 import React from "react";
 import { useTable } from "react-table";
 import styles from "./Table.module.css";
-import CopyToClipboard from "react-copy-to-clipboard";
-import { toast } from "react-toastify";
 
 
-const PaymentTable = ({elements, updateStat}) => {
+const PaymentTable = ({ columns, elements}) => {
     console.log(`ELement: ${JSON.stringify(elements)}`)
     const formattedData = elements.map(entry => {
         const formattedCreatedAt = new Date(entry["created_at"]).toISOString().replace('T', ' ').slice(0, 23);
@@ -22,53 +20,6 @@ const PaymentTable = ({elements, updateStat}) => {
         };
     });
 
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: "ID",
-        accessor: "id"
-      },
-      {
-        Header: "Сумма",
-        accessor: "amount"
-      },
-      {
-        Header: "Реквизиты",
-        accessor: "requisites",
-        Cell: ({ row }) => (
-          <CopyToClipboard text={row?.original?.requisites}>
-            <span style={{ cursor: "pointer", textDecoration: "underline"}} onClick={()=> toast.info(`Реквизиты для ${row?.original?.clientName} скопированы!`)}>{row?.original?.requisites}</span>
-          </CopyToClipboard>
-        )
-      },
-      {
-        Header: "Метод",
-        accessor: "method"
-      },
-      {
-        Header: "ФИО",
-        accessor: "clientName"
-      },
-      {
-        Header: "Статус",
-        accessor: "status"
-      },
-      {
-        Header: "Время создания",
-        accessor: "createdAt"
-      },
-      {
-        Header: "Действия",
-        Cell: ({ row }) => (
-            <div>
-                <button className={styles.button_green} onClick={() => updateStat({ newStatus: "paid", key: row.original.id, clientName: row.original.clientName })}>Подтвердить</button>
-                <button className={styles.button_red} onClick={() => updateStat({ newStatus: "canceled", key: row.original.id, clientName: row.original.clientName })}>Завершить</button>
-            </div>
-        )
-      }
-    ],
-    [updateStat]
-  );
 
   const {
     getTableProps,

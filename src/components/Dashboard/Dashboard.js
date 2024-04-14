@@ -1,36 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback } from "react";
 import styles from './Dashboard.module.css'
 import { userapi } from "../../api/userApi";
 import { useNavigate } from "react-router-dom";
-import SessionTable from "../Table/SessionTable";
 import WithdrawBlock from "./WithdrawBlock/WithdrawBlock";
 import useAuthRedirect from "../../hooks/keyCheckHook";
-import { Table } from "../Table/Table";
+import Table from "../Table/MainTable";
 import { toast } from "react-toastify";
-
-
-const columns = [
-    { id: "name", Header: "Имя", accessor: "name" },
-    { id: "balance", Header: "Баланс", accessor: "balance" },
-    { id: "status", Header: "Статус", accessor: "status" }
-  ];
-
 
 
 const Dashboard = () => {
     useAuthRedirect()
     const navigate = useNavigate()
-    const [workerD, setWorkerD] = useState(null)
-    
-    const { data: workersData, error: workersError, isError: workersIsError, refetch: workersRefetch } = userapi.useWorkersQuery()
+
+    const { data: workersData, error: workersError, isError: workersIsError } = userapi.useWorkersQuery()
 
     const [deleteSession, {error, isError}] = userapi.useDeleteSessionMutation()
 
-    useEffect(()=> {
-        setWorkerD(workersData)
-    }, [workersData ])
-
-    // console.log(workersData)
     if (isError || workersIsError) {
         if (error) {
             if (error.status === 401) {
@@ -51,12 +36,56 @@ const Dashboard = () => {
         
     }
 
-    function delSession(user_id) {
-        const body = {'user_id': user_id}
-        deleteSession(body)
-        toast.success("Сессия удалена!")
-        workersRefetch()
-    }
+    const delSession = useCallback((user_id) => {
+        const body = {'user_id': user_id};
+        deleteSession(body);
+        toast.success("Сессия удалена!");
+        navigate("/")
+    }, [deleteSession, navigate]);
+
+    const columns = React.useMemo(
+        () => [
+            {
+                Header: "ИМЯ",
+                accessor: "name",
+            },
+            {
+                Header: "БАЛАНС",
+                accessor: "balance",
+                Cell: ({ row }) => (
+                    row?.original?.balance.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+                )
+            },
+            {
+                Header: "СТАТУС",
+                accessor: "status",
+            }
+        ], []
+    )
+
+    const sessionColumns = React.useMemo(
+        () => [
+          {
+            Header: "ПОЛЬЗОВАТЕЛЬ",
+            accessor: "user"
+          },
+          {
+            Header: "IP",
+            accessor: "ip"
+          },
+          {
+            Header: "ГОРОД",
+            accessor: "city"
+          },
+          {
+            Header: "ДЕЙСТВИЯ",
+            Cell: ({ row }) => (
+              <button className='button red' onClick={() => delSession(row.original?.id)}>Завершить</button>
+            )
+          }
+        ],
+        [delSession]
+      );
 
 
     if (workersData) {
@@ -90,7 +119,7 @@ const Dashboard = () => {
                         </div>
                         <div className={styles.user_dashboard}>
                             <p className={styles.session_p}>Данные о сессиях:</p>
-                            <SessionTable sessions={workerD ? workerD.sessions.map(session => session.WorkersSessions): []} delSession={delSession} />
+                            <Table data={workersData ? workersData.sessions.map(session => session.WorkersSessions): []} columns={sessionColumns} />
                         </div>
                     </div>
                 </div>
