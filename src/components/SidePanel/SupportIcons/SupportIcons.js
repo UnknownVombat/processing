@@ -17,10 +17,12 @@ const SupportIcons = () => {
         resetKey('')
     }
     if (logoutData) {
+        resetKey('')
         navigate('/auth')
     }
     if (logoutError) {
         console.error(logoutError)
+        resetKey('')
         navigate('/auth')
     }
     return (
