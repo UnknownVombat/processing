@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './PanelHeader.module.css'
-import full_logo from '../../../../public/logo512.png'
+import full_logo from '../../../logo/logo512.png'
 
 const PanelHeader = () => {
     return (
