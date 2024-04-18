@@ -38,7 +38,7 @@ thead {
 }
 
 .all_payments_table_container {
-    border: #8ad814 3px solid;
+    border: #8AD8FF 3px solid;
     border-radius: 20px;
     margin: 0 auto;
     width: auto;
@@ -54,9 +54,9 @@ thead {
 }
 
 .all_payments_submit {
-    background-color: #d8e8cd;
+    background-color: #D8E8FF;
     border-radius: 10px;
-    border: #3c6930 2px solid;
+    border: #3C69FF 2px solid;
     height: auto;
     width: 150px;
     font-size: 1.2rem;
@@ -67,11 +67,11 @@ thead {
 }
 
 .all_payments_submit.clicked {
-    background-color: #3c6930;
+    background-color: #3C69FF;
 }
 
 .all_payments_submit:hover {
-    background-color: #3c6930;
+    background-color: #3C69FF;
 }
 
 .all_payments_buttons_container {

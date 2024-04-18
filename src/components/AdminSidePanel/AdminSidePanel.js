@@ -2,8 +2,8 @@ import React from 'react';
 import styles from './AdminSidePanel.module.css'
 import PanelHeader from "../SidePanel/PanelHeader/PanelHeader";
 import users from "../../icons/bxs-user.svg";
-import withdraws from '../../icons/money-withdraw-regular-24.png'
-import deals from '../../icons/bxs-receipt.svg'
+import withdraws from '../../icons/bxs-receipt.svg'
+import deals from '../../icons/bx-bar-chart-square.svg'
 import {NavLink} from "react-router-dom";
 import logout from "../../icons/bxs-log-out.svg";
 import {authStorage} from "../../storages/AuthStorage";

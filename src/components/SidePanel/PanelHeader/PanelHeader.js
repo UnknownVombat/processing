@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './PanelHeader.module.css'
-import full_logo from '../../../logo/aster_full.svg'
+import full_logo from '../../../../public/logo512.png'
 
 const PanelHeader = () => {
     return (

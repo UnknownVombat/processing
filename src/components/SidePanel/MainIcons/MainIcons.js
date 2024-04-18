@@ -1,9 +1,9 @@
 import React from 'react';
 import 'boxicons'
 import styles from './MainIcons.module.css'
-import dashboard from '../../../icons/bxs-dashboard.svg'
-import logincircle from '../../../icons/bxs-log-in-circle.svg'
-import receipt from '../../../icons/bxs-receipt.svg'
+import dashboard from '../../../icons/bxs-info-circle.svg'
+import logincircle from '../../../icons/bxs-credit-card.svg'
+import receipt from '../../../icons/bx-support.svg'
 import {NavLink} from 'react-router-dom'
 
 const MainIcons = () => {

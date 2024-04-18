@@ -15,7 +15,7 @@
     flex-direction: column;
     /* margin-left: 10px; */
     margin-right: 10px;
-    border: #3c6930 2px solid;
+    border: #3C69FF 2px solid;
     border-radius: 20px;
     text-align: center;
 }
@@ -76,9 +76,9 @@
     width: 120px;
     height: 30px;
     font-size: 1rem;
-    background-color: #d8e8cd;
+    background-color: #d8e8ff;
     border-radius: 10px;
-    border: #3c6930 2px solid;
+    border: #3C69FF 2px solid;
     cursor: pointer;
 }
 
@@ -86,19 +86,19 @@
     width: 120px;
     height: 30px;
     font-size: 1rem;
-    background-color: #d8e8cd;
+    background-color: #d8e8ff;
     border-radius: 10px;
-    border: #3c6930 2px solid;
+    border: #3C69FF 2px solid;
     cursor: pointer;
     margin: auto 10px;
 }
 
 .row_submit:hover {
-    background-color: #3c6930;
+    background-color: #3C69FF;
 }
 
 .submit:hover {
-    background-color: #3c6930;
+    background-color: #3C69FF;
 }
 
 .withdraw {
@@ -118,7 +118,7 @@
     margin-bottom: 20px;
     height: 1.3rem;
     border-radius: 10px;
-    border: #3c6930 2px solid;
+    border: #3C69FF 2px solid;
     padding-left: 5px;
     width: 200px;
 }

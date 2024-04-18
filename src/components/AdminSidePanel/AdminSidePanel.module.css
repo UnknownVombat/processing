@@ -1,7 +1,7 @@
 .side_panel {
     padding: 10px 5px;
     /*margin: 5px;*/
-    background: #d8e8cd;
+    background: #D8E8FF;
     width: auto;
     max-width: 15%;
     /*position: fixed;*/
@@ -21,7 +21,7 @@
 
 .inline_block {
     border-radius: 26px;
-    background-color: #d8e8cd;
+    background-color: #D8E8FF;
     /*margin: 10px;*/
     /*padding: 5px 5px 8px 5px;*/
     display: flex;
@@ -32,7 +32,7 @@
 }
 
 .inline_block:hover {
-    background-color: #3c6930;
+    background-color: #3C69FF;
 }
 
 .image_div {

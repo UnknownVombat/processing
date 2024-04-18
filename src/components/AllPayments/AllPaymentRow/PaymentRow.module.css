@@ -1,7 +1,7 @@
 .submit {
-    background-color: #d8e8cd;
+    background-color: #D8E8FF;
     border-radius: 10px;
-    border: #3c6930 2px solid;
+    border: #3C69FF 2px solid;
     margin: auto 0;
     max-height: 80%;
     height: auto;
@@ -13,7 +13,7 @@
 }
 
 .submit:hover {
-    background-color: #3c6930;
+    background-color: #3C69FF;
 }
 
 .decline {
@@ -44,5 +44,5 @@
 }
 
 .row_true {
-    background-color: #EAFFC9;
+    background-color: #BBF3FF;
 }

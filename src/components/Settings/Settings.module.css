@@ -18,7 +18,7 @@
     /* justify-content: center; */
     margin-right: 10px;
     flex: 1;
-    border: #3c6930 2px solid;
+    border: #3C69FF 2px solid;
     border-radius: 20px;
     padding: 20px;
     height: auto;
@@ -41,7 +41,7 @@
     margin-bottom: 20px;
     /* height: 1.3rem; */
     border-radius: 10px;
-    border: #3c6930 2px solid;
+    border: #3C69FF 2px solid;
     padding-left: 5px;
     width: 200px;
 
@@ -51,29 +51,29 @@
     width: 120px;
     height: 30px;
     font-size: 1rem;
-    background-color: #d8e8cd;
+    background-color: #D8E8FF;
     border-radius: 10px;
-    border: #3c6930 2px solid;
+    border: #3C69FF 2px solid;
     cursor: pointer;
 }
 
 .submit:hover {
-    background-color: #3c6930;
+    background-color: #3C69FF;
 }
 
 .row_submit {
     width: 120px;
     height: 30px;
     font-size: 1rem;
-    background-color: #d8e8cd;
+    background-color: #D8E8FF;
     border-radius: 10px;
-    border: #3c6930 2px solid;
+    border: #3C69FF 2px solid;
     cursor: pointer;
     margin: auto 10px;
 }
 
 .row_submit:hover {
-    background-color: #3c6930;
+    background-color: #3C69FF;
 }
 
 .user_row_block {

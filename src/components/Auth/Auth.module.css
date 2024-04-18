@@ -21,7 +21,7 @@
     margin: 5px;
     height: 1.3rem;
     border-radius: 10px;
-    border: #3c6930 2px solid;
+    border: #3C69FF 2px solid;
     padding-left: 5px;
 }
 
@@ -29,12 +29,12 @@
     width: 120px;
     height: 30px;
     font-size: 1rem;
-    background-color: #d8e8cd;
+    background-color: #D8E8FF;
     border-radius: 10px;
-    border: #3c6930 2px solid;
+    border: #3C69FF 2px solid;
     cursor: pointer;
 }
 
 .submit:hover {
-    background-color: #3c6930;
+    background-color: #3C69FF;
 }

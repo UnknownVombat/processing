@@ -55,9 +55,9 @@ thead {
 }
 
 .payments_submit {
-    background-color: #d8e8cd;
+    background-color: #D8E8FF;
     border-radius: 10px;
-    border: #3c6930 2px solid;
+    border: #3C69FF 2px solid;
     height: auto;
     width: 150px;
     font-size: 1.2rem;
@@ -68,11 +68,11 @@ thead {
 }
 
 .payments_submit.clicked {
-    background-color: #3c6930;
+    background-color: #3C69FF;
 }
 
 .payments_submit:hover {
-    background-color: #3c6930;
+    background-color: #3C69FF;
 }
 
 .payments_buttons_container {
